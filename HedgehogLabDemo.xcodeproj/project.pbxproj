@@ -33,6 +33,7 @@
 		5ED0626A27EBCEE900FACD0B /* FavoriteTabRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626827EBCEBC00FACD0B /* FavoriteTabRoute.swift */; };
 		5ED0626F27EBCF6C00FACD0B /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */; };
 		5ED0627027EBCF8500FACD0B /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626C27EBCF4500FACD0B /* FavoritesViewController.swift */; };
+		5ED0627627EBDC1400FACD0B /* ModalTransitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0627527EBDC1400FACD0B /* ModalTransitionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		5ED0626827EBCEBC00FACD0B /* FavoriteTabRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTabRoute.swift; sourceTree = "<group>"; };
 		5ED0626C27EBCF4500FACD0B /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		5ED0627527EBDC1400FACD0B /* ModalTransitionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransitionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				5EBC3F7427EB5E2B003F9CB9 /* HedgehogLabDemoTests.swift */,
-				5ED0624B27EBB41600FACD0B /* UIResponderHelperTests */,
+				5ED0627127EBDBC500FACD0B /* User Interface */,
 			);
 			path = HedgehogLabDemoTests;
 			sourceTree = "<group>";
@@ -264,6 +266,39 @@
 				5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */,
 			);
 			path = Favorites;
+			sourceTree = "<group>";
+		};
+		5ED0627127EBDBC500FACD0B /* User Interface */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0627327EBDBEA00FACD0B /* Routing */,
+				5ED0627227EBDBD800FACD0B /* Helpers */,
+			);
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		5ED0627227EBDBD800FACD0B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0624B27EBB41600FACD0B /* UIResponderHelperTests */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		5ED0627327EBDBEA00FACD0B /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0627427EBDBF700FACD0B /* Transitions */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		5ED0627427EBDBF700FACD0B /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				5ED0627527EBDC1400FACD0B /* ModalTransitionTests.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,6 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED0627627EBDC1400FACD0B /* ModalTransitionTests.swift in Sources */,
 				5ED0624A27EBB33B00FACD0B /* UIResponderHelperTests.swift in Sources */,
 				5ED0624E27EBB43D00FACD0B /* TestViewController.swift in Sources */,
 				5EBC3F7527EB5E2B003F9CB9 /* HedgehogLabDemoTests.swift in Sources */,
