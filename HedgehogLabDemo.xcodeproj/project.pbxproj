@@ -113,7 +113,7 @@
 		5EBC3F5127EB5E2A003F9CB9 = {
 			isa = PBXGroup;
 			children = (
-				5EBC3F5C27EB5E2A003F9CB9 /* HedgehogLabDemo */,
+				5EBC3F5C27EB5E2A003F9CB9 /* Composition Root */,
 				5EBC3F8D27EB602F003F9CB9 /* User Interface */,
 				5EBC3F7327EB5E2B003F9CB9 /* HedgehogLabDemoTests */,
 				5EBC3F7D27EB5E2B003F9CB9 /* HedgehogLabDemoUITests */,
@@ -131,14 +131,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5EBC3F5C27EB5E2A003F9CB9 /* HedgehogLabDemo */ = {
+		5EBC3F5C27EB5E2A003F9CB9 /* Composition Root */ = {
 			isa = PBXGroup;
 			children = (
 				5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */,
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
 			);
-			path = HedgehogLabDemo;
+			path = "Composition Root";
 			sourceTree = "<group>";
 		};
 		5EBC3F7327EB5E2B003F9CB9 /* HedgehogLabDemoTests */ = {
@@ -595,7 +595,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6NHWRV56U;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HedgehogLabDemo/Info.plist;
+				INFOPLIST_FILE = "Composition Root/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -623,7 +623,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P6NHWRV56U;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = HedgehogLabDemo/Info.plist;
+				INFOPLIST_FILE = "Composition Root/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
