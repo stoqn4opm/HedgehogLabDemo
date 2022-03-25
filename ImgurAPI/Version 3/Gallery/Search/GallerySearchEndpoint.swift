@@ -13,8 +13,6 @@ import NetworkingKit
 ///
 /// Due to caching limitations of Imgur, it's not possible to change the result size of the gallery resources.
 ///
-/// This container has all things regarding the `GallerySearch` call.
-
 /// If you want to call the endpoint initialize this.
 public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[Image]>> {
     

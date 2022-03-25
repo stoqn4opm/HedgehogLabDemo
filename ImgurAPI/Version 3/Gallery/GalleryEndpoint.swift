@@ -12,9 +12,7 @@ import NetworkingKit
 /// Fetch images from Imgur gallery.
 ///
 /// Due to caching limitations of Imgur, it's not possible to change the result size of the gallery resources.
-///
-/// This container has all things regarding the `Gallery` call.
-
+/// 
 /// If you want to call the endpoint initialize this.
 public final class GalleryEndpoint: Endpoint.WithResponseTypeOnly<Basic<[Image]>> {
     

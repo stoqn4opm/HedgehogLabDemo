@@ -15,6 +15,10 @@
 		5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */; };
 		5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637C27EE7610000C40E4 /* AppStarterTests.swift */; };
 		5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */; };
+		5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */; };
+		5E34639127EE88C7000C40E4 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */; };
+		5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638C27EE8872000C40E4 /* PhotoService.swift */; };
+		5E34639527EE8A37000C40E4 /* PhotoServiceStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -135,6 +139,10 @@
 		5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupUIStartupAction.swift; sourceTree = "<group>"; };
 		5E34637C27EE7610000C40E4 /* AppStarterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStarterTests.swift; sourceTree = "<group>"; };
 		5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyStartupAction.swift; sourceTree = "<group>"; };
+		5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurPhotoRepository.swift; sourceTree = "<group>"; };
+		5E34638C27EE8872000C40E4 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
+		5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceStartupAction.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -243,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */,
+				5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -270,6 +279,22 @@
 				5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */,
 			);
 			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
+		5E34638727EE83E4000C40E4 /* Imgur Photo Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */,
+			);
+			path = "Imgur Photo Repository";
+			sourceTree = "<group>";
+		};
+		5E34638E27EE888F000C40E4 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		5EBC3F5127EB5E2A003F9CB9 = {
@@ -303,6 +328,7 @@
 				5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */,
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
 				5E34636F27EE6AAB000C40E4 /* Startup */,
+				5E34638727EE83E4000C40E4 /* Imgur Photo Repository */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
 			);
 			path = "Composition Root";
@@ -359,6 +385,8 @@
 			isa = PBXGroup;
 			children = (
 				5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */,
+				5E34638C27EE8872000C40E4 /* PhotoService.swift */,
+				5E34638E27EE888F000C40E4 /* Dependencies */,
 				5EBDEEF627EDEAE80083FDDD /* Models */,
 			);
 			path = "Service Layer";
@@ -837,9 +865,11 @@
 			files = (
 				5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */,
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
+				5E34639527EE8A37000C40E4 /* PhotoServiceStartupAction.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
 				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
 				5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */,
+				5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -863,7 +893,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E34639127EE88C7000C40E4 /* PhotoRepository.swift in Sources */,
 				5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */,
+				5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
