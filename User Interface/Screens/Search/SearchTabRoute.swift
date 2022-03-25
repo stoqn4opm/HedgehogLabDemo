@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-protocol SearchTabRoute {
+public protocol SearchTabRoute {
     var composedSearchTab: UIViewController { get }
 }
 
 extension SearchTabRoute where Self: Router {
     
-    var composedSearchTab: UIViewController {
+    public var composedSearchTab: UIViewController {
         let viewController = UIStoryboard(name: "Main", bundle: Bundle(for: SearchViewController.self))
             .instantiateViewController(identifier: SearchViewController.className) { coder in
                 

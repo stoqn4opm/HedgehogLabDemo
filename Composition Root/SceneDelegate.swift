@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HedgehogLabDemoUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

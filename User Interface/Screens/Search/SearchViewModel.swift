@@ -8,14 +8,13 @@
 import Foundation
 import Combine
 import UIKit
-
+import ServiceLayer
 
 protocol PhotoRepository {
     func fetchMostPopular(withCompletion completion: (Result<UIImage, Error>) -> Void)
 }
 
-struct Photo: Hashable {
-    let identifier: String
+extension Photo {
     var asImage: UIImage { UIImage() }
 }
 

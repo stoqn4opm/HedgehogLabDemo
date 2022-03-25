@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-protocol FavoriteTabRoute {
+public protocol FavoriteTabRoute {
     var composedFavoritesTab: UIViewController { get }
 }
 
 extension FavoriteTabRoute where Self: Router {
     
-    var composedFavoritesTab: UIViewController {
+    public var composedFavoritesTab: UIViewController {
         let viewController = UIStoryboard(name: "Main", bundle: Bundle(for: FavoritesViewController.self))
             .instantiateViewController(identifier: FavoritesViewController.className) { coder in
                 
