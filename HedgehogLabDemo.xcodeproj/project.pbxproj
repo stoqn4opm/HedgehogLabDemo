@@ -10,6 +10,9 @@
 		5E34636A27EE5AE5000C40E4 /* SearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8389327ECD31800F40809 /* SearchViewControllerTests.swift */; };
 		5E34636C27EE5D18000C40E4 /* Decodable+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34636B27EE5D18000C40E4 /* Decodable+Testing.swift */; };
 		5E34636E27EE5E85000C40E4 /* basic_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E34636D27EE5E85000C40E4 /* basic_response.json */; };
+		5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */; };
+		5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637027EE6AB6000C40E4 /* StartupAction.swift */; };
+		5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -125,6 +128,9 @@
 /* Begin PBXFileReference section */
 		5E34636B27EE5D18000C40E4 /* Decodable+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Testing.swift"; sourceTree = "<group>"; };
 		5E34636D27EE5E85000C40E4 /* basic_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = basic_response.json; sourceTree = "<group>"; };
+		5E34637027EE6AB6000C40E4 /* StartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupAction.swift; sourceTree = "<group>"; };
+		5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupActionExecutor.swift; sourceTree = "<group>"; };
+		5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupUIStartupAction.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +225,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E34636F27EE6AAB000C40E4 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				5E34637027EE6AB6000C40E4 /* StartupAction.swift */,
+				5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */,
+				5E34637627EE6F5F000C40E4 /* Actions */,
+			);
+			path = Startup;
+			sourceTree = "<group>";
+		};
+		5E34637627EE6F5F000C40E4 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
 		5EBC3F5127EB5E2A003F9CB9 = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +273,7 @@
 			children = (
 				5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */,
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
+				5E34636F27EE6AAB000C40E4 /* Startup */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
 			);
 			path = "Composition Root";
@@ -781,7 +806,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */,
+				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
+				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
+				5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
