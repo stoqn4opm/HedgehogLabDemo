@@ -13,6 +13,8 @@
 		5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */; };
 		5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637027EE6AB6000C40E4 /* StartupAction.swift */; };
 		5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */; };
+		5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637C27EE7610000C40E4 /* AppStarterTests.swift */; };
+		5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,6 +133,8 @@
 		5E34637027EE6AB6000C40E4 /* StartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupAction.swift; sourceTree = "<group>"; };
 		5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupActionExecutor.swift; sourceTree = "<group>"; };
 		5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupUIStartupAction.swift; sourceTree = "<group>"; };
+		5E34637C27EE7610000C40E4 /* AppStarterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStarterTests.swift; sourceTree = "<group>"; };
+		5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyStartupAction.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -243,6 +247,31 @@
 			path = Actions;
 			sourceTree = "<group>";
 		};
+		5E34637A27EE75DE000C40E4 /* Composition Root */ = {
+			isa = PBXGroup;
+			children = (
+				5E34637B27EE75E8000C40E4 /* Startup */,
+			);
+			path = "Composition Root";
+			sourceTree = "<group>";
+		};
+		5E34637B27EE75E8000C40E4 /* Startup */ = {
+			isa = PBXGroup;
+			children = (
+				5E34637C27EE7610000C40E4 /* AppStarterTests.swift */,
+				5E34637E27EE76B1000C40E4 /* Test Doubles */,
+			);
+			path = Startup;
+			sourceTree = "<group>";
+		};
+		5E34637E27EE76B1000C40E4 /* Test Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */,
+			);
+			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
 		5EBC3F5127EB5E2A003F9CB9 = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +311,7 @@
 		5EBC3F7327EB5E2B003F9CB9 /* HedgehogLabDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E34637A27EE75DE000C40E4 /* Composition Root */,
 				5EBDEF8E27EE57490083FDDD /* ImgurAPI */,
 				5ED0627127EBDBC500FACD0B /* User Interface */,
 				5E34636B27EE5D18000C40E4 /* Decodable+Testing.swift */,
@@ -819,8 +849,10 @@
 			files = (
 				5ED0627627EBDC1400FACD0B /* ModalTransitionTests.swift in Sources */,
 				5EBDEF9227EE57780083FDDD /* BasicTests.swift in Sources */,
+				5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */,
 				5ED8389727ECD77100F40809 /* SearchViewModelMock.swift in Sources */,
 				5ED0624A27EBB33B00FACD0B /* UIResponderHelperTests.swift in Sources */,
+				5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */,
 				5ED0624E27EBB43D00FACD0B /* TestViewController.swift in Sources */,
 				5E34636A27EE5AE5000C40E4 /* SearchViewControllerTests.swift in Sources */,
 				5E34636C27EE5D18000C40E4 /* Decodable+Testing.swift in Sources */,
