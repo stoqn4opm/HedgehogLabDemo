@@ -42,9 +42,19 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EBC3F7927EB5E2B003F9CB9"
+               BlueprintIdentifier = "5EBDEF0427EDEC220083FDDD"
                BuildableName = "HedgehogLabDemoUITests.xctest"
                BlueprintName = "HedgehogLabDemoUITests"
+               ReferencedContainer = "container:HedgehogLabDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "5EBDEF5F27EE54E30083FDDD"
+               BuildableName = "ImgurAPITests.xctest"
+               BlueprintName = "ImgurAPITests"
                ReferencedContainer = "container:HedgehogLabDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>

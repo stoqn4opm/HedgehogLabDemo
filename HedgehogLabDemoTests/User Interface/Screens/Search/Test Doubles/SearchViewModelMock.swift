@@ -7,7 +7,8 @@
 
 import Foundation
 import Combine
-@testable import HedgehogLabDemo
+import ServiceLayer
+@testable import HedgehogLabDemoUI
 
 final class SearchViewModelMock: SearchViewModelType {
      

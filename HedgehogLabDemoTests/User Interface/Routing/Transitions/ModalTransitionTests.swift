@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import HedgehogLabDemo
+@testable import HedgehogLabDemoUI
 
 class ModalTransitionTests: XCTestCase {
 

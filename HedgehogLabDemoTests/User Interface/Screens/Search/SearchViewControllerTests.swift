@@ -6,7 +6,8 @@
 //
 
 import XCTest
-@testable import HedgehogLabDemo
+@testable import ServiceLayer
+@testable import HedgehogLabDemoUI
 
 // MARK: - Class Definition
 
