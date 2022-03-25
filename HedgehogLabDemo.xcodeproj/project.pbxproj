@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E8A316D27EDAD2B004F2EA7 /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E8A316C27EDAD2B004F2EA7 /* NetworkingKit */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBC3F6527EB5E2A003F9CB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6327EB5E2A003F9CB9 /* Main.storyboard */; };
@@ -104,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5ED8389D27ECDDF500F40809 /* CombineSchedulers in Frameworks */,
+				5E8A316D27EDAD2B004F2EA7 /* NetworkingKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +378,7 @@
 			name = HedgehogLabDemo;
 			packageProductDependencies = (
 				5ED8389C27ECDDF500F40809 /* CombineSchedulers */,
+				5E8A316C27EDAD2B004F2EA7 /* NetworkingKit */,
 			);
 			productName = HedgehogLabDemo;
 			productReference = 5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */;
@@ -451,6 +454,7 @@
 			mainGroup = 5EBC3F5127EB5E2A003F9CB9;
 			packageReferences = (
 				5ED8389B27ECDDF500F40809 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
+				5E8A316B27EDAD2B004F2EA7 /* XCRemoteSwiftPackageReference "NetworkingKit" */,
 			);
 			productRefGroup = 5EBC3F5B27EB5E2A003F9CB9 /* Products */;
 			projectDirPath = "";
@@ -997,6 +1001,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5E8A316B27EDAD2B004F2EA7 /* XCRemoteSwiftPackageReference "NetworkingKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stoqn4opm/NetworkingKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5ED8389B27ECDDF500F40809 /* XCRemoteSwiftPackageReference "combine-schedulers" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/combine-schedulers";
@@ -1008,6 +1020,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5E8A316C27EDAD2B004F2EA7 /* NetworkingKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E8A316B27EDAD2B004F2EA7 /* XCRemoteSwiftPackageReference "NetworkingKit" */;
+			productName = NetworkingKit;
+		};
 		5ED8389C27ECDDF500F40809 /* CombineSchedulers */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5ED8389B27ECDDF500F40809 /* XCRemoteSwiftPackageReference "combine-schedulers" */;
