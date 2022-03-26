@@ -41,7 +41,7 @@ final class SearchViewControllerTests: XCTestCase {
     
     @discardableResult private func whenPhotosAreAppended(imageCount: Int, nameStartingFrom: Int) -> [Photo] {
         let photos = (0..<max(0, imageCount))
-            .map { Photo(identifier: "photo_\(nameStartingFrom + $0)") }
+            .map { Photo(rawPhoto: PhotoMock(id: "photo_\(nameStartingFrom + $0)"), dataAccessorKey: "") }
         
         viewModel.appendPhotosSubject.send(photos)
         return photos

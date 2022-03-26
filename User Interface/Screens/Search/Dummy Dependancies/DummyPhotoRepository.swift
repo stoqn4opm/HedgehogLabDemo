@@ -12,11 +12,11 @@ import ServiceLayer
 // MARK: - Default Photo Repository
 
 final class DummyPhotoRepository: PhotoRepository {
-    func fetchMostPopular(page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
+    func fetchMostPopular(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         
     }
     
-    func search(searchQuery: String, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
+    func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         
         //
         //        let images = UIImage(na)

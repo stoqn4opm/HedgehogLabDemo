@@ -35,10 +35,11 @@ final class SearchViewModel: SearchViewModelType {
         self.router = router
         self.photoService = photoService
         
-        photoService.photoRepository.fetchMostPopular(page: 1) { result in
+        photoService.fetchMostPopular(inSize: .thumbnail, page: 1) { result in
             switch result {
             case .success(let result):
-                print(result)
+                break
+//                print(result)
             case .failure(let error):
                 print(error)
             }

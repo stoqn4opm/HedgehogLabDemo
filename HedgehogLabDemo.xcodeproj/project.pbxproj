@@ -15,7 +15,7 @@
 		5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637C27EE7610000C40E4 /* AppStarterTests.swift */; };
 		5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */; };
 		5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */; };
-		5E34639127EE88C7000C40E4 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */; };
+		5E34639127EE88C7000C40E4 /* PhotoService+Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638F27EE88AE000C40E4 /* PhotoService+Dependencies.swift */; };
 		5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638C27EE8872000C40E4 /* PhotoService.swift */; };
 		5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */; };
 		5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */; };
@@ -24,6 +24,16 @@
 		5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */; };
 		5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */; };
 		5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */; };
+		5E3463B027EF6EC4000C40E4 /* PhotoService+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */; };
+		5E3463B327EF7436000C40E4 /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463B227EF7436000C40E4 /* ImageEndpoint.swift */; };
+		5E3463B927EF77C9000C40E4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463B827EF77C9000C40E4 /* Image.swift */; };
+		5E3463BC27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */; };
+		5E3463BF27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BE27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift */; };
+		5E3463C727EFAFA7000C40E4 /* LossyCachePhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */; };
+		5E3463C927EFB441000C40E4 /* WebRawDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */; };
+		5E3463CC27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */; };
+		5E3463CE27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */; };
+		5E3463D027EFBF6C000C40E4 /* PhotoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,7 +73,7 @@
 		5EBDEF8127EE54F80083FDDD /* GalleryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7927EE54F80083FDDD /* GalleryEndpoint.swift */; };
 		5EBDEF8227EE54F80083FDDD /* Gallery+RequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7A27EE54F80083FDDD /* Gallery+RequestOptions.swift */; };
 		5EBDEF8327EE54F80083FDDD /* GallerySearchEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7C27EE54F80083FDDD /* GallerySearchEndpoint.swift */; };
-		5EBDEF8427EE54F80083FDDD /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7E27EE54F80083FDDD /* Image.swift */; };
+		5EBDEF8427EE54F80083FDDD /* GalleryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7E27EE54F80083FDDD /* GalleryImage.swift */; };
 		5EBDEF8527EE54F80083FDDD /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7F27EE54F80083FDDD /* Basic.swift */; };
 		5EBDEF8627EE54F80083FDDD /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF8027EE54F80083FDDD /* Tag.swift */; };
 		5EBDEF8A27EE55960083FDDD /* NetworkingKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBDEF8927EE55960083FDDD /* NetworkingKit */; };
@@ -145,7 +155,7 @@
 		5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyStartupAction.swift; sourceTree = "<group>"; };
 		5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurPhotoRepository.swift; sourceTree = "<group>"; };
 		5E34638C27EE8872000C40E4 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
-		5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
+		5E34638F27EE88AE000C40E4 /* PhotoService+Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoService+Dependencies.swift"; sourceTree = "<group>"; };
 		5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUIFromPhotoService.swift; sourceTree = "<group>"; };
 		5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImgurPhotoService.swift; sourceTree = "<group>"; };
 		5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupAction.swift; sourceTree = "<group>"; };
@@ -153,6 +163,16 @@
 		5E3463A227EEB891000C40E4 /* MainStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStartupAction.swift; sourceTree = "<group>"; };
 		5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupActionTests.swift; sourceTree = "<group>"; };
 		5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepTransformerActionTests.swift; sourceTree = "<group>"; };
+		5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoService+Error.swift"; sourceTree = "<group>"; };
+		5E3463B227EF7436000C40E4 /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
+		5E3463B827EF77C9000C40E4 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsLinkCoordinator.swift; sourceTree = "<group>"; };
+		5E3463BE27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsLinkCoordinatorTests.swift; sourceTree = "<group>"; };
+		5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossyCachePhotoStorage.swift; sourceTree = "<group>"; };
+		5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRawDataDownloader.swift; sourceTree = "<group>"; };
+		5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemRawDataAccessor.swift; sourceTree = "<group>"; };
+		5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LossyCachePhotoStorage+Dependencies.swift"; sourceTree = "<group>"; };
+		5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMock.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,7 +197,7 @@
 		5EBDEF7927EE54F80083FDDD /* GalleryEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryEndpoint.swift; sourceTree = "<group>"; };
 		5EBDEF7A27EE54F80083FDDD /* Gallery+RequestOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Gallery+RequestOptions.swift"; sourceTree = "<group>"; };
 		5EBDEF7C27EE54F80083FDDD /* GallerySearchEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GallerySearchEndpoint.swift; sourceTree = "<group>"; };
-		5EBDEF7E27EE54F80083FDDD /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		5EBDEF7E27EE54F80083FDDD /* GalleryImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImage.swift; sourceTree = "<group>"; };
 		5EBDEF7F27EE54F80083FDDD /* Basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 		5EBDEF8027EE54F80083FDDD /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		5EBDEF9127EE57780083FDDD /* BasicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTests.swift; sourceTree = "<group>"; };
@@ -302,14 +322,6 @@
 			path = "Imgur Photo Repository";
 			sourceTree = "<group>";
 		};
-		5E34638E27EE888F000C40E4 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
 		5E3463A127EEB776000C40E4 /* Operators */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +346,49 @@
 				5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */,
 			);
 			path = Operators;
+			sourceTree = "<group>";
+		};
+		5E3463B127EF741C000C40E4 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463B227EF7436000C40E4 /* ImageEndpoint.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		5E3463B427EF75B8000C40E4 /* Local Photo Storage */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */,
+				5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */,
+				5E3463CA27EFB84B000C40E4 /* Dependencies */,
+			);
+			path = "Local Photo Storage";
+			sourceTree = "<group>";
+		};
+		5E3463BA27EF7B76000C40E4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		5E3463BD27EF81E0000C40E4 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463BE27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		5E3463CA27EFB84B000C40E4 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */,
+				5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */,
+			);
+			path = Dependencies;
 			sourceTree = "<group>";
 		};
 		5EBC3F5127EB5E2A003F9CB9 = {
@@ -368,6 +423,7 @@
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
 				5E34636F27EE6AAB000C40E4 /* Startup */,
 				5E34638727EE83E4000C40E4 /* Imgur Photo Repository */,
+				5E3463B427EF75B8000C40E4 /* Local Photo Storage */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
 			);
 			path = "Composition Root";
@@ -425,7 +481,8 @@
 			children = (
 				5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */,
 				5E34638C27EE8872000C40E4 /* PhotoService.swift */,
-				5E34638E27EE888F000C40E4 /* Dependencies */,
+				5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */,
+				5E34638F27EE88AE000C40E4 /* PhotoService+Dependencies.swift */,
 				5EBDEEF627EDEAE80083FDDD /* Models */,
 			);
 			path = "Service Layer";
@@ -466,7 +523,9 @@
 		5EBDEF7727EE54F80083FDDD /* Version 3 */ = {
 			isa = PBXGroup;
 			children = (
+				5E3463BA27EF7B76000C40E4 /* Utility */,
 				5EBDEF7D27EE54F80083FDDD /* Models */,
+				5E3463B127EF741C000C40E4 /* Image */,
 				5EBDEF7827EE54F80083FDDD /* Gallery */,
 			);
 			path = "Version 3";
@@ -494,7 +553,8 @@
 			isa = PBXGroup;
 			children = (
 				5EBDEF7F27EE54F80083FDDD /* Basic.swift */,
-				5EBDEF7E27EE54F80083FDDD /* Image.swift */,
+				5EBDEF7E27EE54F80083FDDD /* GalleryImage.swift */,
+				5E3463B827EF77C9000C40E4 /* Image.swift */,
 				5EBDEF8027EE54F80083FDDD /* Tag.swift */,
 			);
 			path = Models;
@@ -511,6 +571,7 @@
 		5EBDEF8F27EE57580083FDDD /* Version 3 */ = {
 			isa = PBXGroup;
 			children = (
+				5E3463BD27EF81E0000C40E4 /* Utility */,
 				5EBDEF9027EE57650083FDDD /* Models */,
 			);
 			path = "Version 3";
@@ -646,6 +707,7 @@
 			isa = PBXGroup;
 			children = (
 				5ED8389627ECD77100F40809 /* SearchViewModelMock.swift */,
+				5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -903,14 +965,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */,
+				5E3463CC27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift in Sources */,
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
+				5E3463C727EFAFA7000C40E4 /* LossyCachePhotoStorage.swift in Sources */,
 				5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */,
 				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
 				5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */,
 				5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */,
 				5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */,
 				5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */,
+				5E3463CE27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */,
+				5E3463C927EFB441000C40E4 /* WebRawDataDownloader.swift in Sources */,
 				5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,8 +988,10 @@
 				5ED0627627EBDC1400FACD0B /* ModalTransitionTests.swift in Sources */,
 				5EBDEF9227EE57780083FDDD /* BasicTests.swift in Sources */,
 				5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */,
+				5E3463BF27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift in Sources */,
 				5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */,
 				5ED8389727ECD77100F40809 /* SearchViewModelMock.swift in Sources */,
+				5E3463D027EFBF6C000C40E4 /* PhotoMock.swift in Sources */,
 				5ED0624A27EBB33B00FACD0B /* UIResponderHelperTests.swift in Sources */,
 				5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */,
 				5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */,
@@ -937,9 +1005,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E34639127EE88C7000C40E4 /* PhotoRepository.swift in Sources */,
+				5E34639127EE88C7000C40E4 /* PhotoService+Dependencies.swift in Sources */,
 				5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */,
 				5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */,
+				5E3463B027EF6EC4000C40E4 /* PhotoService+Error.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -972,9 +1041,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E3463BC27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift in Sources */,
 				5EBDEF8627EE54F80083FDDD /* Tag.swift in Sources */,
+				5E3463B927EF77C9000C40E4 /* Image.swift in Sources */,
 				5EBDEF8327EE54F80083FDDD /* GallerySearchEndpoint.swift in Sources */,
-				5EBDEF8427EE54F80083FDDD /* Image.swift in Sources */,
+				5EBDEF8427EE54F80083FDDD /* GalleryImage.swift in Sources */,
+				5E3463B327EF7436000C40E4 /* ImageEndpoint.swift in Sources */,
 				5EBDEF8227EE54F80083FDDD /* Gallery+RequestOptions.swift in Sources */,
 				5EBDEF8527EE54F80083FDDD /* Basic.swift in Sources */,
 				5EBDEF8127EE54F80083FDDD /* GalleryEndpoint.swift in Sources */,
