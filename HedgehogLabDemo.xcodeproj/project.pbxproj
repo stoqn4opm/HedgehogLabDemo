@@ -29,11 +29,11 @@
 		5E3463B927EF77C9000C40E4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463B827EF77C9000C40E4 /* Image.swift */; };
 		5E3463BC27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */; };
 		5E3463BF27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BE27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift */; };
-		5E3463C727EFAFA7000C40E4 /* LossyCachePhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */; };
-		5E3463C927EFB441000C40E4 /* WebRawDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */; };
 		5E3463CC27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */; };
-		5E3463CE27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */; };
 		5E3463D027EFBF6C000C40E4 /* PhotoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */; };
+		5E3463D127EFC463000C40E4 /* LossyCachePhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */; };
+		5E3463D227EFC463000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */; };
+		5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -356,14 +356,12 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
-		5E3463B427EF75B8000C40E4 /* Local Photo Storage */ = {
+		5E3463B427EF75B8000C40E4 /* PhotoStorage Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */,
-				5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */,
-				5E3463CA27EFB84B000C40E4 /* Dependencies */,
+				5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */,
 			);
-			path = "Local Photo Storage";
+			path = "PhotoStorage Dependencies";
 			sourceTree = "<group>";
 		};
 		5E3463BA27EF7B76000C40E4 /* Utility */ = {
@@ -382,11 +380,28 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
-		5E3463CA27EFB84B000C40E4 /* Dependencies */ = {
+		5E3463D327EFC499000C40E4 /* Dependency Local Defaults */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463D427EFC4AB000C40E4 /* Photo Storage */,
+			);
+			path = "Dependency Local Defaults";
+			sourceTree = "<group>";
+		};
+		5E3463D427EFC4AB000C40E4 /* Photo Storage */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */,
+				5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */,
+				5E3463D527EFC4BF000C40E4 /* Dependencies */,
+			);
+			path = "Photo Storage";
+			sourceTree = "<group>";
+		};
+		5E3463D527EFC4BF000C40E4 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
 				5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */,
-				5E3463CB27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -423,7 +438,7 @@
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
 				5E34636F27EE6AAB000C40E4 /* Startup */,
 				5E34638727EE83E4000C40E4 /* Imgur Photo Repository */,
-				5E3463B427EF75B8000C40E4 /* Local Photo Storage */,
+				5E3463B427EF75B8000C40E4 /* PhotoStorage Dependencies */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
 			);
 			path = "Composition Root";
@@ -483,6 +498,7 @@
 				5E34638C27EE8872000C40E4 /* PhotoService.swift */,
 				5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */,
 				5E34638F27EE88AE000C40E4 /* PhotoService+Dependencies.swift */,
+				5E3463D327EFC499000C40E4 /* Dependency Local Defaults */,
 				5EBDEEF627EDEAE80083FDDD /* Models */,
 			);
 			path = "Service Layer";
@@ -968,15 +984,12 @@
 				5E3463CC27EFB92D000C40E4 /* FileSystemRawDataAccessor.swift in Sources */,
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
-				5E3463C727EFAFA7000C40E4 /* LossyCachePhotoStorage.swift in Sources */,
 				5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */,
 				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
 				5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */,
 				5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */,
 				5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */,
 				5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */,
-				5E3463CE27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */,
-				5E3463C927EFB441000C40E4 /* WebRawDataDownloader.swift in Sources */,
 				5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1008,7 +1021,10 @@
 				5E34639127EE88C7000C40E4 /* PhotoService+Dependencies.swift in Sources */,
 				5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */,
 				5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */,
+				5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */,
 				5E3463B027EF6EC4000C40E4 /* PhotoService+Error.swift in Sources */,
+				5E3463D127EFC463000C40E4 /* LossyCachePhotoStorage.swift in Sources */,
+				5E3463D227EFC463000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

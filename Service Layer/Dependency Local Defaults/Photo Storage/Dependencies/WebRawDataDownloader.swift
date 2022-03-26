@@ -1,6 +1,6 @@
 //
 //  WebRawDataDownloader.swift
-//  HedgehogLabDemo
+//  ServiceLayer
 //
 //  Created by Stoyan Stoyanov on 26/03/22.
 //
@@ -12,11 +12,15 @@ import Foundation
 /// Simple HTTP GET downloader.
 /// Pass it a session, and it will give you back the body of the response
 /// as raw `Data`.
-struct WebRawDataDownloader: RawDataDownloader {
+public struct WebRawDataDownloader: RawDataDownloader {
     
-    let session: URLSession
+    public let session: URLSession
     
-    func download(url: URL, withCompletion completion: @escaping (Result<Data, Error>) -> ()) {
+    public init(session: URLSession) {
+        self.session = session
+    }
+    
+    public func download(url: URL, withCompletion completion: @escaping (Result<Data, Error>) -> ()) {
         session.dataTask(with: url) { data, response, error in
             if let data = data {
                 completion(.success(data))

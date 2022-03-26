@@ -1,12 +1,11 @@
 //
 //  LossyPhotoStorage.swift
-//  HedgehogLabDemoTests
+//  ServiceLayer
 //
 //  Created by Stoyan Stoyanov on 26/03/22.
 //
 
 import Foundation
-import ServiceLayer
 import Combine
 
 // MARK: - Local Lossy Photo Storage
@@ -17,17 +16,17 @@ import Combine
 /// and also when saving multiple photos simultaneously, in case
 /// of write failures they are dismissed, and only the successful
 /// writes are returned.
-class LossyCachePhotoStorage: PhotoStorage {
+public class LossyCachePhotoStorage: PhotoStorage {
     
-    let downloader: RawDataDownloader
-    let accessor: RawDataAccessor
+    public let downloader: RawDataDownloader
+    public let accessor: RawDataAccessor
     
-    init(downloader: RawDataDownloader, accessor: RawDataAccessor) {
+    public init(downloader: RawDataDownloader, accessor: RawDataAccessor) {
         self.downloader = downloader
         self.accessor = accessor
     }
     
-    func storePhotos(_ tuples: [(key: String, photo: RawPhoto)], completion: @escaping (Result<[Photo], Error>) -> ()) {
+    public func storePhotos(_ tuples: [(key: String, photo: RawPhoto)], completion: @escaping (Result<[Photo], Error>) -> ()) {
         var cancellable: AnyCancellable?
         cancellable = tuples.publisher
             .flatMap { [weak self] tuple -> AnyPublisher<Result<Photo, Error>, Never> in
@@ -63,7 +62,7 @@ class LossyCachePhotoStorage: PhotoStorage {
             }
     }
     
-    func storePhoto(_ rawPhoto: RawPhoto, forKey: String, completion: @escaping (Result<Photo, Error>) -> ()) {
+    public func storePhoto(_ rawPhoto: RawPhoto, forKey: String, completion: @escaping (Result<Photo, Error>) -> ()) {
         downloader.download(url: rawPhoto.downloadURL) { [weak self] result in
             switch result {
             case .success(let data):
@@ -82,7 +81,7 @@ class LossyCachePhotoStorage: PhotoStorage {
         }
     }
     
-    func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ()) {
+    public func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ()) {
         accessor.read(forKey: photo.dataAccessorKey) { result in
             switch result {
             case .success(let data):
