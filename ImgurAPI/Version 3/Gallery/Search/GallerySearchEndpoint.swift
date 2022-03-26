@@ -14,7 +14,7 @@ import NetworkingKit
 /// Due to caching limitations of Imgur, it's not possible to change the result size of the gallery resources.
 ///
 /// If you want to call the endpoint initialize this.
-public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[Image]>> {
+public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[GalleryImage]>> {
     
     public let sortedUsing: SortOption
     public let inTimeWindow: Window
@@ -34,7 +34,7 @@ public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[I
         [URLQueryItem(name: "q", value: searchQuery)]
     }
     
-    @discardableResult public init(searchQuery: String, sortedUsing: SortOption = .top, inTimeWindow: Window = .all, page: Int, appClientId: String, completion: @escaping (Basic<[Image]>?, Endpoint.Error?) -> ()) {
+    @discardableResult public init(searchQuery: String, sortedUsing: SortOption = .top, inTimeWindow: Window = .all, page: Int, appClientId: String, completion: @escaping (Basic<[GalleryImage]>?, Endpoint.Error?) -> ()) {
         self.sortedUsing = sortedUsing
         self.inTimeWindow = inTimeWindow
         self.page = page
@@ -44,7 +44,7 @@ public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[I
     }
     
     @available(*, unavailable)
-    override init(completion: @escaping (Basic<[Image]>?, Endpoint.Error?) -> ()) {
+    override init(completion: @escaping (Basic<[GalleryImage]>?, Endpoint.Error?) -> ()) {
         fatalError("not implemented")
     }
 }

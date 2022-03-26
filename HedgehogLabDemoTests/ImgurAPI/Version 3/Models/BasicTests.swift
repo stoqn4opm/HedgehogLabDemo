@@ -13,6 +13,6 @@ import XCTest
 final class BasicTests: XCTestCase {
     
     func testThatTheImgurModelsFilesHaventChangedInAWayThatWontParseServerResponse() {
-        XCTAssertNoThrow(try Basic<[Image]>.from(fileName: "basic_response"))
+        XCTAssertNoThrow(try Basic<[GalleryImage]>.from(fileName: "basic_response"))
     }
 }

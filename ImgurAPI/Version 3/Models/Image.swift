@@ -1,8 +1,8 @@
 //
-//  GalleryImage.swift
+//  Image.swift
 //  ImgurAPI
 //
-//  Created by Stoyan Stoyanov on 25/03/22.
+//  Created by Stoyan Stoyanov on 26/03/22.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Foundation
 
 /// The data model formatted for gallery images from Imgur's API.
 ///
-/// Image thumbnails
+/// GalleryImage thumbnails
 /// There are 6 total thumbnails that an image can be resized to.
 /// Each one is accessible by appending a single character suffix
 /// to the end of the image id, and before the file extension.
@@ -60,6 +60,9 @@ public struct Image: Codable {
     /// The number of image views
     public let views: Int
     
+    /// Undocumented, noticing that its never `null`, but keep an eye
+    public let tags: [Tag]
+    
     /// The direct link to the the image.
     ///
     /// Image thumbnails
@@ -81,26 +84,27 @@ public struct Image: Codable {
     /// has the Medium Thumbnail located at https://i.imgur.com/12345m.jpg
     ///
     /// Note: if fetching an animated GIF that was over 20MB in original size, a .gif thumbnail will be returned
-    public let link: String
-    
-    /// Upvotes for the image
-    public let ups: Int
-    
-    /// Number of downvotes for the image
-    public let downs: Int
-    
-    /// Upvotes minus downvotes
-    public let points: Int
-    
-    /// Imgur popularity score
-    public let score: Int
-    
-    /// Number of comments on the gallery image.
-    public let commentCount: Int
-    
-    /// Undocumented, noticing that its never `null`, but keep an eye
-    public let tags: [Tag]
+    public let link: URL
 
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try container.decode(String.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        width = try container.decodeIfPresent(Int.self, forKey: .width)
+        height = try container.decodeIfPresent(Int.self, forKey: .height)
+        size = try container.decodeIfPresent(Int.self, forKey: .size)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
+        views = try container.decode(Int.self, forKey: .views)
+        tags = try container.decode([Tag].self, forKey: .tags)
+        
+        let link = try container.decode(String.self, forKey: .link)
+        guard let url = URL(string: link) else {
+            throw NSError(domain: "ImgurAPIDecodingError", code: -1)
+        }
+        self.link = url
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -109,12 +113,7 @@ public struct Image: Codable {
         case size
         case description
         case views
-        case link
-        case ups
-        case downs
-        case points
-        case score
-        case commentCount = "comment_count"
         case tags
+        case link
     }
 }
