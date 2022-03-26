@@ -10,7 +10,8 @@ import Foundation
 
 public final class PhotoService {
     
-    let photoRepository: PhotoRepository
+    #warning("should be internal, making it public only for development purposes")
+    public let photoRepository: PhotoRepository
     
     public init(photoRepository: PhotoRepository) {
         self.photoRepository = photoRepository

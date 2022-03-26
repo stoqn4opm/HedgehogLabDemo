@@ -12,13 +12,16 @@
 		5E34636E27EE5E85000C40E4 /* basic_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E34636D27EE5E85000C40E4 /* basic_response.json */; };
 		5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */; };
 		5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637027EE6AB6000C40E4 /* StartupAction.swift */; };
-		5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */; };
 		5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637C27EE7610000C40E4 /* AppStarterTests.swift */; };
 		5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */; };
 		5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */; };
 		5E34639127EE88C7000C40E4 /* PhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */; };
 		5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34638C27EE8872000C40E4 /* PhotoService.swift */; };
-		5E34639527EE8A37000C40E4 /* PhotoServiceStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */; };
+		5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */; };
+		5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */; };
+		5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */; };
+		5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A227EEB891000C40E4 /* MainStartupAction.swift */; };
+		5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -136,13 +139,16 @@
 		5E34636D27EE5E85000C40E4 /* basic_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = basic_response.json; sourceTree = "<group>"; };
 		5E34637027EE6AB6000C40E4 /* StartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupAction.swift; sourceTree = "<group>"; };
 		5E34637227EE6ACB000C40E4 /* StartupActionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupActionExecutor.swift; sourceTree = "<group>"; };
-		5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupUIStartupAction.swift; sourceTree = "<group>"; };
 		5E34637C27EE7610000C40E4 /* AppStarterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStarterTests.swift; sourceTree = "<group>"; };
 		5E34637F27EE7737000C40E4 /* SpyStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyStartupAction.swift; sourceTree = "<group>"; };
 		5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurPhotoRepository.swift; sourceTree = "<group>"; };
 		5E34638C27EE8872000C40E4 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRepository.swift; sourceTree = "<group>"; };
-		5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceStartupAction.swift; sourceTree = "<group>"; };
+		5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUIFromPhotoService.swift; sourceTree = "<group>"; };
+		5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImgurPhotoService.swift; sourceTree = "<group>"; };
+		5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupAction.swift; sourceTree = "<group>"; };
+		5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepTransformerAction.swift; sourceTree = "<group>"; };
+		5E3463A227EEB891000C40E4 /* MainStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStartupAction.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -250,8 +256,10 @@
 		5E34637627EE6F5F000C40E4 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				5E34637727EE6F99000C40E4 /* SetupUIStartupAction.swift */,
-				5E34639327EE89BF000C40E4 /* PhotoServiceStartupAction.swift */,
+				5E3463A127EEB776000C40E4 /* Operators */,
+				5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */,
+				5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */,
+				5E3463A227EEB891000C40E4 /* MainStartupAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -295,6 +303,15 @@
 				5E34638F27EE88AE000C40E4 /* PhotoRepository.swift */,
 			);
 			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		5E3463A127EEB776000C40E4 /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */,
+				5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */,
+			);
+			path = Operators;
 			sourceTree = "<group>";
 		};
 		5EBC3F5127EB5E2A003F9CB9 = {
@@ -865,11 +882,14 @@
 			files = (
 				5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */,
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
-				5E34639527EE8A37000C40E4 /* PhotoServiceStartupAction.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
+				5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */,
 				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
-				5E34637927EE6F9D000C40E4 /* SetupUIStartupAction.swift in Sources */,
+				5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */,
+				5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */,
 				5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */,
+				5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */,
+				5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

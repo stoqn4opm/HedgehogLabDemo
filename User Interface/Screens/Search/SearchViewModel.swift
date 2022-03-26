@@ -10,9 +10,6 @@ import Combine
 import UIKit
 import ServiceLayer
 
-protocol PhotoRepository {
-    func fetchMostPopular(withCompletion completion: (Result<UIImage, Error>) -> Void)
-}
 
 extension Photo {
     var asImage: UIImage { UIImage() }
@@ -32,11 +29,20 @@ protocol SearchViewModelType {
 final class SearchViewModel: SearchViewModelType {
     
     let router: Router
-    let repository: PhotoRepository
+    let photoService: PhotoService
     
-    init(router: Router, repository: PhotoRepository) {
+    init(router: Router, photoService: PhotoService) {
         self.router = router
-        self.repository = repository
+        self.photoService = photoService
+        
+        photoService.photoRepository.fetchMostPopular(page: 1) { result in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     var appendPhotosPublisher: AnyPublisher<[Photo], Error> {

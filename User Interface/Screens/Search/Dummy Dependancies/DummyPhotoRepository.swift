@@ -7,28 +7,29 @@
 
 import Foundation
 import UIKit
-
+import ServiceLayer
 
 // MARK: - Default Photo Repository
 
 final class DummyPhotoRepository: PhotoRepository {
-    func fetchMostPopular(withCompletion completion: (Result<UIImage, Error>) -> Void) {
+    func fetchMostPopular(page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         
     }
     
-    
-    func fetchMostPopular(withCompletion completion: (Result<[Data], Error>) -> Void) {
-//        
-//        let images = UIImage(na)
-//        
-//        image1,
-//        image2,
-//        image3,
-//        image4,
-//        image5,
-//        image6,
-//        image7,
+    func search(searchQuery: String, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         
-        completion(.success([]))
+        //
+        //        let images = UIImage(na)
+        //
+        //        image1,
+        //        image2,
+        //        image3,
+        //        image4,
+        //        image5,
+        //        image6,
+        //        image7,
+                
+                completion(.success([]))
+
     }
 }
