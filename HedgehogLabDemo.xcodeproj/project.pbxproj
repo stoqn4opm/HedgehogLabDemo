@@ -22,6 +22,8 @@
 		5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */; };
 		5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A227EEB891000C40E4 /* MainStartupAction.swift */; };
 		5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */; };
+		5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */; };
+		5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
 		5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */; };
 		5EBDEEE827EDEA970083FDDD /* ServiceLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -149,6 +151,8 @@
 		5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupAction.swift; sourceTree = "<group>"; };
 		5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepTransformerAction.swift; sourceTree = "<group>"; };
 		5E3463A227EEB891000C40E4 /* MainStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStartupAction.swift; sourceTree = "<group>"; };
+		5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupActionTests.swift; sourceTree = "<group>"; };
+		5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepTransformerActionTests.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				5E34637C27EE7610000C40E4 /* AppStarterTests.swift */,
+				5E3463A527EEF9E9000C40E4 /* Actions */,
 				5E34637E27EE76B1000C40E4 /* Test Doubles */,
 			);
 			path = Startup;
@@ -310,6 +315,23 @@
 			children = (
 				5E34639C27EEB6DA000C40E4 /* TransformerStartupAction.swift */,
 				5E34639F27EEB70F000C40E4 /* ThreeStepTransformerAction.swift */,
+			);
+			path = Operators;
+			sourceTree = "<group>";
+		};
+		5E3463A527EEF9E9000C40E4 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463A627EEF9F1000C40E4 /* Operators */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		5E3463A627EEF9F1000C40E4 /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */,
+				5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */,
 			);
 			path = Operators;
 			sourceTree = "<group>";
@@ -900,9 +922,11 @@
 				5ED0627627EBDC1400FACD0B /* ModalTransitionTests.swift in Sources */,
 				5EBDEF9227EE57780083FDDD /* BasicTests.swift in Sources */,
 				5E34638027EE7737000C40E4 /* SpyStartupAction.swift in Sources */,
+				5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */,
 				5ED8389727ECD77100F40809 /* SearchViewModelMock.swift in Sources */,
 				5ED0624A27EBB33B00FACD0B /* UIResponderHelperTests.swift in Sources */,
 				5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */,
+				5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */,
 				5ED0624E27EBB43D00FACD0B /* TestViewController.swift in Sources */,
 				5E34636A27EE5AE5000C40E4 /* SearchViewControllerTests.swift in Sources */,
 				5E34636C27EE5D18000C40E4 /* Decodable+Testing.swift in Sources */,
