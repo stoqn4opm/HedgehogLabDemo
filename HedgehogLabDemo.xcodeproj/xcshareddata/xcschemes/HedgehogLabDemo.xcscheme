@@ -38,30 +38,10 @@
                ReferencedContainer = "container:HedgehogLabDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EBDEF0427EDEC220083FDDD"
-               BuildableName = "HedgehogLabDemoUITests.xctest"
-               BlueprintName = "HedgehogLabDemoUITests"
-               ReferencedContainer = "container:HedgehogLabDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5EBDEF5F27EE54E30083FDDD"
-               BuildableName = "ImgurAPITests.xctest"
-               BlueprintName = "ImgurAPITests"
-               ReferencedContainer = "container:HedgehogLabDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Dummy"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
