@@ -27,6 +27,9 @@ protocol SearchViewModelType {
     /// Fetches the most popular photos from the photo service.
     func fetchMostPopular()
     
+    /// Searches for photos from the photo service.
+    func searchPhoto(searchQuery: String)
+    
     /// Fetches the next page of photos to be presented to the user.
     func fetchNext()
     
@@ -34,7 +37,7 @@ protocol SearchViewModelType {
     func refresh()
     
     /// Publishes when a badge of more photos needs to be presented to the user.
-    var appendPhotosPublisher: AnyPublisher<[Photo], Error> { get }
+    var appendPhotosPublisher: AnyPublisher<[Photo], Never> { get }
     
     /// Publishes when list photo list needs to be cleared.
     var resetPhotosPublisher: AnyPublisher<Void, Never> { get }
@@ -44,6 +47,12 @@ protocol SearchViewModelType {
     
     /// Generates a graphical representation for a photo.
     func graphicRepresentation(for photo: Photo, withCompletion completion: @escaping (UIImage?) -> ())
+    
+    /// Gives you back a photo object at the given index.
+    ///
+    /// - Parameter index: The index at which you want to fetch the item
+    /// - Returns: The found item, or `nil` if `index` is invalid.
+    func photo(at index: Int) -> Photo?
 }
 
 // MARK: - Search View Model
@@ -57,8 +66,9 @@ final class SearchViewModel: SearchViewModelType {
     
     /// Keeps track on which page we are
     private var currentPage: Int
+    private var photos: [Photo]
     
-    private var appendPhotosSubject = PassthroughSubject<[Photo], Error>()
+    private var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
     private var resetPhotosSubject = PassthroughSubject<Void, Never>()
     private var errorMessageSubject = PassthroughSubject<String, Never>()
     
@@ -69,11 +79,18 @@ final class SearchViewModel: SearchViewModelType {
         self.photoService = photoService
         self.state = state
         self.currentPage = 1
-
-        $state
-            .removeDuplicates()
+        self.photos = []
+        
+        resetPhotosPublisher
             .sink { [weak self] _ in
                 self?.currentPage = 1
+                self?.photos = []
+            }
+            .store(in: &cancellables)
+        
+        appendPhotosPublisher
+            .sink { [weak self] newPhotos in
+                self?.photos.append(contentsOf: newPhotos)
             }
             .store(in: &cancellables)
     }
@@ -83,7 +100,7 @@ final class SearchViewModel: SearchViewModelType {
 
 extension SearchViewModel {
     
-    var appendPhotosPublisher: AnyPublisher<[Photo], Error> {
+    var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
         appendPhotosSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -109,16 +126,15 @@ extension SearchViewModel {
     
     func fetchMostPopular() {
         state = .mostPopular
-        
-        photoService.fetchMostPopular(inSize: .thumbnail, page: currentPage) { [weak self] result in
-            switch result {
-            case .success(let result):
-                self?.appendPhotosSubject.send(result)
-                
-            case .failure(let error):
-                print("[SearchViewModel] Failed most popular photos with error: \(error)")
-                self?.errorMessageSubject.send("Failed most popular photos".localized)
-            }
+        self.photoService.fetchMostPopular(inSize: .thumbnail, page: self.currentPage) { [weak self] result in
+            self?.handleFetchResult(result)
+        }
+    }
+    
+    func searchPhoto(searchQuery: String) {
+        state = .search
+        photoService.search(searchQuery: searchQuery, inSize: .thumbnail, page: currentPage) { [weak self] result in
+            self?.handleFetchResult(result)
         }
     }
     
@@ -128,10 +144,14 @@ extension SearchViewModel {
     }
     
     func refresh() {
-        currentPage = 1
         resetPhotosSubject.send(())
         fetch()
     }
+}
+
+// MARK: - Queries
+
+extension SearchViewModel {
     
     func graphicRepresentation(for photo: Photo, withCompletion completion: @escaping (UIImage?) -> ()) {
         photoService.rawImageData(forPhoto: photo) { [weak self] result in
@@ -146,6 +166,11 @@ extension SearchViewModel {
             }
         }
     }
+    
+    func photo(at index: Int) -> Photo? {
+        guard photos.indices.contains(index) else { return nil }
+        return photos[index]
+    }
 }
 
 // MARK: - Helpers
@@ -159,6 +184,17 @@ extension SearchViewModel {
             
         case .search:
             break
+        }
+    }
+    
+    private func handleFetchResult(_ result: Result<[Photo], PhotoService.Error>) {
+        switch result {
+        case .success(let result):
+            appendPhotosSubject.send(result)
+            
+        case .failure(let error):
+            print("[SearchViewModel] Failed most popular photos with error: \(error)")
+            errorMessageSubject.send("Failed most popular photos".localized)
         }
     }
 }
