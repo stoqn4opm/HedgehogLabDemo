@@ -39,6 +39,10 @@ protocol SearchViewModelType {
     /// Publishes when a badge of more photos needs to be presented to the user.
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> { get }
     
+    /// Sends `true` when the view model is going to perform
+    /// a fetch operation and `false` when its done.
+    var isLoadingPublisher: AnyPublisher<Bool, Never> { get }
+    
     /// Publishes when list photo list needs to be cleared.
     var resetPhotosPublisher: AnyPublisher<Void, Never> { get }
     
@@ -67,8 +71,10 @@ final class SearchViewModel: SearchViewModelType {
     /// Keeps track on which page we are
     private var currentPage: Int
     private var photos: [Photo]
+    private var searchQuery: String
     
     private var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
+    private var isLoadingSubject = PassthroughSubject<Bool, Never>()
     private var resetPhotosSubject = PassthroughSubject<Void, Never>()
     private var errorMessageSubject = PassthroughSubject<String, Never>()
     
@@ -80,6 +86,7 @@ final class SearchViewModel: SearchViewModelType {
         self.state = state
         self.currentPage = 1
         self.photos = []
+        self.searchQuery = ""
         
         resetPhotosPublisher
             .sink { [weak self] _ in
@@ -102,6 +109,11 @@ extension SearchViewModel {
     
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
         appendPhotosSubject
+            .eraseToAnyPublisher()
+    }
+    
+    var isLoadingPublisher: AnyPublisher<Bool, Never> {
+        isLoadingSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
@@ -126,13 +138,21 @@ extension SearchViewModel {
     
     func fetchMostPopular() {
         state = .mostPopular
-        self.photoService.fetchMostPopular(inSize: .thumbnail, page: self.currentPage) { [weak self] result in
+        isLoadingSubject.send(true)
+        photoService.fetchMostPopular(inSize: .thumbnail, page: currentPage) { [weak self] result in
             self?.handleFetchResult(result)
         }
     }
     
     func searchPhoto(searchQuery: String) {
         state = .search
+        if self.searchQuery != searchQuery {
+            // because we want to reset on different consecutive searches
+            resetPhotosSubject.send(())
+        }
+        
+        self.searchQuery = searchQuery
+        isLoadingSubject.send(true)
         photoService.search(searchQuery: searchQuery, inSize: .thumbnail, page: currentPage) { [weak self] result in
             self?.handleFetchResult(result)
         }
@@ -183,11 +203,13 @@ extension SearchViewModel {
             fetchMostPopular()
             
         case .search:
-            break
+            searchPhoto(searchQuery: searchQuery)
         }
     }
     
     private func handleFetchResult(_ result: Result<[Photo], PhotoService.Error>) {
+        isLoadingSubject.send(false)
+        
         switch result {
         case .success(let result):
             appendPhotosSubject.send(result)

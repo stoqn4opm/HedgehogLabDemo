@@ -45,6 +45,11 @@ public class LossyCachePhotoStorage: PhotoStorage {
             .collect()
             .eraseToAnyPublisher()
             .sink { individualResults in
+                guard individualResults.isEmpty == false else {
+                    completion(.success([]))
+                    return
+                }
+                
                 let photos = individualResults.compactMap { result -> Photo? in
                     switch result {
                     case .success(let photo): return photo

@@ -15,21 +15,32 @@ import ServiceLayer
 
 final class SearchViewController: UIViewController {
     
-    @IBOutlet private(set) weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var emptyStateContainer: UIView!
+    @IBOutlet private weak var loadingStateContainer: UIView!
     
     let viewModel: SearchViewModelType
     let distanceToEndBeforeFetchingMore: Int
     let scheduler: AnySchedulerOf<RunLoop>
+    let searchController: UISearchController
     
     private var presentingAlert: Bool
     private(set) var dataSource: UICollectionViewDiffableDataSource<Int, Photo>?
     private var cancellables: Set<AnyCancellable> = []
+    private var viewModelIsLoading: Bool
     
-    init?(coder: NSCoder, viewModel: SearchViewModelType, scheduler: AnySchedulerOf<RunLoop> = .main, distanceToEndBeforeFetchingMore: Int = 5) {
+    init?(coder: NSCoder,
+          viewModel: SearchViewModelType,
+          scheduler: AnySchedulerOf<RunLoop> = .main,
+          distanceToEndBeforeFetchingMore: Int = 5,
+          searchController: UISearchController) {
+        
         self.viewModel = viewModel
         self.distanceToEndBeforeFetchingMore = distanceToEndBeforeFetchingMore
         self.scheduler = scheduler
+        self.searchController = searchController
         self.presentingAlert = false
+        self.viewModelIsLoading = false
         super.init(coder: coder)
     }
     
@@ -46,9 +57,14 @@ extension SearchViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Most Popular".localized
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        collectionView.scrollsToTop = false
+        
         
         prepareCollectionView()
         setupCollectionViewLayout()
+        setupSearchBar()
         setupSubscriptions()
         viewModel.fetchMostPopular()
     }
@@ -92,6 +108,13 @@ extension SearchViewController {
         flowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
         collectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
+    
+    private func setupSearchBar() {
+        // Change placeholder text color
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.placeholder = "Search photos...".localized
+        searchController.searchBar.delegate = self
+    }
 }
 
 // MARK: - Combine Subscriptions
@@ -110,7 +133,8 @@ extension SearchViewController {
                 }
                 snapshot.appendItems(photos)
                 dataSource.apply(snapshot)
-                self?.collectionView.refreshControl?.endRefreshing()
+                self?.refreshUIState()
+                print("appending \(photos.count), all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -118,10 +142,11 @@ extension SearchViewController {
             .receive(on: scheduler)
             .sink { _ in
             } receiveValue: { [weak self] _ in
-                guard let dataSource = self?.dataSource else { return }
                 var snapshot = NSDiffableDataSourceSnapshot<Int, Photo>()
                 snapshot.appendSections([0])
-                dataSource.apply(snapshot)
+                self?.dataSource?.apply(snapshot)
+                self?.refreshUIState()
+                print("reseting all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -136,7 +161,37 @@ extension SearchViewController {
                 })
             }
             .store(in: &cancellables)
+        
+        viewModel.isLoadingPublisher
+            .receive(on: scheduler)
+            .sink { [weak self] isLoading in
+                self?.viewModelIsLoading = isLoading
+                self?.refreshUIState()
+                print("loading")
+            }
+            .store(in: &cancellables)
 
+    }
+    
+    private func refreshUIState() {
+        collectionView.refreshControl?.endRefreshing()
+        guard let snapshot = dataSource?.snapshot() else { return }
+        
+        if snapshot.numberOfItems != 0 {
+            self.collectionView.alpha = 1
+            self.emptyStateContainer.alpha = 0
+            self.loadingStateContainer.alpha = 0
+        } else {
+            self.collectionView.alpha = 0
+            
+            if self.viewModelIsLoading {
+                self.emptyStateContainer.alpha = 0
+                self.loadingStateContainer.alpha = 1
+            } else {
+                self.emptyStateContainer.alpha = 1
+                self.loadingStateContainer.alpha = 0
+            }
+        }
     }
 }
 
@@ -156,6 +211,29 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let currentPhoto = dataSource?.itemIdentifier(for: indexPath) else { return }
         fetchMoreIfNeeded(reachedPhoto: currentPhoto)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    // called when text changes (including clear)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard searchText.isEmpty else { return }
+        viewModel.fetchMostPopular()
+    }
+
+    // called when keyboard search button pressed
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text ?? ""
+        viewModel.searchPhoto(searchQuery: searchText)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        viewModel.fetchMostPopular()
+        searchBar.resignFirstResponder()
     }
 }
 

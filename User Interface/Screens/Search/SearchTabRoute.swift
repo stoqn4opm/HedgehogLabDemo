@@ -21,9 +21,10 @@ extension SearchTabRoute where Self: Router {
             .instantiateViewController(identifier: SearchViewController.className) { coder in
                 
                 // `EmptyTransition` since they are managed by the TabBarController
+                let searchController = UISearchController(searchResultsController: nil)
                 let router = MainRouter(rootTransition: EmptyTransition())
                 let viewModel = SearchViewModel(router: router, photoService: photoService, state: .mostPopular)
-                let result = SearchViewController(coder: coder, viewModel: viewModel)
+                let result = SearchViewController(coder: coder, viewModel: viewModel, searchController: searchController)
                 router.root = result
                 return result
             }

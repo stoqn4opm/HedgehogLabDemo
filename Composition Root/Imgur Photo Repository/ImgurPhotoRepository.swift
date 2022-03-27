@@ -36,7 +36,7 @@ final class ImgurPhotoRepository: PhotoRepository {
         GallerySearchEndpoint(searchQuery: searchQuery, inTimeWindow: .all, page: page, appClientId: appClientId) { result, error in
             if let rawResult = result?.data {
                 let photosOnly = rawResult
-                    .filter { $0.isAd == false && $0.isAlbum == false }
+                    .filter { $0.isAd == false && $0.isAlbum == false && $0.isAnimated == false }
                     .compactMap { ImgurGalleryRawPhoto(galleryImage: $0, inSize: size) }
                 completion(.success(photosOnly))
             } else if let error = error {
