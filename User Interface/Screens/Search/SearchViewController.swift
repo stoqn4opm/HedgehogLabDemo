@@ -48,8 +48,15 @@ extension SearchViewController {
         title = "Most Popular".localized
         
         prepareCollectionView()
+        setupCollectionViewLayout()
         setupSubscriptions()
         viewModel.fetchMostPopular()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+            super.traitCollectionDidChange(previousTraitCollection)
+        guard let snapshot = dataSource?.snapshot() else { return }
+        dataSource?.applySnapshotUsingReloadData(snapshot)
     }
 }
 
@@ -72,6 +79,18 @@ extension SearchViewController {
         collectionView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.dataSource = dataSource
         collectionView.delegate = self
+        collectionView.contentInset = .init(top: 5, left: 5, bottom: 20, right: 5)
+    }
+    
+    private func setupCollectionViewLayout() {
+        let flowLayout = UICollectionViewFlowLayout()
+        let gap: CGFloat = 5
+        
+        flowLayout.minimumLineSpacing = gap
+        flowLayout.minimumInteritemSpacing = gap
+        let itemSize = (view.bounds.width - 3 * gap) / 2
+        flowLayout.itemSize = CGSize(width: itemSize, height: itemSize)
+        collectionView.setCollectionViewLayout(flowLayout, animated: true)
     }
 }
 

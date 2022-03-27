@@ -30,6 +30,8 @@ extension PhotoCollectionViewCell {
             self?.imageView.image = image
         }
         
-        imageView.backgroundColor = .green
+        contentView.layer.cornerRadius = 8
+        contentView.layer.borderColor = UIColor.systemGray5.cgColor
+        contentView.layer.borderWidth = 3
     }
 }
