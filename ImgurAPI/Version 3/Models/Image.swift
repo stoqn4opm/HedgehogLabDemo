@@ -28,7 +28,7 @@ import Foundation
 /// For example, the image located at https://i.imgur.com/12345.jpg
 /// has the Medium Thumbnail located at https://i.imgur.com/12345m.jpg
 ///
-/// More info: https://api.imgur.com/models/gallery_image
+/// More info: https://api.imgur.com/models/image
 public struct Image: Codable {
     
     /// The ID for the image.
