@@ -26,6 +26,8 @@ public final class GalleryEndpoint: Endpoint.WithResponseTypeOnly<Basic<[Gallery
     
     public override var path: String { "/3/gallery/\(section.rawValue)/\(sortedUsing.rawValue)/\(inTimeWindow.rawValue)/\(page)" }
     
+    public override var timeout: TimePeriod { .minutes(1) }
+    
     public override var headers: [HTTP.Header] {
         [.init(.authorization, value: "Client-ID \(appClientId)")]
     }

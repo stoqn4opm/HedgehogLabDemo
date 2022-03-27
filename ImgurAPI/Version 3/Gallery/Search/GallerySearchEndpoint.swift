@@ -25,6 +25,8 @@ public final class GallerySearchEndpoint: Endpoint.WithResponseTypeOnly<Basic<[G
     public override var host: String { "api.imgur.com" }
     
     public override var path: String { "/3/gallery/search/\(sortedUsing.rawValue)/\(inTimeWindow.rawValue)/\(page)" }
+   
+    public override var timeout: TimePeriod { .minutes(1) }
     
     public override var headers: [HTTP.Header] {
         [.init(.authorization, value: "Client-ID \(appClientId)")]
