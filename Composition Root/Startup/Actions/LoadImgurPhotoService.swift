@@ -11,21 +11,29 @@ import NetworkingKit
 
 // MARK: - UIWindow Startup Action
 
-final class LoadImgurPhotoService: TransformerStartupAction<String, PhotoService> {
+final class LoadImgurPhotoService: TransformerStartupAction<String, Result<PhotoService, Error>> {
     
     init() {
         super.init { appClientId in
             let repository = ImgurPhotoRepository(appClientId: appClientId)
             let downloader = WebRawDataDownloader(session: Endpoint.sharedSession)
-            let accessor = FileSystemRawDataAccessor()
+            let oneGigabyte: Int64 = 1073741824
+            
+            guard let accessor = CacheDirectoryRawDataAccessor(cacheSubdirectory: "Imgur-temp",
+                                                               fileManager: .default,
+                                                               maxAllowedDiskUsageInBytes: oneGigabyte)
+            else {
+                return .failure(NSError(domain: "[LoadImgurPhotoService] - no enough space on disk!", code: 1))
+            }
+            
             let photoStorage = LossyCachePhotoStorage(downloader: downloader, accessor: accessor)
             let photoService = PhotoService(photoRepository: repository, photoStorage: photoStorage)
-            return photoService
+            return .success(photoService)
         }
     }
     
     @available(*, unavailable)
-    override init(input: String? = nil, transform: @escaping (String) -> (PhotoService)) {
+    override init(input: String? = nil, transform: @escaping (String) -> (Result<PhotoService, Error>)) {
         super.init(input: input, transform: transform)
     }
 }

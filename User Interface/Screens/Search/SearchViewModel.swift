@@ -38,8 +38,7 @@ final class SearchViewModel: SearchViewModelType {
         photoService.fetchMostPopular(inSize: .thumbnail, page: 1) { result in
             switch result {
             case .success(let result):
-                break
-//                print(result)
+                print(result)
             case .failure(let error):
                 print(error)
             }

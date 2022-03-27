@@ -70,6 +70,14 @@ public struct GalleryImage: Codable {
     /// If it's an album or not
     public let isAlbum: Bool
     
+    /// Gives info if current entry is animated or not.
+    ///
+    /// - true for videos/gifs,
+    /// - false for images
+    /// - missing for albums, galleries, and all sorts of other objects
+    /// that the API represents with the same model.
+    public let isAnimated: Bool?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -87,5 +95,6 @@ public struct GalleryImage: Codable {
         case tags
         case isAd = "is_ad"
         case isAlbum = "is_album"
+        case isAnimated = "animated"
     }
 }
