@@ -52,9 +52,17 @@ final class ImgurGalleryRawPhoto: RawPhoto {
     
     let galleryImage: GalleryImage
     let downloadURL: URL
+    let width: Int
+    let height: Int
     
     init?(galleryImage: GalleryImage, inSize size: Photo.Size) {
         self.galleryImage = galleryImage
+        
+        guard let width = galleryImage.width,
+              let height = galleryImage.height else { return nil }
+        
+        self.width = width
+        self.height = height
         
         guard let url = URL(string: galleryImage.link) else { return nil }
         let coordinator = ThumbnailsLinkCoordinator(originalLink: url)
@@ -74,7 +82,7 @@ extension Photo.Size {
     fileprivate var imgurSize: ThumbnailsLinkCoordinator.ThumbnailSize {
         switch self {
         case .original: return .original
-        case .thumbnail: return .smallThumbnail
+        case .thumbnail: return .mediumThumbnail
         }
     }
 }
