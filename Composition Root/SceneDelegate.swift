@@ -6,26 +6,33 @@
 //
 
 import UIKit
+import ServiceLayer
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    /// Coordinates the configuration of services, environments and launch procedures
+    let appStarter: StartupActionExecutor = AppStarter()
 
-
+    let imgurClientId = "ef8d4acb74c28c0"
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let mainRouter = MainRouter(rootTransition: EmptyTransition())
-        let tabs = [mainRouter.composedSearchTab,
-                    mainRouter.composedFavoritesTab]
-
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = MainTabBarController(viewControllers: tabs)
-        window?.makeKeyAndVisible()
+        appStarter
+            .append(MainStartupAction(
+                withImgurClientId: imgurClientId,
+                step1: LoadImgurPhotoService(),
+                step2: LoadUIFromPhotoService(in: windowScene),
+                step3: .init { window in
+                    self.window = window
+                }
+            ))
+            .execute()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

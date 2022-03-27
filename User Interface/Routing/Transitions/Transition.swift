@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Transition Definition
 
-protocol Transition: AnyObject {
+public protocol Transition: AnyObject {
     var isAnimated: Bool { get set }
 
     func open(_ viewController: UIViewController, from: UIViewController, completion: (() -> Void)?)

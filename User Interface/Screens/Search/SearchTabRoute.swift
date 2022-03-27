@@ -7,26 +7,29 @@
 
 import Foundation
 import UIKit
+import ServiceLayer
 
-protocol SearchTabRoute {
-    var composedSearchTab: UIViewController { get }
+
+public protocol SearchTabRoute {
+    func composedSearchTab(withPhotoService photoService: PhotoService) -> UIViewController
 }
 
 extension SearchTabRoute where Self: Router {
     
-    var composedSearchTab: UIViewController {
+    public func composedSearchTab(withPhotoService photoService: PhotoService) -> UIViewController {
         let viewController = UIStoryboard(name: "Main", bundle: Bundle(for: SearchViewController.self))
             .instantiateViewController(identifier: SearchViewController.className) { coder in
                 
                 // `EmptyTransition` since they are managed by the TabBarController
                 let router = MainRouter(rootTransition: EmptyTransition())
-                let viewModel = SearchViewModel(router: router)
+                let viewModel = SearchViewModel(router: router, photoService: photoService, state: .mostPopular)
                 let result = SearchViewController(coder: coder, viewModel: viewModel)
                 router.root = result
                 return result
             }
 
         let navigation = UINavigationController(rootViewController: viewController)
+        navigation.navigationBar.prefersLargeTitles = true
         navigation.tabBarItem = Tabs.search.item
         return navigation
     }

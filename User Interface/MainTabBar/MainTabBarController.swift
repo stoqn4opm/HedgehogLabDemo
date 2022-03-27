@@ -10,8 +10,8 @@ import UIKit
 
 // MARK: - Class Definition
 
-final class MainTabBarController: UITabBarController {
-    init(viewControllers: [UIViewController]) {
+public final class MainTabBarController: UITabBarController {
+    public init(viewControllers: [UIViewController]) {
         super.init(nibName: nil, bundle: nil)
         self.viewControllers = viewControllers
     }

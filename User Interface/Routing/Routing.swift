@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - Routing Protocols
 
-protocol Closable: AnyObject {
+public protocol Closable: AnyObject {
     /// Closes the Router's root view controller using the transition used to show it.
     func close()
 
@@ -18,7 +18,7 @@ protocol Closable: AnyObject {
     func close(completion: (() -> Void)?)
 }
 
-protocol Dismissable: AnyObject {
+public protocol Dismissable: AnyObject {
     /// Dismisses the Router's root view controller ignoring the transition used to show it.
     func dismiss()
 
@@ -26,7 +26,7 @@ protocol Dismissable: AnyObject {
     func dismiss(completion: (() -> Void)?)
 }
 
-protocol Routable: AnyObject {
+public protocol Routable: AnyObject {
     /// Route to a view controller using the transition provided.
     func route(to viewController: UIViewController, with transition: Transition)
 
@@ -34,7 +34,7 @@ protocol Routable: AnyObject {
     func route(to viewController: UIViewController, with transition: Transition, completion: (() -> Void)?)
 }
 
-protocol Router: Routable {
+public protocol Router: Routable {
     /// The root view controller of this router.
     var root: UIViewController? { get set }
 }

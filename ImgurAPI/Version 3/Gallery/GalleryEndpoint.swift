@@ -1,0 +1,48 @@
+//
+//  Gallery.swift
+//  ImgurAPI
+//
+//  Created by Stoyan Stoyanov on 25/03/22.
+//
+
+import Foundation
+import NetworkingKit
+
+
+/// Fetch images from Imgur gallery.
+///
+/// Due to caching limitations of Imgur, it's not possible to change the result size of the gallery resources.
+/// 
+/// If you want to call the endpoint initialize this.
+public final class GalleryEndpoint: Endpoint.WithResponseTypeOnly<Basic<[GalleryImage]>> {
+    
+    public let section: Section
+    public let sortedUsing: SortOption
+    public let inTimeWindow: Window
+    public let page: Int
+    public let appClientId: String
+    
+    public override var host: String { "api.imgur.com" }
+    
+    public override var path: String { "/3/gallery/\(section.rawValue)/\(sortedUsing.rawValue)/\(inTimeWindow.rawValue)/\(page)" }
+    
+    public override var timeout: TimePeriod { .minutes(1) }
+    
+    public override var headers: [HTTP.Header] {
+        [.init(.authorization, value: "Client-ID \(appClientId)")]
+    }
+    
+    @discardableResult public init(section: Section = .hot, sortedUsing: SortOption = .top, inTimeWindow: Window = .all, page: Int, appClientId: String, completion: @escaping (Basic<[GalleryImage]>?, Endpoint.Error?) -> ()) {
+        self.sortedUsing = sortedUsing
+        self.inTimeWindow = inTimeWindow
+        self.page = page
+        self.appClientId = appClientId
+        self.section = section
+        super.init(completion: completion)
+    }
+    
+    @available(*, unavailable)
+    override init(completion: @escaping (Basic<[GalleryImage]>?, Endpoint.Error?) -> ()) {
+        fatalError("not implemented")
+    }
+}

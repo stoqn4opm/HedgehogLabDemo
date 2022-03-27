@@ -8,14 +8,16 @@
 import Foundation
 import UIKit
 
-final class EmptyTransition {
-    var isAnimated = true
+public final class EmptyTransition {
+    public var isAnimated = true
+    
+    public init() {}
 }
 
 // MARK: - Transition Conformance
 
 extension EmptyTransition: Transition {
 
-    func open(_ viewController: UIViewController, from: UIViewController, completion: (() -> Void)?) {}
-    func close(_ viewController: UIViewController, completion: (() -> Void)?) {}
+    public func open(_ viewController: UIViewController, from: UIViewController, completion: (() -> Void)?) {}
+    public func close(_ viewController: UIViewController, completion: (() -> Void)?) {}
 }
