@@ -21,6 +21,7 @@ final class SearchViewController: UIViewController {
     let distanceToEndBeforeFetchingMore: Int
     let scheduler: AnySchedulerOf<RunLoop>
     
+    private var presentingAlert: Bool
     private(set) var dataSource: UICollectionViewDiffableDataSource<Int, Photo>?
     private var cancellables: Set<AnyCancellable> = []
     
@@ -28,6 +29,7 @@ final class SearchViewController: UIViewController {
         self.viewModel = viewModel
         self.distanceToEndBeforeFetchingMore = distanceToEndBeforeFetchingMore
         self.scheduler = scheduler
+        self.presentingAlert = false
         super.init(coder: coder)
     }
     
@@ -47,6 +49,7 @@ extension SearchViewController {
         
         prepareCollectionView()
         setupSubscriptions()
+        viewModel.fetchMostPopular()
     }
 }
 
@@ -57,7 +60,10 @@ extension SearchViewController {
     private func prepareCollectionView() {
         dataSource = UICollectionViewDiffableDataSource<Int, Photo>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.className, for: indexPath)
-            (cell as? PhotoCollectionViewCell)?.populate(from: itemIdentifier)
+            let photoCell = cell as? PhotoCollectionViewCell
+            photoCell?.populate(from: itemIdentifier) { [weak self] graphicsProvider in
+                self?.viewModel.graphicRepresentation(for: itemIdentifier, withCompletion: graphicsProvider)
+            }
             return cell
         }
         
@@ -85,6 +91,7 @@ extension SearchViewController {
                 }
                 snapshot.appendItems(photos)
                 dataSource.apply(snapshot)
+                self?.collectionView.refreshControl?.endRefreshing()
             }
             .store(in: &cancellables)
         
@@ -96,6 +103,18 @@ extension SearchViewController {
                 var snapshot = NSDiffableDataSourceSnapshot<Int, Photo>()
                 snapshot.appendSections([0])
                 dataSource.apply(snapshot)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.errorMessagePublisher
+            .debounce(for: 0.5, scheduler: scheduler)
+            .sink { [weak self] message in
+                guard self?.presentingAlert == nil else { return }
+                self?.presentingAlert = true
+                let alert = UIAlertController(title: "Error Occurred".localized, message: message, preferredStyle: .alert)
+                alert.addAction(.init(title: "OK".localized, style: .cancel) { [weak self] _ in
+                    self?.presentingAlert = false
+                })
             }
             .store(in: &cancellables)
 

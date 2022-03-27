@@ -22,7 +22,7 @@ extension SearchTabRoute where Self: Router {
                 
                 // `EmptyTransition` since they are managed by the TabBarController
                 let router = MainRouter(rootTransition: EmptyTransition())
-                let viewModel = SearchViewModel(router: router, photoService: photoService)
+                let viewModel = SearchViewModel(router: router, photoService: photoService, state: .mostPopular)
                 let result = SearchViewController(coder: coder, viewModel: viewModel)
                 router.root = result
                 return result

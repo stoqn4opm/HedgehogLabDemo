@@ -26,6 +26,8 @@ public struct Photo: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawPhoto.id)
     }
+    
+    public var title: String { rawPhoto.title }
 }
 
 extension Photo {

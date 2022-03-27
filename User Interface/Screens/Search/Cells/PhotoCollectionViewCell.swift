@@ -14,14 +14,22 @@ import ServiceLayer
 final class PhotoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
+    
+    private var photo: Photo?
 }
 
 // MARK: - Populate With Data
 
 extension PhotoCollectionViewCell {
     
-    func populate(from data: Photo) {
-        imageView.image = data.asImage
+    func populate(from photo: Photo, graphicRepresentation: (@escaping (UIImage?) -> ()) -> ()) {
+        self.photo = photo
+        
+        graphicRepresentation { [weak self] image in
+            guard self?.photo == photo else { return }
+            self?.imageView.image = image
+        }
+        
         imageView.backgroundColor = .green
     }
 }
