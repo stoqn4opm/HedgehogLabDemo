@@ -54,27 +54,35 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm1-g7-jXH">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ltm-OH-hY5">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ltm-OH-hY5" customClass="AnimationView" customModule="Lottie">
                                         <rect key="frame" x="87" y="345" width="240" height="128"/>
-                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="Wie-jS-xaM"/>
                                             <constraint firstAttribute="width" constant="240" id="yyT-hq-RCL"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Results..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osv-sL-EHe">
+                                        <rect key="frame" x="107" y="523" width="200" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="Ltm-OH-hY5" firstAttribute="centerX" secondItem="Rm1-g7-jXH" secondAttribute="centerX" id="FcE-gF-lpJ"/>
                                     <constraint firstItem="Ltm-OH-hY5" firstAttribute="centerY" secondItem="Rm1-g7-jXH" secondAttribute="centerY" id="H7o-ZQ-nzF"/>
+                                    <constraint firstItem="osv-sL-EHe" firstAttribute="top" secondItem="Ltm-OH-hY5" secondAttribute="bottom" constant="50" id="XIi-iH-NHe"/>
+                                    <constraint firstItem="osv-sL-EHe" firstAttribute="centerX" secondItem="Rm1-g7-jXH" secondAttribute="centerX" id="xih-sn-RXk"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e01-9E-h8w">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reY-cl-nrI">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reY-cl-nrI" customClass="AnimationView" customModule="Lottie">
                                         <rect key="frame" x="87" y="345" width="240" height="128"/>
-                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="2sf-EC-AXi"/>
                                             <constraint firstAttribute="height" constant="128" id="hbw-vI-ruI"/>
@@ -107,7 +115,9 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="NhE-MA-Gu3" id="ZXP-ip-sCP"/>
+                        <outlet property="emptyAnimationView" destination="Ltm-OH-hY5" id="qNa-xV-Cdd"/>
                         <outlet property="emptyStateContainer" destination="Rm1-g7-jXH" id="cji-xI-HxJ"/>
+                        <outlet property="loadingAnimationView" destination="reY-cl-nrI" id="Nd8-aD-wYM"/>
                         <outlet property="loadingStateContainer" destination="e01-9E-h8w" id="Moo-qJ-AfJ"/>
                     </connections>
                 </viewController>
@@ -124,6 +134,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="X96-V0-CoT"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="tintColor" red="0.062745098039215685" green="0.41960784313725491" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoJ-cG-ReP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -149,9 +160,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGroupedBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

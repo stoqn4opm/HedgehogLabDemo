@@ -10,6 +10,7 @@ import UIKit
 import Combine
 import CombineSchedulers
 import ServiceLayer
+import Lottie
 
 // MARK: - Class Definition
 
@@ -18,6 +19,8 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var emptyStateContainer: UIView!
     @IBOutlet private weak var loadingStateContainer: UIView!
+    @IBOutlet private weak var loadingAnimationView: AnimationView!
+    @IBOutlet private weak var emptyAnimationView: AnimationView!
     
     let viewModel: SearchViewModelType
     let distanceToEndBeforeFetchingMore: Int
@@ -65,12 +68,14 @@ extension SearchViewController {
         prepareCollectionView()
         setupCollectionViewLayout()
         setupSearchBar()
+        prepareLoadingAnimation()
+        prepareEmptyStateAnimation()
         setupSubscriptions()
         viewModel.fetchMostPopular()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-            super.traitCollectionDidChange(previousTraitCollection)
+        super.traitCollectionDidChange(previousTraitCollection)
         guard let snapshot = dataSource?.snapshot() else { return }
         dataSource?.applySnapshotUsingReloadData(snapshot)
     }
@@ -114,6 +119,20 @@ extension SearchViewController {
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.placeholder = "Search photos...".localized
         searchController.searchBar.delegate = self
+    }
+    
+    private func prepareLoadingAnimation() {
+        if let loadingAnimationPath = Bundle(for: Self.self).path(forResource: "loading", ofType: "json") {
+            loadingAnimationView.animation = .filepath(loadingAnimationPath)
+            loadingAnimationView.loopMode = .loop
+        }
+    }
+    
+    private func prepareEmptyStateAnimation() {
+        if let emptyAnimationPath = Bundle(for: Self.self).path(forResource: "10223-search-empty", ofType: "json") {
+            emptyAnimationView.animation = .filepath(emptyAnimationPath)
+            emptyAnimationView.loopMode = .autoReverse
+        }
     }
 }
 
@@ -170,7 +189,7 @@ extension SearchViewController {
                 print("loading")
             }
             .store(in: &cancellables)
-
+        
     }
     
     private func refreshUIState() {
@@ -178,18 +197,23 @@ extension SearchViewController {
         guard let snapshot = dataSource?.snapshot() else { return }
         
         if snapshot.numberOfItems != 0 {
-            self.collectionView.alpha = 1
-            self.emptyStateContainer.alpha = 0
-            self.loadingStateContainer.alpha = 0
+            collectionView.alpha = 1
+            emptyStateContainer.alpha = 0
+            loadingStateContainer.alpha = 0
+            emptyAnimationView.stop()
+            loadingAnimationView.stop()
         } else {
-            self.collectionView.alpha = 0
-            
-            if self.viewModelIsLoading {
-                self.emptyStateContainer.alpha = 0
-                self.loadingStateContainer.alpha = 1
+            collectionView.alpha = 0
+            if viewModelIsLoading {
+                emptyStateContainer.alpha = 0
+                loadingStateContainer.alpha = 1
+                emptyAnimationView.stop()
+                loadingAnimationView.play()
             } else {
-                self.emptyStateContainer.alpha = 1
-                self.loadingStateContainer.alpha = 0
+                emptyStateContainer.alpha = 1
+                loadingStateContainer.alpha = 0
+                emptyAnimationView.play()
+                loadingAnimationView.stop()
             }
         }
     }
@@ -223,13 +247,13 @@ extension SearchViewController: UISearchBarDelegate {
         guard searchText.isEmpty else { return }
         viewModel.fetchMostPopular()
     }
-
+    
     // called when keyboard search button pressed
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text ?? ""
         viewModel.searchPhoto(searchQuery: searchText)
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         viewModel.fetchMostPopular()

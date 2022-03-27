@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E2A485227F0E38F00AE54C5 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5E2A485127F0E38F00AE54C5 /* Lottie */; };
+		5E2A485627F0E5CB00AE54C5 /* 10223-search-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */; };
+		5E2A485B27F0E86C00AE54C5 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E2A485A27F0E86C00AE54C5 /* loading.json */; };
 		5E34636A27EE5AE5000C40E4 /* SearchViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED8389327ECD31800F40809 /* SearchViewControllerTests.swift */; };
 		5E34636C27EE5D18000C40E4 /* Decodable+Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34636B27EE5D18000C40E4 /* Decodable+Testing.swift */; };
 		5E34636E27EE5E85000C40E4 /* basic_response.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E34636D27EE5E85000C40E4 /* basic_response.json */; };
@@ -146,6 +149,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10223-search-empty.json"; sourceTree = "<group>"; };
+		5E2A485A27F0E86C00AE54C5 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		5E34636B27EE5D18000C40E4 /* Decodable+Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Testing.swift"; sourceTree = "<group>"; };
 		5E34636D27EE5E85000C40E4 /* basic_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = basic_response.json; sourceTree = "<group>"; };
 		5E34637027EE6AB6000C40E4 /* StartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupAction.swift; sourceTree = "<group>"; };
@@ -251,6 +256,7 @@
 			files = (
 				5EBDEF3827EDEF840083FDDD /* CombineSchedulers in Frameworks */,
 				5EBDEF3127EDED440083FDDD /* ServiceLayer.framework in Frameworks */,
+				5E2A485227F0E38F00AE54C5 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +271,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E2A485327F0E5BB00AE54C5 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */,
+				5E2A485A27F0E86C00AE54C5 /* loading.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		5E34636F27EE6AAB000C40E4 /* Startup */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +630,7 @@
 				5ED0623F27EBAECE00FACD0B /* SearchTabRoute.swift */,
 				5ED0624227EBAF5100FACD0B /* SearchViewController.swift */,
 				5ED0624427EBAF5D00FACD0B /* SearchViewModel.swift */,
+				5E2A485327F0E5BB00AE54C5 /* Animations */,
 				5EF2AA3227EC927500CC83A5 /* Cells */,
 			);
 			path = Search;
@@ -841,6 +857,7 @@
 			name = HedgehogLabDemoUI;
 			packageProductDependencies = (
 				5EBDEF3727EDEF840083FDDD /* CombineSchedulers */,
+				5E2A485127F0E38F00AE54C5 /* Lottie */,
 			);
 			productName = HedgehogLabDemoUI;
 			productReference = 5EBDEEFE27EDEC220083FDDD /* HedgehogLabDemoUI.framework */;
@@ -908,6 +925,7 @@
 				5ED8389B27ECDDF500F40809 /* XCRemoteSwiftPackageReference "combine-schedulers" */,
 				5E8A316B27EDAD2B004F2EA7 /* XCRemoteSwiftPackageReference "NetworkingKit" */,
 				5E3463DD27EFD233000C40E4 /* XCRemoteSwiftPackageReference "FolderMonitorKit" */,
+				5E2A485027F0E38F00AE54C5 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 5EBC3F5B27EB5E2A003F9CB9 /* Products */;
 			projectDirPath = "";
@@ -951,6 +969,8 @@
 			files = (
 				5EBDEF1B27EDECE20083FDDD /* Main.storyboard in Resources */,
 				5EBDEF1D27EDECEE0083FDDD /* Assets.xcassets in Resources */,
+				5E2A485627F0E5CB00AE54C5 /* 10223-search-empty.json in Resources */,
+				5E2A485B27F0E86C00AE54C5 /* loading.json in Resources */,
 				5EBDEF1C27EDECE80083FDDD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1568,6 +1588,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5E2A485027F0E38F00AE54C5 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		5E3463DD27EFD233000C40E4 /* XCRemoteSwiftPackageReference "FolderMonitorKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/stoqn4opm/FolderMonitorKit.git";
@@ -1595,6 +1623,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5E2A485127F0E38F00AE54C5 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E2A485027F0E38F00AE54C5 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		5E3463DE27EFD233000C40E4 /* FolderMonitorKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5E3463DD27EFD233000C40E4 /* XCRemoteSwiftPackageReference "FolderMonitorKit" */;
