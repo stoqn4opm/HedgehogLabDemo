@@ -30,7 +30,7 @@
 		5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */; };
 		5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */; };
 		5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */; };
-		5E3463B027EF6EC4000C40E4 /* PhotoService+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */; };
+		5E3463B027EF6EC4000C40E4 /* PhotoServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463AD27EF6E49000C40E4 /* PhotoServiceError.swift */; };
 		5E3463B327EF7436000C40E4 /* ImageEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463B227EF7436000C40E4 /* ImageEndpoint.swift */; };
 		5E3463B927EF77C9000C40E4 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463B827EF77C9000C40E4 /* Image.swift */; };
 		5E3463BC27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */; };
@@ -76,7 +76,6 @@
 		5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEEF727EDEB400083FDDD /* Photo.swift */; };
 		5EBDEF3827EDEF840083FDDD /* CombineSchedulers in Frameworks */ = {isa = PBXBuildFile; productRef = 5EBDEF3727EDEF840083FDDD /* CombineSchedulers */; };
 		5EBDEF6927EE54E30083FDDD /* ImgurAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 5EBDEF5B27EE54E30083FDDD /* ImgurAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5EBDEF6C27EE54E30083FDDD /* ImgurAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDEF5927EE54E30083FDDD /* ImgurAPI.framework */; };
 		5EBDEF6D27EE54E30083FDDD /* ImgurAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDEF5927EE54E30083FDDD /* ImgurAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EBDEF8127EE54F80083FDDD /* GalleryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7927EE54F80083FDDD /* GalleryEndpoint.swift */; };
 		5EBDEF8227EE54F80083FDDD /* Gallery+RequestOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDEF7A27EE54F80083FDDD /* Gallery+RequestOptions.swift */; };
@@ -176,7 +175,7 @@
 		5E3463A227EEB891000C40E4 /* MainStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStartupAction.swift; sourceTree = "<group>"; };
 		5E3463A727EEF9FE000C40E4 /* TransformerStartupActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformerStartupActionTests.swift; sourceTree = "<group>"; };
 		5E3463A927EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeStepTransformerActionTests.swift; sourceTree = "<group>"; };
-		5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoService+Error.swift"; sourceTree = "<group>"; };
+		5E3463AD27EF6E49000C40E4 /* PhotoServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoServiceError.swift; sourceTree = "<group>"; };
 		5E3463B227EF7436000C40E4 /* ImageEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEndpoint.swift; sourceTree = "<group>"; };
 		5E3463B827EF77C9000C40E4 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailsLinkCoordinator.swift; sourceTree = "<group>"; };
@@ -241,7 +240,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBDEF8B27EE55B00083FDDD /* ImgurAPI.framework in Frameworks */,
-				5EBDEF6C27EE54E30083FDDD /* ImgurAPI.framework in Frameworks */,
 				5EBDEF1127EDEC220083FDDD /* HedgehogLabDemoUI.framework in Frameworks */,
 				5E3463DF27EFD233000C40E4 /* FolderMonitorKit in Frameworks */,
 				5EBDEEF127EDEAC40083FDDD /* ServiceLayer.framework in Frameworks */,
@@ -541,7 +539,7 @@
 			children = (
 				5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */,
 				5E34638C27EE8872000C40E4 /* PhotoService.swift */,
-				5E3463AD27EF6E49000C40E4 /* PhotoService+Error.swift */,
+				5E3463AD27EF6E49000C40E4 /* PhotoServiceError.swift */,
 				5E34638F27EE88AE000C40E4 /* PhotoService+Dependencies.swift */,
 				5E3463D327EFC499000C40E4 /* Dependency Local Defaults */,
 				5EBDEEF627EDEAE80083FDDD /* Models */,
@@ -1065,7 +1063,7 @@
 				5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */,
 				5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */,
 				5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */,
-				5E3463B027EF6EC4000C40E4 /* PhotoService+Error.swift in Sources */,
+				5E3463B027EF6EC4000C40E4 /* PhotoServiceError.swift in Sources */,
 				5E3463D127EFC463000C40E4 /* LossyCachePhotoStorage.swift in Sources */,
 				5E3463D227EFC463000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */,
 			);

@@ -216,7 +216,7 @@ extension SearchViewModel {
         }
     }
     
-    private func handleFetchResult(_ result: Result<[Photo], PhotoService.Error>) {
+    private func handleFetchResult(_ result: Result<[Photo], PhotoServiceError>) {
         isLoadingSubject.send(false)
         
         switch result {

@@ -23,25 +23,25 @@ public final class PhotoService {
 // MARK: - Interface
 
 extension PhotoService {
-    public func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
+    public func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ()) {
         photoRepository.fetch(inSize: size, page: page) { [weak self] result in
             self?.handleMultiPhotoFetchingResult(result, withCompletion: completion)
         }
     }
     
-    public func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, Error>) -> ()) {
+    public func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ()) {
         photoRepository.fetchPhotoDetails(forId: id, inSize: size) { [weak self] result in
             self?.handlePhotoFetchingResult(result, withCompletion: completion)
         }
     }
     
-    public func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
+    public func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ()) {
         photoRepository.search(searchQuery: searchQuery, inSize: size, page: page) { [weak self] result in
             self?.handleMultiPhotoFetchingResult(result, withCompletion: completion)
         }
     }
     
-    public func rawImageData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ()) {
+    public func rawImageData(forPhoto photo: Photo, completion: @escaping (Result<Data, PhotoServiceError>) -> ()) {
         photoStorage.readPhotoRawData(forPhoto: photo) { result in
             switch result {
             case .success(let data):
@@ -58,7 +58,7 @@ extension PhotoService {
 
 extension PhotoService {
     
-    private func handleMultiPhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
+    private func handleMultiPhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhotos):
             photoStorage.storePhotos(rawPhotos.map { (key: $0.id, photo: $0) }) { result in
@@ -76,7 +76,7 @@ extension PhotoService {
         }
     }
     
-    private func handlePhotoFetchingResult(_ result: Result<RawPhoto, Swift.Error>, withCompletion completion: @escaping (Result<Photo, Error>) -> ()) {
+    private func handlePhotoFetchingResult(_ result: Result<RawPhoto, Swift.Error>, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhoto):
             photoStorage.storePhoto(rawPhoto, forKey: rawPhoto.id) { result in

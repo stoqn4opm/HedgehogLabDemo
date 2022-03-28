@@ -58,7 +58,7 @@ public class LossyCachePhotoStorage: PhotoStorage {
                 }
                 
                 if photos.isEmpty {
-                    completion(.failure(PhotoService.Error.photoStorageMultipleSavesFailed))
+                    completion(.failure(PhotoServiceError.photoStorageMultipleSavesFailed))
                 } else {
                     completion(.success(photos))
                 }
