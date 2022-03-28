@@ -12,14 +12,22 @@ import UIKit
 @testable import HedgehogLabDemoUI
 
 final class SearchViewModelMock: SearchViewModelType {
+    
+    var isLoadingPublisher: AnyPublisher<Bool, Never> {
+        isLoadingSubject.eraseToAnyPublisher()
+    }
+    
     var state: SearchViewModelState = .mostPopular
      
     private(set) var fetchedMostPopular = false
     private(set) var fetchedNext = false
     private(set) var refreshed = false
+    private(set) var searchQuery: String?
+    private(set) var openPhotoDetails: Photo?
     
     private(set) var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
     private(set) var resetPhotosSubject = PassthroughSubject<Void, Never>()
+    private(set) var isLoadingSubject = PassthroughSubject<Bool, Never>()
     
     
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
@@ -48,9 +56,13 @@ final class SearchViewModelMock: SearchViewModelType {
     }
     
     func searchPhoto(searchQuery: String) {
-        
+        self.searchQuery = searchQuery
     }
        
+    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ()) {
+        self.openPhotoDetails = photo
+    }
+    
     func graphicRepresentation(for photo: Photo, withCompletion completion: @escaping (UIImage?) -> ()) {
         
     }

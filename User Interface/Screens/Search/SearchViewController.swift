@@ -16,7 +16,7 @@ import Lottie
 
 final class SearchViewController: UIViewController {
     
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
     @IBOutlet private weak var emptyStateContainer: UIView!
     @IBOutlet private weak var loadingStateContainer: UIView!
     @IBOutlet private weak var loadingAnimationView: AnimationView!
