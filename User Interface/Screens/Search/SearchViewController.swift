@@ -31,6 +31,7 @@ final class SearchViewController: UIViewController {
     private(set) var dataSource: UICollectionViewDiffableDataSource<Int, Photo>?
     private var cancellables: Set<AnyCancellable> = []
     private var viewModelIsLoading: Bool
+    private var photoTapped: Bool
     
     init?(coder: NSCoder,
           viewModel: SearchViewModelType,
@@ -44,6 +45,7 @@ final class SearchViewController: UIViewController {
         self.searchController = searchController
         self.presentingAlert = false
         self.viewModelIsLoading = false
+        self.photoTapped = false
         super.init(coder: coder)
     }
     
@@ -178,6 +180,7 @@ extension SearchViewController {
                 alert.addAction(.init(title: "OK".localized, style: .cancel) { [weak self] _ in
                     self?.presentingAlert = false
                 })
+                self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
         
@@ -235,6 +238,21 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let currentPhoto = dataSource?.itemIdentifier(for: indexPath) else { return }
         fetchMoreIfNeeded(reachedPhoto: currentPhoto)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard photoTapped == false,
+              let photo = dataSource?.itemIdentifier(for: indexPath)
+        else { return }
+        photoTapped = true
+        viewModel.openPhotoDetails(photo) { [weak self] success in
+            self?.photoTapped = false
+            guard success == false else { return }
+            
+            let alert = UIAlertController(title: "Error".localized, message: "Opening image failed, try again later".localized, preferredStyle: .alert)
+            alert.addAction(.init(title: "OK".localized, style: .cancel))
+            self?.present(alert, animated: true)
+        }
     }
 }
 

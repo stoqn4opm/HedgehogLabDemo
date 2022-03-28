@@ -12,7 +12,7 @@ public struct Photo: Hashable {
         
     /// The key under which the raw `Data` of this Photo is saved.
     public let dataAccessorKey: String
-    let rawPhoto: RawPhoto
+    private let rawPhoto: RawPhoto
     
     public init(rawPhoto: RawPhoto, dataAccessorKey: String) {
         self.rawPhoto = rawPhoto
@@ -28,6 +28,9 @@ public struct Photo: Hashable {
     }
     
     public var title: String { rawPhoto.title }
+    public var description: String? { rawPhoto.description }
+    public var tags: [String] { rawPhoto.tags }
+    public var viewCount: Int { rawPhoto.viewCount }
 }
 
 extension Photo {

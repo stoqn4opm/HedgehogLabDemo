@@ -13,6 +13,8 @@ public protocol RawPhoto {
     var title: String { get }
     var description: String? { get }
     var downloadURL: URL { get }
+    var tags: [String] { get }
+    var viewCount: Int { get }
 }
 
 public protocol PhotoRepository {

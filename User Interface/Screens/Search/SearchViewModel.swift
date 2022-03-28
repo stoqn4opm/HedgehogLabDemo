@@ -36,6 +36,9 @@ protocol SearchViewModelType {
     /// Triggers a refresh of the current results.
     func refresh()
     
+    /// Notifies the view model that the user want to see this photo.
+    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ())
+    
     /// Publishes when a badge of more photos needs to be presented to the user.
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> { get }
     
@@ -62,8 +65,9 @@ protocol SearchViewModelType {
 // MARK: - Search View Model
 
 final class SearchViewModel: SearchViewModelType {
+    typealias Routes = PhotoDetailsViewRoute
+    let router: Routes
     
-    let router: Router
     let photoService: PhotoService
     
     @Published private(set) var state: SearchViewModelState
@@ -80,7 +84,7 @@ final class SearchViewModel: SearchViewModelType {
     
     private var cancellables: Set<AnyCancellable> = []
     
-    init(router: Router, photoService: PhotoService, state: SearchViewModelState) {
+    init(router: Routes, photoService: PhotoService, state: SearchViewModelState) {
         self.router = router
         self.photoService = photoService
         self.state = state
@@ -166,6 +170,10 @@ extension SearchViewModel {
     func refresh() {
         resetPhotosSubject.send(())
         fetch()
+    }
+    
+    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ()) {
+        router.openPhoto(photo: photo, photoService: photoService, completion: completion)
     }
 }
 
