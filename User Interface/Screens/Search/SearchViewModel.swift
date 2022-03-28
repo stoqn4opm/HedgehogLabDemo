@@ -69,7 +69,7 @@ final class SearchViewModel: SearchViewModelType {
     typealias Routes = PhotoDetailsViewRoute
     let router: Routes
     
-    let photoService: PhotoServiceFacade
+    let photoService: PhotoService
     
     @Published private(set) var state: SearchViewModelState
     
@@ -85,7 +85,7 @@ final class SearchViewModel: SearchViewModelType {
     
     private var cancellables: Set<AnyCancellable> = []
     
-    init(router: Routes, photoService: PhotoServiceFacade, state: SearchViewModelState) {
+    init(router: Routes, photoService: PhotoService, state: SearchViewModelState) {
         self.router = router
         self.photoService = photoService
         self.state = state

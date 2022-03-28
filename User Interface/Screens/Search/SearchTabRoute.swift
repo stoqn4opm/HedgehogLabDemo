@@ -11,12 +11,12 @@ import ServiceLayer
 
 
 public protocol SearchTabRoute {
-    func composedSearchTab(withPhotoService photoService: PhotoServiceFacade) -> UIViewController
+    func composedSearchTab(withPhotoService photoService: PhotoService) -> UIViewController
 }
 
 extension SearchTabRoute where Self: Router {
     
-    public func composedSearchTab(withPhotoService photoService: PhotoServiceFacade) -> UIViewController {
+    public func composedSearchTab(withPhotoService photoService: PhotoService) -> UIViewController {
         let viewController = UIStoryboard(name: "Main", bundle: Bundle(for: SearchViewController.self))
             .instantiateViewController(identifier: SearchViewController.className) { coder in
                 

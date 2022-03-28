@@ -19,9 +19,9 @@ import Combine
 public class LossyCachePhotoStorage: PhotoStorage {
     
     public let downloader: RawDataDownloader
-    public let accessor: RawDataAccessor
+    public let accessor: RawDataHandler
     
-    public init(downloader: RawDataDownloader, accessor: RawDataAccessor) {
+    public init(downloader: RawDataDownloader, accessor: RawDataHandler) {
         self.downloader = downloader
         self.accessor = accessor
     }

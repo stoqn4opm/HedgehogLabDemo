@@ -20,9 +20,9 @@ extension CacheDirectoryRawDataAccessor {
     }
 }
 
-// MARK: - Cache Directory RawDataAccessor
+// MARK: - Cache Directory RawDataHandler
 
-/// RawDataAccessor that uses the directory within the caches directory
+/// RawDataHandler that uses the directory within the caches directory
 /// inside the user domain mask. The implementation tracks the disk space usage
 /// and after it reaches the limit it starts erroring out.
 ///
@@ -31,7 +31,7 @@ extension CacheDirectoryRawDataAccessor {
 /// Currently, it just adds new entries, it never deletes old ones, so if you use the app
 /// long enough it will start erroring out, as all the available space within the limit
 /// will be used.
-final class CacheDirectoryRawDataAccessor: RawDataAccessor {
+final class CacheDirectoryRawDataAccessor: RawDataHandler {
     
     /// The subdirectory of the `NSCachesDirectory` directory that is used a a file system cache.
     let workingDirectory: URL

@@ -11,12 +11,12 @@ import ServiceLayer
 import CombineSchedulers
 
 protocol PhotoDetailsViewRoute {
-    func openPhoto(photo: Photo, photoService: PhotoServiceFacade, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
+    func openPhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
 }
 
 extension PhotoDetailsViewRoute where Self: Router {
     
-    func openPhoto(photo: Photo, photoService: PhotoServiceFacade, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
+    func openPhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         
         photoService.fetchPhotoDetails(forId: photo.id, inSize: .original) { [weak self] result in
             scheduler.schedule {
@@ -32,7 +32,7 @@ extension PhotoDetailsViewRoute where Self: Router {
         }
     }
     
-    private func openOriginalPhoto(photo: Photo, photoService: PhotoServiceFacade, completion: @escaping (Error?) -> ()) {
+    private func openOriginalPhoto(photo: Photo, photoService: PhotoService, completion: @escaping (Error?) -> ()) {
         
         let transition = ModalTransition()
         let router = MainRouter(rootTransition: transition)

@@ -1,5 +1,5 @@
 //
-//  PhotoServiceFacade.swift
+//  PhotoService.swift
 //  ServiceLayer
 //
 //  Created by Stoyan Stoyanov on 26/03/22.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-public protocol PhotoServiceFacade {
+public protocol PhotoService {
     func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ())
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
@@ -42,6 +42,18 @@ public protocol PhotoStorage {
     func storePhoto(_ rawPhoto: RawPhoto, forKey: String, completion: @escaping (Result<Photo, Error>) -> ())
     func storePhotos(_ tuples: [(key: String, photo: RawPhoto)], completion: @escaping (Result<[Photo], Error>) -> ())
     func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ())
+}
+
+/// Instances that know how to store and retrieve stored raw data.
+/// Used mostly within `PhotoStorage`s when the graphic representation needs to be saved/retrieved.
+public protocol RawDataHandler {
+    func store(data: Data, forKey key: String, withCompletion completion: @escaping (Error?) -> ())
+    func read(forKey key: String, withCompletion completion: @escaping (Result<Data, Error>) -> ())
+}
+
+/// Instances that know how to load raw data representations coming from URLs.
+public protocol RawDataDownloader {
+    func download(url: URL, withCompletion completion: @escaping (Result<Data, Error>) -> ())
 }
 
 // MARK: - Photo Service Errors

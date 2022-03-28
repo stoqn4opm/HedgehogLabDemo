@@ -12,7 +12,7 @@ import ServiceLayer
 
 // MARK: - UIWindow Startup Action
 
-final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoServiceFacade, Error>, UIWindow> {
+final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoService, Error>, UIWindow> {
     
     init(in windowScene: UIWindowScene) {
         super.init { result in
@@ -40,7 +40,7 @@ final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoService
     }
     
     @available(*, unavailable)
-    override init(input: Result<PhotoServiceFacade, Error>? = nil, transform: @escaping (Result<PhotoServiceFacade, Error>) -> (UIWindow)) {
+    override init(input: Result<PhotoService, Error>? = nil, transform: @escaping (Result<PhotoService, Error>) -> (UIWindow)) {
         super.init(input: input, transform: transform)
     }
 }

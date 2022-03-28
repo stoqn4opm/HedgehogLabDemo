@@ -23,7 +23,7 @@ final class PhotoDetailsViewModel: ObservableObject {
     
     
     let photo: Photo!
-    let photoService: PhotoServiceFacade!
+    let photoService: PhotoService!
     let router: Routes!
     
     /// Used ONLY for SwiftUI previews, always pass photo and photo service and router to the model.
@@ -40,7 +40,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         router = nil
     }
     
-    init(photo: Photo, photoService: PhotoServiceFacade, router: Routes) {
+    init(photo: Photo, photoService: PhotoService, router: Routes) {
         title = photo.title
         description = photo.description
         tags = photo.tags
