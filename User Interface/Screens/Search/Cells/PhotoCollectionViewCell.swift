@@ -11,7 +11,7 @@ import ServiceLayer
 
 // MARK: - Class Definition
 
-final class PhotoCollectionViewCell: UICollectionViewCell {
+final class PhotoCollectionViewCell: ShrinkableCollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
     
@@ -33,5 +33,11 @@ extension PhotoCollectionViewCell {
         contentView.layer.cornerRadius = 8
         contentView.layer.borderColor = UIColor.systemGray5.cgColor
         contentView.layer.borderWidth = 3
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
 }

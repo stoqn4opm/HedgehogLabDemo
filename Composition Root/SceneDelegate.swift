@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// Coordinates the configuration of services, environments and launch procedures
     let appStarter: StartupActionExecutor = AppStarter()
 
-    let imgurClientId = "ef8d4acb74c28c0"
+    private let imgurClientId = "c48aeb181c8aaca"
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.

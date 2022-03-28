@@ -30,7 +30,7 @@ final class SearchViewControllerTests: XCTestCase {
             let result = SearchViewController(coder: coder,
                                               viewModel: viewModel,
                                               scheduler: .immediate,
-                                              distanceToEndBeforeFetchingMore: distanceToEndBeforeFetchingMore)
+                                              distanceToEndBeforeFetchingMore: distanceToEndBeforeFetchingMore, searchController: .init())
             return result
         }
     }

@@ -13,11 +13,14 @@ public protocol RawPhoto {
     var title: String { get }
     var description: String? { get }
     var downloadURL: URL { get }
+    var tags: [String] { get }
+    var viewCount: Int { get }
 }
 
 public protocol PhotoRepository {
  
     func fetchMostPopular(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ())
+    func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<RawPhoto, Error>) -> ())
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ())
 }
 

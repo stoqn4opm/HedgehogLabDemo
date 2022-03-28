@@ -16,7 +16,7 @@ import Lottie
 
 final class SearchViewController: UIViewController {
     
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private(set) weak var collectionView: UICollectionView!
     @IBOutlet private weak var emptyStateContainer: UIView!
     @IBOutlet private weak var loadingStateContainer: UIView!
     @IBOutlet private weak var loadingAnimationView: AnimationView!
@@ -31,6 +31,7 @@ final class SearchViewController: UIViewController {
     private(set) var dataSource: UICollectionViewDiffableDataSource<Int, Photo>?
     private var cancellables: Set<AnyCancellable> = []
     private var viewModelIsLoading: Bool
+    private var photoTapped: Bool
     
     init?(coder: NSCoder,
           viewModel: SearchViewModelType,
@@ -44,6 +45,7 @@ final class SearchViewController: UIViewController {
         self.searchController = searchController
         self.presentingAlert = false
         self.viewModelIsLoading = false
+        self.photoTapped = false
         super.init(coder: coder)
     }
     
@@ -153,7 +155,6 @@ extension SearchViewController {
                 snapshot.appendItems(photos)
                 dataSource.apply(snapshot)
                 self?.refreshUIState()
-                print("appending \(photos.count), all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -165,7 +166,6 @@ extension SearchViewController {
                 snapshot.appendSections([0])
                 self?.dataSource?.apply(snapshot)
                 self?.refreshUIState()
-                print("reseting all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -178,6 +178,7 @@ extension SearchViewController {
                 alert.addAction(.init(title: "OK".localized, style: .cancel) { [weak self] _ in
                     self?.presentingAlert = false
                 })
+                self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
         
@@ -186,7 +187,6 @@ extension SearchViewController {
             .sink { [weak self] isLoading in
                 self?.viewModelIsLoading = isLoading
                 self?.refreshUIState()
-                print("loading")
             }
             .store(in: &cancellables)
         
@@ -235,6 +235,21 @@ extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let currentPhoto = dataSource?.itemIdentifier(for: indexPath) else { return }
         fetchMoreIfNeeded(reachedPhoto: currentPhoto)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard photoTapped == false,
+              let photo = dataSource?.itemIdentifier(for: indexPath)
+        else { return }
+        photoTapped = true
+        viewModel.openPhotoDetails(photo, scheduler: scheduler) { [weak self] error in
+            self?.photoTapped = false
+            guard error != nil else { return }
+            
+            let alert = UIAlertController(title: "Error".localized, message: "Opening image failed, try again later".localized, preferredStyle: .alert)
+            alert.addAction(.init(title: "OK".localized, style: .cancel))
+            self?.present(alert, animated: true)
+        }
     }
 }
 

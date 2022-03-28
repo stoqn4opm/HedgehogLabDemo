@@ -18,5 +18,6 @@ extension PhotoService {
         case photoRepositoryError(Swift.Error)
         case photoStorageError(Swift.Error)
         case photoStorageMultipleSavesFailed
+        case graphicRepresentationError
     }
 }

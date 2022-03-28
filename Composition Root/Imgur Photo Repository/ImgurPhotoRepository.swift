@@ -32,6 +32,17 @@ final class ImgurPhotoRepository: PhotoRepository {
         }
     }
     
+    func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<RawPhoto, Error>) -> ()) {
+        ImageEndpoint(imageId: id, appClientId: appClientId) { result, error in
+            if let rawResult = result?.data,
+               let rawPhoto = ImageRawPhoto(image: rawResult, inSize: .original) {
+                completion(.success(rawPhoto))
+            } else if let error = error {
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         GallerySearchEndpoint(searchQuery: searchQuery, inTimeWindow: .all, page: page, appClientId: appClientId) { result, error in
             if let rawResult = result?.data {
@@ -47,6 +58,37 @@ final class ImgurPhotoRepository: PhotoRepository {
 }
 
 // MARK: - Raw Photo Conformance
+
+final class ImageRawPhoto: RawPhoto {
+    
+    let image: Image
+    let downloadURL: URL
+    let width: Int
+    let height: Int
+    
+    init?(image: Image, inSize size: Photo.Size) {
+        self.image = image
+        
+        guard let width = image.width,
+              let height = image.height else { return nil }
+        
+        self.width = width
+        self.height = height
+        
+        guard let url = URL(string: image.link) else { return nil }
+        let coordinator = ThumbnailsLinkCoordinator(originalLink: url)
+        guard let link = coordinator.url(withSize: size.imgurSize) else { return nil }
+        
+        downloadURL = link
+    }
+    
+    var id: String { image.id }
+    var title: String { image.title }
+    var description: String? { image.description }
+    
+    var tags: [String] { image.tags.map { $0.name } }
+    var viewCount: Int { image.views }
+}
 
 final class ImgurGalleryRawPhoto: RawPhoto {
     
@@ -74,6 +116,9 @@ final class ImgurGalleryRawPhoto: RawPhoto {
     var id: String { galleryImage.id }
     var title: String { galleryImage.title }
     var description: String? { galleryImage.description }
+    
+    var tags: [String] { galleryImage.tags.map { $0.name } }
+    var viewCount: Int { galleryImage.views }
 }
 
 // MARK: - Photo Size Translation
