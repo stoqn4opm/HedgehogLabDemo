@@ -41,6 +41,7 @@
 		5E3463D227EFC463000C40E4 /* LossyCachePhotoStorage+Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */; };
 		5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */; };
 		5E3463DF27EFD233000C40E4 /* FolderMonitorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E3463DE27EFD233000C40E4 /* FolderMonitorKit */; };
+		5E43870427F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */; };
 		5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */; };
 		5E98C51027F12B6700946547 /* PhotoDetailsViewRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
@@ -185,6 +186,7 @@
 		5E3463CB27EFB92D000C40E4 /* CacheDirectoryRawDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDirectoryRawDataAccessor.swift; sourceTree = "<group>"; };
 		5E3463CD27EFBEF8000C40E4 /* LossyCachePhotoStorage+Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LossyCachePhotoStorage+Dependencies.swift"; sourceTree = "<group>"; };
 		5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMock.swift; sourceTree = "<group>"; };
+		5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkableCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewRoute.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -698,6 +700,7 @@
 			children = (
 				5ED0624727EBB1C100FACD0B /* UIResponder+Helpers.swift */,
 				5ED0625327EBB97B00FACD0B /* String+Helper.swift */,
+				5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */,
 				5EBDEF2127EDED030083FDDD /* FavoritesViewController.swift in Sources */,
 				5EBDEF2927EDED0E0083FDDD /* PhotoCollectionViewCell.swift in Sources */,
+				5E43870427F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift in Sources */,
 				5EBDEF3027EDED1B0083FDDD /* PushTransition.swift in Sources */,
 				5EBDEF1F27EDECF90083FDDD /* Tabs.swift in Sources */,
 			);
