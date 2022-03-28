@@ -27,7 +27,7 @@ final class LoadImgurPhotoService: TransformerStartupAction<String, Result<Photo
             }
             
             let photoStorage = LossyCachePhotoStorage(downloader: downloader, accessor: accessor)
-            let photoService = PhotoService(photoRepository: repository, photoStorage: photoStorage)
+            let photoService = CachingPhotoService(photoRepository: repository, photoStorage: photoStorage)
             return .success(photoService)
         }
     }
