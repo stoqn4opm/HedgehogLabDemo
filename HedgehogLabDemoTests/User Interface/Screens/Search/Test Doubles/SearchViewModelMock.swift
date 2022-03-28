@@ -14,6 +14,8 @@ import UIKit
 
 final class SearchViewModelMock: SearchViewModelType {
     
+    var screenTitle: String = "TestTitle"
+    
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
         isLoadingSubject.eraseToAnyPublisher()
     }
