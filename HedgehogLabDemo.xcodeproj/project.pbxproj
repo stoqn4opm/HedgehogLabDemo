@@ -40,6 +40,13 @@
 		5E3463DF27EFD233000C40E4 /* FolderMonitorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E3463DE27EFD233000C40E4 /* FolderMonitorKit */; };
 		5E43870427F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */; };
 		5E43870827F2256E006E1C58 /* CachingPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870627F22552006E1C58 /* CachingPhotoService.swift */; };
+		5E43870A27F22E5C006E1C58 /* NonCachingPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870927F22E5C006E1C58 /* NonCachingPhotoService.swift */; };
+		5E43870D27F2319C006E1C58 /* ImgurImageRawPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870B27F23198006E1C58 /* ImgurImageRawPhoto.swift */; };
+		5E43870F27F231DE006E1C58 /* ImgurGalleryRawPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43870E27F231DE006E1C58 /* ImgurGalleryRawPhoto.swift */; };
+		5E43871227F23330006E1C58 /* FavoritesPhotoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871127F23330006E1C58 /* FavoritesPhotoRepository.swift */; };
+		5E43871527F23D35006E1C58 /* Array+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871427F23D35006E1C58 /* Array+Helpers.swift */; };
+		5E43871727F25102006E1C58 /* FavoriteRawPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871627F25102006E1C58 /* FavoriteRawPhoto.swift */; };
+		5E43871D27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871C27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift */; };
 		5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */; };
 		5E98C51027F12B6700946547 /* PhotoDetailsViewRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
@@ -182,6 +189,13 @@
 		5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMock.swift; sourceTree = "<group>"; };
 		5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkableCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E43870627F22552006E1C58 /* CachingPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingPhotoService.swift; sourceTree = "<group>"; };
+		5E43870927F22E5C006E1C58 /* NonCachingPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCachingPhotoService.swift; sourceTree = "<group>"; };
+		5E43870B27F23198006E1C58 /* ImgurImageRawPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurImageRawPhoto.swift; sourceTree = "<group>"; };
+		5E43870E27F231DE006E1C58 /* ImgurGalleryRawPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurGalleryRawPhoto.swift; sourceTree = "<group>"; };
+		5E43871127F23330006E1C58 /* FavoritesPhotoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPhotoRepository.swift; sourceTree = "<group>"; };
+		5E43871427F23D35006E1C58 /* Array+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Helpers.swift"; sourceTree = "<group>"; };
+		5E43871627F25102006E1C58 /* FavoriteRawPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRawPhoto.swift; sourceTree = "<group>"; };
+		5E43871C27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePhotoDetailsViewRoute.swift; sourceTree = "<group>"; };
 		5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewRoute.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */,
+				5E43871C27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift */,
 				5E2A485D27F0EEF900AE54C5 /* PhotoDetailsView.swift */,
 				5E2A485F27F0F04F00AE54C5 /* PhotoDetailsViewModel.swift */,
 				5E2A486327F108CD00AE54C5 /* View Elements */,
@@ -357,6 +372,8 @@
 			isa = PBXGroup;
 			children = (
 				5E34638827EE8402000C40E4 /* ImgurPhotoRepository.swift */,
+				5E43870E27F231DE006E1C58 /* ImgurGalleryRawPhoto.swift */,
+				5E43870B27F23198006E1C58 /* ImgurImageRawPhoto.swift */,
 			);
 			path = "Imgur Photo Repository";
 			sourceTree = "<group>";
@@ -444,6 +461,23 @@
 			path = Dependencies;
 			sourceTree = "<group>";
 		};
+		5E43871027F232B2006E1C58 /* Favorites Photo Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5E43871127F23330006E1C58 /* FavoritesPhotoRepository.swift */,
+				5E43871627F25102006E1C58 /* FavoriteRawPhoto.swift */,
+			);
+			path = "Favorites Photo Repository";
+			sourceTree = "<group>";
+		};
+		5E43871327F23D1E006E1C58 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5E43871427F23D35006E1C58 /* Array+Helpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		5EBC3F5127EB5E2A003F9CB9 = {
 			isa = PBXGroup;
 			children = (
@@ -474,7 +508,9 @@
 			children = (
 				5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */,
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
+				5E43871327F23D1E006E1C58 /* Helpers */,
 				5E34636F27EE6AAB000C40E4 /* Startup */,
+				5E43871027F232B2006E1C58 /* Favorites Photo Repository */,
 				5E34638727EE83E4000C40E4 /* Imgur Photo Repository */,
 				5E3463B427EF75B8000C40E4 /* PhotoStorage Dependencies */,
 				5EBC3F6B27EB5E2B003F9CB9 /* Info.plist */,
@@ -535,6 +571,7 @@
 				5EBDEEE727EDEA970083FDDD /* ServiceLayer.h */,
 				5E34638C27EE8872000C40E4 /* PhotoService.swift */,
 				5E43870627F22552006E1C58 /* CachingPhotoService.swift */,
+				5E43870927F22E5C006E1C58 /* NonCachingPhotoService.swift */,
 				5E3463D327EFC499000C40E4 /* Dependency Local Defaults */,
 				5EBDEEF627EDEAE80083FDDD /* Models */,
 			);
@@ -1020,9 +1057,14 @@
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
 				5EBC3F6027EB5E2A003F9CB9 /* SceneDelegate.swift in Sources */,
 				5E34639B27EEACE0000C40E4 /* LoadImgurPhotoService.swift in Sources */,
+				5E43871727F25102006E1C58 /* FavoriteRawPhoto.swift in Sources */,
 				5E34637527EE6E80000C40E4 /* StartupAction.swift in Sources */,
+				5E43870D27F2319C006E1C58 /* ImgurImageRawPhoto.swift in Sources */,
 				5E34639E27EEB6F4000C40E4 /* TransformerStartupAction.swift in Sources */,
+				5E43870F27F231DE006E1C58 /* ImgurGalleryRawPhoto.swift in Sources */,
 				5E3463A327EEB891000C40E4 /* MainStartupAction.swift in Sources */,
+				5E43871527F23D35006E1C58 /* Array+Helpers.swift in Sources */,
+				5E43871227F23330006E1C58 /* FavoritesPhotoRepository.swift in Sources */,
 				5E34638A27EE84E5000C40E4 /* ImgurPhotoRepository.swift in Sources */,
 				5E3463A427EEBB3C000C40E4 /* LoadUIFromPhotoService.swift in Sources */,
 				5E3463A027EEB70F000C40E4 /* ThreeStepTransformerAction.swift in Sources */,
@@ -1053,6 +1095,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E43870A27F22E5C006E1C58 /* NonCachingPhotoService.swift in Sources */,
 				5EBDEF3627EDED870083FDDD /* Photo.swift in Sources */,
 				5E34639227EE88EF000C40E4 /* PhotoService.swift in Sources */,
 				5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */,
@@ -1081,6 +1124,7 @@
 				5EBDEF2B27EDED1B0083FDDD /* Transition.swift in Sources */,
 				5EBDEF2427EDED0E0083FDDD /* SearchTabRoute.swift in Sources */,
 				5E2A486027F0F04F00AE54C5 /* PhotoDetailsViewModel.swift in Sources */,
+				5E43871D27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift in Sources */,
 				5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */,
 				5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */,
 				5EBDEF2127EDED030083FDDD /* FavoritesViewController.swift in Sources */,

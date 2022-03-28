@@ -19,7 +19,7 @@ public protocol PhotoService {
 /// Representing unprocessed, raw photo that has just been given back by a `PhotoRepository`
 /// In the case of network based `PhotoRepository` that would be a simple model with a link from where
 /// to download the image.
-public protocol RawPhoto {
+public protocol RawPhoto: Codable {
     var id: String { get }
     var title: String { get }
     var description: String? { get }
@@ -63,6 +63,8 @@ public enum PhotoServiceError: Swift.Error {
     
     case photoRepositoryError(Error)
     case photoStorageError(Error)
+    case rawDataHandlerError(Error)
+    case rawPhotoDetailsMissing
     case photoStorageMultipleSavesFailed
     case graphicRepresentationError
 }

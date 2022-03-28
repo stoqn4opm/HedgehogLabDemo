@@ -12,7 +12,7 @@ import ServiceLayer
 
 // MARK: - UIWindow Startup Action
 
-final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoService, Error>, UIWindow> {
+final class LoadUIFromPhotoService: TransformerStartupAction<Result<(search: PhotoService, favorite: PhotoService), Error>, UIWindow> {
     
     init(in windowScene: UIWindowScene) {
         super.init { result in
@@ -22,8 +22,8 @@ final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoService
             if case let .success(photoService) = result {
                 let mainRouter = MainRouter(rootTransition: EmptyTransition())
                 
-                tabs = [mainRouter.composedSearchTab(withPhotoService: photoService),
-                        mainRouter.composedFavoritesTab]
+                tabs = [mainRouter.composedSearchTab(withPhotoService: photoService.search),
+                        mainRouter.composedFavoriteTab(withPhotoService: photoService.favorite)]
                 
             } else {
                 // for now, just blank screen,
@@ -40,7 +40,9 @@ final class LoadUIFromPhotoService: TransformerStartupAction<Result<PhotoService
     }
     
     @available(*, unavailable)
-    override init(input: Result<PhotoService, Error>? = nil, transform: @escaping (Result<PhotoService, Error>) -> (UIWindow)) {
+    override init(input: Result<(search: PhotoService, favorite: PhotoService), Error>? = nil,
+                  transform: @escaping (Result<(search: PhotoService, favorite: PhotoService), Error>) -> (UIWindow)) {
+        
         super.init(input: input, transform: transform)
     }
 }

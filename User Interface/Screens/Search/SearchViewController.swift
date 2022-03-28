@@ -61,7 +61,7 @@ extension SearchViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Most Popular".localized
+        title = viewModel.screenTitle
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         collectionView.scrollsToTop = false

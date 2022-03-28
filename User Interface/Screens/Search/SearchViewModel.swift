@@ -25,6 +25,9 @@ protocol SearchViewModelType {
     /// Gives info regarding the current state of the model.
     var state: SearchViewModelState { get }
     
+    /// Gives you back the title that needs to be presented to the user.
+    var screenTitle: String { get }
+    
     /// Fetches the most popular photos from the photo service.
     func fetchMostPopular()
     
@@ -66,9 +69,10 @@ protocol SearchViewModelType {
 // MARK: - Search View Model
 
 final class SearchViewModel: SearchViewModelType {
-    typealias Routes = PhotoDetailsViewRoute
+    typealias Routes = PhotoDetailsViewRoute & FavoritePhotoDetailsViewRoute
     let router: Routes
     
+    let tab: Tabs
     let photoService: PhotoService
     
     @Published private(set) var state: SearchViewModelState
@@ -85,10 +89,11 @@ final class SearchViewModel: SearchViewModelType {
     
     private var cancellables: Set<AnyCancellable> = []
     
-    init(router: Routes, photoService: PhotoService, state: SearchViewModelState) {
+    init(router: Routes, photoService: PhotoService, tab: Tabs) {
         self.router = router
         self.photoService = photoService
-        self.state = state
+        self.tab = tab
+        self.state = .mostPopular
         self.currentPage = 1
         self.photos = []
         self.searchQuery = ""
@@ -174,7 +179,12 @@ extension SearchViewModel {
     }
     
     func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
-        router.openPhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
+        switch tab {
+        case .search:
+            router.openPhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
+        case .favorites:
+            router.openFavoritePhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
+        }
     }
 }
 
@@ -199,6 +209,15 @@ extension SearchViewModel {
     func photo(at index: Int) -> Photo? {
         guard photos.indices.contains(index) else { return nil }
         return photos[index]
+    }
+    
+    var screenTitle: String {
+        switch tab {
+        case .search:
+            return "Search".localized
+        case .favorites:
+            return "Favorites".localized
+        }
     }
 }
 
