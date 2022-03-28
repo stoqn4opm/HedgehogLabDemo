@@ -23,8 +23,8 @@ public final class PhotoService {
 // MARK: - Interface
 
 extension PhotoService {
-    public func fetchMostPopular(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
-        photoRepository.fetchMostPopular(inSize: size, page: page) { [weak self] result in
+    public func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
+        photoRepository.fetch(inSize: size, page: page) { [weak self] result in
             self?.handleMultiPhotoFetchingResult(result, withCompletion: completion)
         }
     }

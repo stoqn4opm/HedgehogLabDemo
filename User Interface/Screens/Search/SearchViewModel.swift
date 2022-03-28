@@ -144,7 +144,7 @@ extension SearchViewModel {
     func fetchMostPopular() {
         state = .mostPopular
         isLoadingSubject.send(true)
-        photoService.fetchMostPopular(inSize: .thumbnail, page: currentPage) { [weak self] result in
+        photoService.fetch(inSize: .thumbnail, page: currentPage) { [weak self] result in
             self?.handleFetchResult(result)
         }
     }

@@ -19,7 +19,7 @@ final class ImgurPhotoRepository: PhotoRepository {
         self.appClientId = appClientId
     }
     
-    func fetchMostPopular(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
+    func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
         GalleryEndpoint(inTimeWindow: .all, page: page, appClientId: appClientId) { result, error in
             if let rawResult = result?.data {
                 let photosOnly = rawResult
