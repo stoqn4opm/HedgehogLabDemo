@@ -62,9 +62,6 @@
 		5EBDEF1D27EDECEE0083FDDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6627EB5E2B003F9CB9 /* Assets.xcassets */; };
 		5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625027EBB70700FACD0B /* MainTabBarController.swift */; };
 		5EBDEF1F27EDECF90083FDDD /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625627EBBAB500FACD0B /* Tabs.swift */; };
-		5EBDEF2027EDED030083FDDD /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */; };
-		5EBDEF2127EDED030083FDDD /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626C27EBCF4500FACD0B /* FavoritesViewController.swift */; };
-		5EBDEF2227EDED030083FDDD /* FavoriteTabRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0626827EBCEBC00FACD0B /* FavoriteTabRoute.swift */; };
 		5EBDEF2327EDED0E0083FDDD /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F8F27EB60CA003F9CB9 /* Routing.swift */; };
 		5EBDEF2427EDED0E0083FDDD /* SearchTabRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0623F27EBAECE00FACD0B /* SearchTabRoute.swift */; };
 		5EBDEF2527EDED0E0083FDDD /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0624427EBAF5D00FACD0B /* SearchViewModel.swift */; };
@@ -235,9 +232,6 @@
 		5ED0625027EBB70700FACD0B /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		5ED0625327EBB97B00FACD0B /* String+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Helper.swift"; sourceTree = "<group>"; };
 		5ED0625627EBBAB500FACD0B /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
-		5ED0626827EBCEBC00FACD0B /* FavoriteTabRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTabRoute.swift; sourceTree = "<group>"; };
-		5ED0626C27EBCF4500FACD0B /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		5ED0627527EBDC1400FACD0B /* ModalTransitionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalTransitionTests.swift; sourceTree = "<group>"; };
 		5ED8389327ECD31800F40809 /* SearchViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerTests.swift; sourceTree = "<group>"; };
 		5ED8389627ECD77100F40809 /* SearchViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelMock.swift; sourceTree = "<group>"; };
@@ -679,7 +673,6 @@
 		5ED0624127EBAF2500FACD0B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				5ED0626B27EBCF0D00FACD0B /* Favorites */,
 				5ED0624627EBAF6A00FACD0B /* Search */,
 				5E2A485C27F0EEDB00AE54C5 /* Photo Details */,
 			);
@@ -732,16 +725,6 @@
 				5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		5ED0626B27EBCF0D00FACD0B /* Favorites */ = {
-			isa = PBXGroup;
-			children = (
-				5ED0626827EBCEBC00FACD0B /* FavoriteTabRoute.swift */,
-				5ED0626C27EBCF4500FACD0B /* FavoritesViewController.swift */,
-				5ED0626E27EBCF6C00FACD0B /* FavoritesViewModel.swift */,
-			);
-			path = Favorites;
 			sourceTree = "<group>";
 		};
 		5ED0627127EBDBC500FACD0B /* User Interface */ = {
@@ -1114,9 +1097,7 @@
 				5EBDEF2A27EDED1B0083FDDD /* ModalTransition.swift in Sources */,
 				5EBDEF2F27EDED1B0083FDDD /* MainRouter.swift in Sources */,
 				5EBDEF2D27EDED1B0083FDDD /* EmptyTransition.swift in Sources */,
-				5EBDEF2027EDED030083FDDD /* FavoritesViewModel.swift in Sources */,
 				5E98C51027F12B6700946547 /* PhotoDetailsViewRoute.swift in Sources */,
-				5EBDEF2227EDED030083FDDD /* FavoriteTabRoute.swift in Sources */,
 				5E2A486527F10A6F00AE54C5 /* PhotoMetadataView.swift in Sources */,
 				5EBDEF2527EDED0E0083FDDD /* SearchViewModel.swift in Sources */,
 				5EBDEF2727EDED0E0083FDDD /* SearchViewController.swift in Sources */,
@@ -1127,7 +1108,6 @@
 				5E43871D27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift in Sources */,
 				5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */,
 				5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */,
-				5EBDEF2127EDED030083FDDD /* FavoritesViewController.swift in Sources */,
 				5EBDEF2927EDED0E0083FDDD /* PhotoCollectionViewCell.swift in Sources */,
 				5E43870427F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift in Sources */,
 				5EBDEF3027EDED1B0083FDDD /* PushTransition.swift in Sources */,
