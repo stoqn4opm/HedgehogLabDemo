@@ -155,7 +155,6 @@ extension SearchViewController {
                 snapshot.appendItems(photos)
                 dataSource.apply(snapshot)
                 self?.refreshUIState()
-                print("appending \(photos.count), all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -167,7 +166,6 @@ extension SearchViewController {
                 snapshot.appendSections([0])
                 self?.dataSource?.apply(snapshot)
                 self?.refreshUIState()
-                print("reseting all \(snapshot.numberOfItems)")
             }
             .store(in: &cancellables)
         
@@ -189,7 +187,6 @@ extension SearchViewController {
             .sink { [weak self] isLoading in
                 self?.viewModelIsLoading = isLoading
                 self?.refreshUIState()
-                print("loading")
             }
             .store(in: &cancellables)
         
