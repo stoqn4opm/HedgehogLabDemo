@@ -12,7 +12,7 @@ import XCTest
 // MARK: - Class Definition
 
 final class SearchViewControllerTests: XCTestCase {
-    private var searchViewController: SearchViewController!
+    private var searchViewController: PhotoTabViewController!
     private var viewModel: SearchViewModelMock!
     
     override func tearDown() {
@@ -22,12 +22,12 @@ final class SearchViewControllerTests: XCTestCase {
     }
 
     private func givenAViewController(withDistanceToEndBeforeFetchingMore distanceToEndBeforeFetchingMore: Int = 5) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: SearchViewController.self))
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: PhotoTabViewController.self))
         let viewModel = SearchViewModelMock()
         self.viewModel = viewModel
         
-        searchViewController = storyboard.instantiateViewController(identifier: SearchViewController.className) { coder in
-            let result = SearchViewController(coder: coder,
+        searchViewController = storyboard.instantiateViewController(identifier: PhotoTabViewController.className) { coder in
+            let result = PhotoTabViewController(coder: coder,
                                               viewModel: viewModel,
                                               scheduler: .immediate,
                                               distanceToEndBeforeFetchingMore: distanceToEndBeforeFetchingMore, searchController: .init())

@@ -63,9 +63,9 @@
 		5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625027EBB70700FACD0B /* MainTabBarController.swift */; };
 		5EBDEF1F27EDECF90083FDDD /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625627EBBAB500FACD0B /* Tabs.swift */; };
 		5EBDEF2327EDED0E0083FDDD /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F8F27EB60CA003F9CB9 /* Routing.swift */; };
-		5EBDEF2427EDED0E0083FDDD /* SearchTabRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0623F27EBAECE00FACD0B /* SearchTabRoute.swift */; };
-		5EBDEF2527EDED0E0083FDDD /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0624427EBAF5D00FACD0B /* SearchViewModel.swift */; };
-		5EBDEF2727EDED0E0083FDDD /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0624227EBAF5100FACD0B /* SearchViewController.swift */; };
+		5EBDEF2427EDED0E0083FDDD /* PhotoTabRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0623F27EBAECE00FACD0B /* PhotoTabRoutes.swift */; };
+		5EBDEF2527EDED0E0083FDDD /* PhotoTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0624427EBAF5D00FACD0B /* PhotoTabViewModel.swift */; };
+		5EBDEF2727EDED0E0083FDDD /* PhotoTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0624227EBAF5100FACD0B /* PhotoTabViewController.swift */; };
 		5EBDEF2927EDED0E0083FDDD /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2AA3327EC92CB00CC83A5 /* PhotoCollectionViewCell.swift */; };
 		5EBDEF2A27EDED1B0083FDDD /* ModalTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F9C27EB78EB003F9CB9 /* ModalTransition.swift */; };
 		5EBDEF2B27EDED1B0083FDDD /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F9827EB763C003F9CB9 /* Transition.swift */; };
@@ -223,9 +223,9 @@
 		5EBDEF7F27EE54F80083FDDD /* Basic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 		5EBDEF8027EE54F80083FDDD /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		5EBDEF9127EE57780083FDDD /* BasicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTests.swift; sourceTree = "<group>"; };
-		5ED0623F27EBAECE00FACD0B /* SearchTabRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabRoute.swift; sourceTree = "<group>"; };
-		5ED0624227EBAF5100FACD0B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		5ED0624427EBAF5D00FACD0B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		5ED0623F27EBAECE00FACD0B /* PhotoTabRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTabRoutes.swift; sourceTree = "<group>"; };
+		5ED0624227EBAF5100FACD0B /* PhotoTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTabViewController.swift; sourceTree = "<group>"; };
+		5ED0624427EBAF5D00FACD0B /* PhotoTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTabViewModel.swift; sourceTree = "<group>"; };
 		5ED0624727EBB1C100FACD0B /* UIResponder+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Helpers.swift"; sourceTree = "<group>"; };
 		5ED0624927EBB33B00FACD0B /* UIResponderHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIResponderHelperTests.swift; sourceTree = "<group>"; };
 		5ED0624D27EBB43D00FACD0B /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -673,22 +673,22 @@
 		5ED0624127EBAF2500FACD0B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				5ED0624627EBAF6A00FACD0B /* Search */,
+				5ED0624627EBAF6A00FACD0B /* Photo Tab */,
 				5E2A485C27F0EEDB00AE54C5 /* Photo Details */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		5ED0624627EBAF6A00FACD0B /* Search */ = {
+		5ED0624627EBAF6A00FACD0B /* Photo Tab */ = {
 			isa = PBXGroup;
 			children = (
-				5ED0623F27EBAECE00FACD0B /* SearchTabRoute.swift */,
-				5ED0624227EBAF5100FACD0B /* SearchViewController.swift */,
-				5ED0624427EBAF5D00FACD0B /* SearchViewModel.swift */,
+				5ED0623F27EBAECE00FACD0B /* PhotoTabRoutes.swift */,
+				5ED0624227EBAF5100FACD0B /* PhotoTabViewController.swift */,
+				5ED0624427EBAF5D00FACD0B /* PhotoTabViewModel.swift */,
 				5E2A485327F0E5BB00AE54C5 /* Animations */,
 				5EF2AA3227EC927500CC83A5 /* Cells */,
 			);
-			path = Search;
+			path = "Photo Tab";
 			sourceTree = "<group>";
 		};
 		5ED0624B27EBB41600FACD0B /* UIResponderHelperTests */ = {
@@ -1099,11 +1099,11 @@
 				5EBDEF2D27EDED1B0083FDDD /* EmptyTransition.swift in Sources */,
 				5E98C51027F12B6700946547 /* PhotoDetailsViewRoute.swift in Sources */,
 				5E2A486527F10A6F00AE54C5 /* PhotoMetadataView.swift in Sources */,
-				5EBDEF2527EDED0E0083FDDD /* SearchViewModel.swift in Sources */,
-				5EBDEF2727EDED0E0083FDDD /* SearchViewController.swift in Sources */,
+				5EBDEF2527EDED0E0083FDDD /* PhotoTabViewModel.swift in Sources */,
+				5EBDEF2727EDED0E0083FDDD /* PhotoTabViewController.swift in Sources */,
 				5EBDEF2327EDED0E0083FDDD /* Routing.swift in Sources */,
 				5EBDEF2B27EDED1B0083FDDD /* Transition.swift in Sources */,
-				5EBDEF2427EDED0E0083FDDD /* SearchTabRoute.swift in Sources */,
+				5EBDEF2427EDED0E0083FDDD /* PhotoTabRoutes.swift in Sources */,
 				5E2A486027F0F04F00AE54C5 /* PhotoDetailsViewModel.swift in Sources */,
 				5E43871D27F2542C006E1C58 /* FavoritePhotoDetailsViewRoute.swift in Sources */,
 				5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */,

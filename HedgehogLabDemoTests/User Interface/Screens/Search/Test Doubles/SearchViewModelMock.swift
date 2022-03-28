@@ -12,7 +12,7 @@ import ServiceLayer
 import UIKit
 @testable import HedgehogLabDemoUI
 
-final class SearchViewModelMock: SearchViewModelType {
+final class SearchViewModelMock: PhotoTabViewModelType {
     
     var screenTitle: String = "TestTitle"
     
@@ -20,7 +20,7 @@ final class SearchViewModelMock: SearchViewModelType {
         isLoadingSubject.eraseToAnyPublisher()
     }
     
-    var state: SearchViewModelState = .mostPopular
+    var state: PhotoTabViewModelState = .list
      
     private(set) var fetchedMostPopular = false
     private(set) var fetchedNext = false

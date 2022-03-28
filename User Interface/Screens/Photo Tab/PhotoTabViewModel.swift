@@ -1,5 +1,5 @@
 //
-//  SearchViewModel.swift
+//  PhotoTabViewModel.swift
 //  HedgehogLabDemo
 //
 //  Created by Stoyan Stoyanov on 23/03/22.
@@ -11,19 +11,19 @@ import CombineSchedulers
 import UIKit
 import ServiceLayer
 
-// MARK: - SearchViewModelState
+// MARK: - PhotoTabViewModelState
 
-enum SearchViewModelState {
-    case mostPopular
+enum PhotoTabViewModelState {
+    case list
     case search
 }
 
-// MARK: - SearchViewModelType
+// MARK: - PhotoTabViewModelType
 
-protocol SearchViewModelType {
+protocol PhotoTabViewModelType {
     
     /// Gives info regarding the current state of the model.
-    var state: SearchViewModelState { get }
+    var state: PhotoTabViewModelState { get }
     
     /// Gives you back the title that needs to be presented to the user.
     var screenTitle: String { get }
@@ -66,16 +66,16 @@ protocol SearchViewModelType {
     func photo(at index: Int) -> Photo?
 }
 
-// MARK: - Search View Model
+// MARK: - Photo Tab View Model
 
-final class SearchViewModel: SearchViewModelType {
+final class PhotoTabViewModel: PhotoTabViewModelType {
     typealias Routes = PhotoDetailsViewRoute & FavoritePhotoDetailsViewRoute
     let router: Routes
     
     let tab: Tabs
     let photoService: PhotoService
     
-    @Published private(set) var state: SearchViewModelState
+    @Published private(set) var state: PhotoTabViewModelState
     
     /// Keeps track on which page we are
     private var currentPage: Int
@@ -93,7 +93,7 @@ final class SearchViewModel: SearchViewModelType {
         self.router = router
         self.photoService = photoService
         self.tab = tab
-        self.state = .mostPopular
+        self.state = .list
         self.currentPage = 1
         self.photos = []
         self.searchQuery = ""
@@ -115,7 +115,7 @@ final class SearchViewModel: SearchViewModelType {
 
 // MARK: - Interface Publishers
 
-extension SearchViewModel {
+extension PhotoTabViewModel {
     
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
         appendPhotosSubject
@@ -144,10 +144,10 @@ extension SearchViewModel {
 
 // MARK: - Commands
 
-extension SearchViewModel {
+extension PhotoTabViewModel {
     
     func fetchMostPopular() {
-        state = .mostPopular
+        state = .list
         isLoadingSubject.send(true)
         photoService.fetch(inSize: .thumbnail, page: currentPage) { [weak self] result in
             self?.handleFetchResult(result)
@@ -190,7 +190,7 @@ extension SearchViewModel {
 
 // MARK: - Queries
 
-extension SearchViewModel {
+extension PhotoTabViewModel {
     
     func graphicRepresentation(for photo: Photo, withCompletion completion: @escaping (UIImage?) -> ()) {
         photoService.rawImageData(forPhoto: photo) { [weak self] result in
@@ -200,7 +200,7 @@ extension SearchViewModel {
                 completion(image)
                 
             case .failure(let error):
-                print("[SearchViewModel] Failed loading graphic representation of image with error: \(error)")
+                print("[PhotoTabViewModel] Failed loading graphic representation of image with error: \(error)")
                 self?.errorMessageSubject.send(String(format: "Loading graphic for image %s representation failed".localized, photo.title))
             }
         }
@@ -223,11 +223,11 @@ extension SearchViewModel {
 
 // MARK: - Helpers
 
-extension SearchViewModel {
+extension PhotoTabViewModel {
     
     private func fetch() {
         switch state {
-        case .mostPopular:
+        case .list:
             fetchMostPopular()
             
         case .search:
@@ -243,7 +243,7 @@ extension SearchViewModel {
             appendPhotosSubject.send(result)
             
         case .failure(let error):
-            print("[SearchViewModel] Failed most popular photos with error: \(error)")
+            print("[PhotoTabViewModel] Failed most popular photos with error: \(error)")
             errorMessageSubject.send("Failed most popular photos".localized)
         }
     }
