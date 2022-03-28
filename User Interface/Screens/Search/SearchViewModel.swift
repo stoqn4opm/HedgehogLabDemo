@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CombineSchedulers
 import UIKit
 import ServiceLayer
 
@@ -37,7 +38,7 @@ protocol SearchViewModelType {
     func refresh()
     
     /// Notifies the view model that the user want to see this photo.
-    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ())
+    func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
     
     /// Publishes when a badge of more photos needs to be presented to the user.
     var appendPhotosPublisher: AnyPublisher<[Photo], Never> { get }
@@ -172,8 +173,8 @@ extension SearchViewModel {
         fetch()
     }
     
-    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ()) {
-        router.openPhoto(photo: photo, photoService: photoService, completion: completion)
+    func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
+        router.openPhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
     }
 }
 

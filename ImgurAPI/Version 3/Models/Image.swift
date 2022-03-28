@@ -84,26 +84,7 @@ public struct Image: Codable {
     /// has the Medium Thumbnail located at https://i.imgur.com/12345m.jpg
     ///
     /// Note: if fetching an animated GIF that was over 20MB in original size, a .gif thumbnail will be returned
-    public let link: URL
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        id = try container.decode(String.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        width = try container.decodeIfPresent(Int.self, forKey: .width)
-        height = try container.decodeIfPresent(Int.self, forKey: .height)
-        size = try container.decodeIfPresent(Int.self, forKey: .size)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
-        views = try container.decode(Int.self, forKey: .views)
-        tags = try container.decode([Tag].self, forKey: .tags)
-        
-        let link = try container.decode(String.self, forKey: .link)
-        guard let url = URL(string: link) else {
-            throw NSError(domain: "ImgurAPIDecodingError", code: -1)
-        }
-        self.link = url
-    }
+    public let link: String
     
     enum CodingKeys: String, CodingKey {
         case id

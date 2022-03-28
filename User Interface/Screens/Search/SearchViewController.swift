@@ -242,9 +242,9 @@ extension SearchViewController: UICollectionViewDelegate {
               let photo = dataSource?.itemIdentifier(for: indexPath)
         else { return }
         photoTapped = true
-        viewModel.openPhotoDetails(photo) { [weak self] success in
+        viewModel.openPhotoDetails(photo, scheduler: scheduler) { [weak self] error in
             self?.photoTapped = false
-            guard success == false else { return }
+            guard error != nil else { return }
             
             let alert = UIAlertController(title: "Error".localized, message: "Opening image failed, try again later".localized, preferredStyle: .alert)
             alert.addAction(.init(title: "OK".localized, style: .cancel))

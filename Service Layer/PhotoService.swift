@@ -25,13 +25,19 @@ public final class PhotoService {
 extension PhotoService {
     public func fetchMostPopular(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
         photoRepository.fetchMostPopular(inSize: size, page: page) { [weak self] result in
+            self?.handleMultiPhotoFetchingResult(result, withCompletion: completion)
+        }
+    }
+    
+    public func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, Error>) -> ()) {
+        photoRepository.fetchPhotoDetails(forId: id, inSize: size) { [weak self] result in
             self?.handlePhotoFetchingResult(result, withCompletion: completion)
         }
     }
     
     public func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
         photoRepository.search(searchQuery: searchQuery, inSize: size, page: page) { [weak self] result in
-            self?.handlePhotoFetchingResult(result, withCompletion: completion)
+            self?.handleMultiPhotoFetchingResult(result, withCompletion: completion)
         }
     }
     
@@ -46,14 +52,37 @@ extension PhotoService {
             }
         }
     }
+}
+
+// MARK: - Result Handlers
+
+extension PhotoService {
     
-    private func handlePhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
+    private func handleMultiPhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], Error>) -> ()) {
         switch result {
         case .success(let rawPhotos):
             photoStorage.storePhotos(rawPhotos.map { (key: $0.id, photo: $0) }) { result in
                 switch result {
                 case .success(let photos):
                     completion(.success(photos))
+                    
+                case .failure(let error):
+                    completion(.failure(.photoStorageError(error)))
+                }
+            }
+            
+        case .failure(let error):
+            completion(.failure(.photoRepositoryError(error)))
+        }
+    }
+    
+    private func handlePhotoFetchingResult(_ result: Result<RawPhoto, Swift.Error>, withCompletion completion: @escaping (Result<Photo, Error>) -> ()) {
+        switch result {
+        case .success(let rawPhoto):
+            photoStorage.storePhoto(rawPhoto, forKey: rawPhoto.id) { result in
+                switch result {
+                case .success(let photo):
+                    completion(.success(photo))
                     
                 case .failure(let error):
                     completion(.failure(.photoStorageError(error)))
