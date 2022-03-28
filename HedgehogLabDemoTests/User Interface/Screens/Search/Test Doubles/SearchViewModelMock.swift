@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CombineSchedulers
 import ServiceLayer
 import UIKit
 @testable import HedgehogLabDemoUI
@@ -59,7 +60,7 @@ final class SearchViewModelMock: SearchViewModelType {
         self.searchQuery = searchQuery
     }
        
-    func openPhotoDetails(_ photo: Photo, completion: @escaping (Bool) -> ()) {
+    func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         self.openPhotoDetails = photo
     }
     
