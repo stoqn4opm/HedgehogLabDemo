@@ -10,7 +10,7 @@ import Combine
 
 /// Photo service that before is providing photos to its callers, first stores them in a `PhotoStorage`.
 /// When requesting `rawImageData()`, it gets it straight from the `PhotoStorage`.
-public final class CachingPhotoService: PhotoService {
+public final class CachingPhotoService: PhotoServiceFacade {
     
     let photoRepository: PhotoRepository
     let photoStorage: PhotoStorage

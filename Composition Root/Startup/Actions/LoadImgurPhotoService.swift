@@ -11,7 +11,7 @@ import NetworkingKit
 
 // MARK: - UIWindow Startup Action
 
-final class LoadImgurPhotoService: TransformerStartupAction<String, Result<PhotoService, Error>> {
+final class LoadImgurPhotoService: TransformerStartupAction<String, Result<PhotoServiceFacade, Error>> {
     
     init() {
         super.init { appClientId in
@@ -33,7 +33,7 @@ final class LoadImgurPhotoService: TransformerStartupAction<String, Result<Photo
     }
     
     @available(*, unavailable)
-    override init(input: String? = nil, transform: @escaping (String) -> (Result<PhotoService, Error>)) {
+    override init(input: String? = nil, transform: @escaping (String) -> (Result<PhotoServiceFacade, Error>)) {
         super.init(input: input, transform: transform)
     }
 }

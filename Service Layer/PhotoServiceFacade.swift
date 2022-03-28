@@ -1,5 +1,5 @@
 //
-//  PhotoService.swift
+//  PhotoServiceFacade.swift
 //  ServiceLayer
 //
 //  Created by Stoyan Stoyanov on 26/03/22.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-public protocol PhotoService {
+public protocol PhotoServiceFacade {
     func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ())
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
