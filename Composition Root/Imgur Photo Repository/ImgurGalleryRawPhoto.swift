@@ -11,6 +11,14 @@ import ServiceLayer
 
 // MARK: - Raw Photo Conformance
 
+/// Might be worth merging with `ImgurImageRawPhoto` class,
+/// as both are identical.
+///
+/// The only reason for them to be kept separate is that
+/// they are representing different entities from the server
+/// `GalleryImage` and `Image`
+///
+/// The properties we use in app are available from both models.
 final class ImgurGalleryRawPhoto: RawPhoto {
     
     let galleryImage: GalleryImage
