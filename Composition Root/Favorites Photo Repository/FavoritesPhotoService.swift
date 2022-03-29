@@ -33,7 +33,7 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
         let rawPhoto = FavoriteRawPhoto(id: photo.id,
                                         title: photo.title,
                                         description: photo.description,
-                                        downloadURL: accessor.managedURL.appendingPathComponent(rawStorageKey(forPhoto: photo, inSize: size)),
+                                        downloadURL: accessor.managedURL.appendingPathComponent(photo.url.lastPathComponent),
                                         tags: photo.tags,
                                         viewCount: photo.viewCount)
         
@@ -53,11 +53,7 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
     }
     
     func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
-        photoRepository.deletePhoto(withId: photo.id, underKey: rawStorageKey(forPhoto: photo, inSize: size), inSize: size, completion: completion)
-    }
-    
-    private func rawStorageKey(forPhoto photo: Photo, inSize size: Photo.Size) -> String {
-        "\(photo.id)-\(size.urlSuffix)"
+        photoRepository.deletePhoto(withId: photo.id, underKey: photo.url.lastPathComponent, inSize: size, completion: completion)
     }
 }
 
