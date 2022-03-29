@@ -68,4 +68,8 @@ final class SearchViewModelMock: PhotoTabViewModelType {
     func photo(at index: Int) -> Photo? {
         nil
     }
+    
+    func initialFetch() {
+        
+    }
 }

@@ -31,6 +31,9 @@ protocol PhotoTabViewModelType {
     /// Fetches the most popular photos from the photo service.
     func fetchMostPopular()
     
+    /// Instructs the view model that its time to do initial fetch.
+    func initialFetch()
+    
     /// Searches for photos from the photo service.
     func searchPhoto(searchQuery: String)
     
@@ -152,6 +155,11 @@ extension PhotoTabViewModel {
 // MARK: - Commands
 
 extension PhotoTabViewModel {
+    
+    func initialFetch() {
+        guard favoritePhotoService !== photoService else { return }
+        fetchMostPopular()
+    }
     
     func fetchMostPopular() {
         state = .list

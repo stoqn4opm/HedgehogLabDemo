@@ -43,7 +43,7 @@ final class SearchViewControllerTests: XCTestCase {
         let photos = (0..<max(0, imageCount))
             .map { Photo(id: "photo_\(nameStartingFrom + $0)", title: "", description: "", viewCount: 0, tags: [], url: URL(fileURLWithPath: "")) }
         
-        viewModel.appendPhotosSubject.send(photos)
+        viewModel.photosChangedSubject.send(photos)
         return photos
     }
 }

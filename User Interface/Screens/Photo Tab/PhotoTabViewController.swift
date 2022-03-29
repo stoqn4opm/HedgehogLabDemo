@@ -73,7 +73,7 @@ extension PhotoTabViewController {
         prepareLoadingAnimation()
         prepareEmptyStateAnimation()
         setupSubscriptions()
-        viewModel.fetchMostPopular()
+        viewModel.initialFetch()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
