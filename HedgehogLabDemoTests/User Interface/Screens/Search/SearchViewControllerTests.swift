@@ -39,16 +39,12 @@ final class SearchViewControllerTests: XCTestCase {
         searchViewController.loadViewIfNeeded()
     }
     
-    @discardableResult private func whenPhotosAreAppended(imageCount: Int, nameStartingFrom: Int) -> [Photo] {
+    @discardableResult private func whenPhotoListChangesTo(imageCount: Int, nameStartingFrom: Int) -> [Photo] {
         let photos = (0..<max(0, imageCount))
-            .map { Photo(rawPhoto: PhotoMock(id: "photo_\(nameStartingFrom + $0)"), dataAccessorKey: "") }
+            .map { Photo(id: "photo_\(nameStartingFrom + $0)", title: "", description: "", viewCount: 0, tags: [], url: URL(fileURLWithPath: "")) }
         
         viewModel.appendPhotosSubject.send(photos)
         return photos
-    }
-    
-    private func whenPhotosAreReset() {
-        viewModel.resetPhotosSubject.send(())
     }
 }
 
@@ -70,48 +66,18 @@ extension SearchViewControllerTests {
         givenAViewController()
         
         whenTheViewLoads()
-        whenPhotosAreAppended(imageCount: 5, nameStartingFrom: 0)
+        whenPhotoListChangesTo(imageCount: 5, nameStartingFrom: 0)
         XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 5)
         
-        whenPhotosAreAppended(imageCount: 2, nameStartingFrom: 10)
-        XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 7)
-    }
-    
-    func testItRemovesAllPhotosFromDataSourceWhenReset() {
-        givenAViewController()
-        
-        whenTheViewLoads()
-        whenPhotosAreAppended(imageCount: 5, nameStartingFrom: 0)
-        whenPhotosAreReset()
-        
-        XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 0)
-    }
-    
-    func testThatResetFromInitialStateLeavesNoPhotosInDataSource() {
-        givenAViewController()
-        
-        whenTheViewLoads()
-        whenPhotosAreReset()
-                
-        XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 0)
-    }
-    
-    func testThatItsPossibleToAppendPhotosToDataSourceAfterReset() {
-        givenAViewController()
-        
-        whenTheViewLoads()
-        whenPhotosAreAppended(imageCount: 5, nameStartingFrom: 0)
-        whenPhotosAreReset()
-        whenPhotosAreAppended(imageCount: 3, nameStartingFrom: 0)
-        
-        XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 3)
+        whenPhotoListChangesTo(imageCount: 2, nameStartingFrom: 10)
+        XCTAssertEqual(searchViewController.dataSource?.snapshot(for: 0).items.count, 2)
     }
 
     func testThatItShouldNotFetchMoreWhenBoundaryNotReached() {
         givenAViewController(withDistanceToEndBeforeFetchingMore: 5)
         
         whenTheViewLoads()
-        let photos = whenPhotosAreAppended(imageCount: 10, nameStartingFrom: 0)
+        let photos = whenPhotoListChangesTo(imageCount: 10, nameStartingFrom: 0)
         
         XCTAssertFalse(searchViewController.shouldFetchMore(reachedPhoto: photos[4]))
     }
@@ -120,7 +86,7 @@ extension SearchViewControllerTests {
         givenAViewController(withDistanceToEndBeforeFetchingMore: 2)
         
         whenTheViewLoads()
-        let photos = whenPhotosAreAppended(imageCount: 10, nameStartingFrom: 0)
+        let photos = whenPhotoListChangesTo(imageCount: 10, nameStartingFrom: 0)
         
         XCTAssertTrue(searchViewController.shouldFetchMore(reachedPhoto: photos[9]))
     }
@@ -129,7 +95,7 @@ extension SearchViewControllerTests {
         givenAViewController(withDistanceToEndBeforeFetchingMore: 5)
         
         whenTheViewLoads()
-        let photos = whenPhotosAreAppended(imageCount: 10, nameStartingFrom: 0)
+        let photos = whenPhotoListChangesTo(imageCount: 10, nameStartingFrom: 0)
         searchViewController.fetchMoreIfNeeded(reachedPhoto: photos[4])
         
         XCTAssertFalse(viewModel.fetchedNext)
@@ -139,7 +105,7 @@ extension SearchViewControllerTests {
         givenAViewController(withDistanceToEndBeforeFetchingMore: 2)
         
         whenTheViewLoads()
-        let photos = whenPhotosAreAppended(imageCount: 10, nameStartingFrom: 0)
+        let photos = whenPhotoListChangesTo(imageCount: 10, nameStartingFrom: 0)
         searchViewController.fetchMoreIfNeeded(reachedPhoto: photos[9])
         
         XCTAssertTrue(viewModel.fetchedNext)

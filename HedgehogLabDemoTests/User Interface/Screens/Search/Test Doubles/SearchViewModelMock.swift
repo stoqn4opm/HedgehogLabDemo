@@ -28,17 +28,12 @@ final class SearchViewModelMock: PhotoTabViewModelType {
     private(set) var searchQuery: String?
     private(set) var openPhotoDetails: Photo?
     
-    private(set) var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
-    private(set) var resetPhotosSubject = PassthroughSubject<Void, Never>()
+    private(set) var photosChangedSubject = PassthroughSubject<[Photo], Never>()
     private(set) var isLoadingSubject = PassthroughSubject<Bool, Never>()
     
     
     var photosChangedPublisher: AnyPublisher<[Photo], Never> {
-        appendPhotosSubject.eraseToAnyPublisher()
-    }
-    
-    var resetPhotosPublisher: AnyPublisher<Void, Never> {
-        resetPhotosSubject.eraseToAnyPublisher()
+        photosChangedSubject.eraseToAnyPublisher()
     }
     
     var errorMessagePublisher: AnyPublisher<String, Never> {

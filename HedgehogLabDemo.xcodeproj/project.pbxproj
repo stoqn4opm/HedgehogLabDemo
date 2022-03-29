@@ -34,7 +34,6 @@
 		5E3463BC27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BB27EF7B88000C40E4 /* ThumbnailsLinkCoordinator.swift */; };
 		5E3463BF27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463BE27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift */; };
 		5E3463CC27EFB92D000C40E4 /* CacheDirectoryRawDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CB27EFB92D000C40E4 /* CacheDirectoryRawDataAccessor.swift */; };
-		5E3463D027EFBF6C000C40E4 /* PhotoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */; };
 		5E3463D127EFC463000C40E4 /* LossyCachePhotoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */; };
 		5E3463D627EFC4CE000C40E4 /* WebRawDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */; };
 		5E3463DF27EFD233000C40E4 /* FolderMonitorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E3463DE27EFD233000C40E4 /* FolderMonitorKit */; };
@@ -184,7 +183,6 @@
 		5E3463C527EFAA03000C40E4 /* LossyCachePhotoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossyCachePhotoStorage.swift; sourceTree = "<group>"; };
 		5E3463C827EFB441000C40E4 /* WebRawDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRawDataDownloader.swift; sourceTree = "<group>"; };
 		5E3463CB27EFB92D000C40E4 /* CacheDirectoryRawDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDirectoryRawDataAccessor.swift; sourceTree = "<group>"; };
-		5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMock.swift; sourceTree = "<group>"; };
 		5E43870327F1D7A7006E1C58 /* ShrinkableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkableCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E43870627F22552006E1C58 /* CachingPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingPhotoService.swift; sourceTree = "<group>"; };
 		5E43870927F22E5C006E1C58 /* NonCachingPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonCachingPhotoService.swift; sourceTree = "<group>"; };
@@ -785,7 +783,6 @@
 			isa = PBXGroup;
 			children = (
 				5ED8389627ECD77100F40809 /* SearchViewModelMock.swift */,
-				5E3463CF27EFBF6C000C40E4 /* PhotoMock.swift */,
 			);
 			path = "Test Doubles";
 			sourceTree = "<group>";
@@ -1069,7 +1066,6 @@
 				5E3463BF27EF81F4000C40E4 /* ThumbnailsLinkCoordinatorTests.swift in Sources */,
 				5E3463A827EEF9FE000C40E4 /* TransformerStartupActionTests.swift in Sources */,
 				5ED8389727ECD77100F40809 /* SearchViewModelMock.swift in Sources */,
-				5E3463D027EFBF6C000C40E4 /* PhotoMock.swift in Sources */,
 				5ED0624A27EBB33B00FACD0B /* UIResponderHelperTests.swift in Sources */,
 				5E34637D27EE7610000C40E4 /* AppStarterTests.swift in Sources */,
 				5E3463AA27EEFD08000C40E4 /* ThreeStepTransformerActionTests.swift in Sources */,
