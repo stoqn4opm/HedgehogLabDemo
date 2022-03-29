@@ -32,6 +32,8 @@ final class PhotoDetailsViewModel: ObservableObject {
     let router: Routes!
     let scheduler: AnySchedulerOf<RunLoop>
     
+    
+    private var favoriteToggleOnInitialValue = false
     private var cancellables: Set<AnyCancellable> = []
     
     /// Used ONLY for SwiftUI previews, always pass photo and photo service and router to the model.
@@ -56,7 +58,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         self.router = nil
         self.scheduler = .main
         
-        setupSubscriptions()
+        checkFavoriteStatus()
     }
     
     init(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
@@ -78,7 +80,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         self.router = router
         self.scheduler = scheduler
         
-        setupSubscriptions()
+        checkFavoriteStatus()
     }
 }
 
@@ -86,13 +88,34 @@ final class PhotoDetailsViewModel: ObservableObject {
 
 extension PhotoDetailsViewModel {
     
-    func setupSubscriptions() {
+    private func checkFavoriteStatus() {
+        favoritePhotoService.contains(photo, withSize: .original) { [weak self] result in
+            switch result {
+            case .success(let hasBeenFoundInFavoriteService):
+                self?.isFavorite = hasBeenFoundInFavoriteService
+                self?.favoriteToggleOnInitialValue = true
+                self?.startMonitoringForFavoriteToggling()
+                
+            case .failure(let error):
+                print("[PhotoDetailsViewModel] Failed checking if image is favorite with error: \(error)")
+                self?.presentError("There was an error loading the image. Some details might not be correct!. Please try to open it later.".localized)
+            }
+        }
+    }
+    
+    private func startMonitoringForFavoriteToggling() {
         $isFavorite
             .removeDuplicates()
             .receive(on: scheduler)
             .sink { [weak self] isFavorite in
-                self?.updateIsFavoriteState(to: isFavorite)
-                print("is favorite: \(isFavorite)")
+                
+                if self?.favoriteToggleOnInitialValue == true {
+                    // skip initial setting
+                    self?.favoriteToggleOnInitialValue = false
+                } else {
+                    self?.updateIsFavoriteState(to: isFavorite)
+                    print("is favorite: \(isFavorite)")
+                }
             }
             .store(in: &cancellables)
     }
