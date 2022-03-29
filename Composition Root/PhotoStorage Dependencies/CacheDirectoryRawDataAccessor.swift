@@ -34,7 +34,7 @@ extension CacheDirectoryRawDataAccessor {
 class CacheDirectoryRawDataAccessor: RawDataHandler {
     
     /// The subdirectory of the `NSCachesDirectory` directory that is used a a file system cache.
-    let workingDirectory: URL
+    let managedURL: URL
     let fileManager: FileManager
     let maxAllowedDiskUsageInBytes: Int64
     var currentlyUsedDiskSpaceInBytes: Int64 = 0
@@ -51,7 +51,7 @@ class CacheDirectoryRawDataAccessor: RawDataHandler {
         
         do {
             try fileManager.createDirectory(atPath: url.absoluteString, withIntermediateDirectories: true, attributes: nil)
-            workingDirectory = url
+            managedURL = url
         } catch {
             return nil
         }
@@ -67,7 +67,7 @@ class CacheDirectoryRawDataAccessor: RawDataHandler {
         
         currentlyUsedDiskSpaceInBytes += Int64(data.count)
         
-        let path = workingDirectory.appendingPathComponent(key).absoluteString
+        let path = managedURL.appendingPathComponent(key).absoluteString
         let success = fileManager.createFile(atPath: path, contents: data, attributes: nil)
         
         if success {
@@ -78,7 +78,7 @@ class CacheDirectoryRawDataAccessor: RawDataHandler {
     }
     
     func read(forKey key: String, withCompletion completion: @escaping (Result<Data, Swift.Error>) -> ()) {
-        let path = workingDirectory.appendingPathComponent(key).absoluteString
+        let path = managedURL.appendingPathComponent(key).absoluteString
         let data = fileManager.contents(atPath: path)
         
         if let data = data {

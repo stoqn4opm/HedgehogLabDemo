@@ -66,6 +66,8 @@ public protocol RawDataDestructor {
 /// Instances that know how to store and retrieve stored raw data.
 /// Used mostly within `PhotoStorage`s when the graphic representation needs to be saved/retrieved.
 public protocol RawDataHandler {
+    var managedURL: URL { get }
+    
     func store(data: Data, forKey key: String, withCompletion completion: @escaping (Error?) -> ())
     func read(forKey key: String, withCompletion completion: @escaping (Result<Data, Error>) -> ())
 }
