@@ -31,7 +31,7 @@ extension CacheDirectoryRawDataAccessor {
 /// Currently, it just adds new entries, it never deletes old ones, so if you use the app
 /// long enough it will start erroring out, as all the available space within the limit
 /// will be used.
-final class CacheDirectoryRawDataAccessor: RawDataHandler {
+class CacheDirectoryRawDataAccessor: RawDataHandler {
     
     /// The subdirectory of the `NSCachesDirectory` directory that is used a a file system cache.
     let workingDirectory: URL

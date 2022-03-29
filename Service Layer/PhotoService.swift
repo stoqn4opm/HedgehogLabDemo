@@ -44,6 +44,11 @@ public protocol PhotoStorage {
     func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ())
 }
 
+/// `RawDataHandler` that knows how to delete in addition to store and retrieve data.
+public protocol RawDataDestructor {
+    func delete(forKey key: String, withCompletion completion: @escaping (Error?) -> ())
+}
+
 /// Instances that know how to store and retrieve stored raw data.
 /// Used mostly within `PhotoStorage`s when the graphic representation needs to be saved/retrieved.
 public protocol RawDataHandler {
