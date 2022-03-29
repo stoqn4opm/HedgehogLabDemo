@@ -69,7 +69,7 @@ protocol PhotoTabViewModelType {
 // MARK: - Photo Tab View Model
 
 final class PhotoTabViewModel: PhotoTabViewModelType {
-    typealias Routes = PhotoDetailsViewRoute & FavoritePhotoDetailsViewRoute
+    typealias Routes = PhotoDetailsViewRoute
     let router: Routes
     
     let tab: Tabs
@@ -181,20 +181,11 @@ extension PhotoTabViewModel {
     }
     
     func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
-        switch tab {
-        case .search:
-            router.openPhoto(photo: photo,
-                             photoService: photoService,
-                             favoritePhotoService: favoritePhotoService,
-                             scheduler: scheduler,
-                             completion: completion)
-        case .favorites:
-            router.openFavoritePhoto(photo: photo,
-                                     photoService: photoService,
-                                     favoritePhotoService: favoritePhotoService,
-                                     scheduler: scheduler,
-                                     completion: completion)
-        }
+        router.openPhoto(photo: photo,
+                         photoService: photoService,
+                         favoritePhotoService: favoritePhotoService,
+                         scheduler: scheduler,
+                         completion: completion)
     }
 }
 

@@ -27,6 +27,7 @@ final class PhotoDetailsViewModel: ObservableObject {
     @Published var presentErrorAlert: Bool
     
     let photo: Photo!
+    let thumbnail: Photo!
     let photoService: PhotoService!
     let favoritePhotoService: PhotoServiceModifiable!
     let router: Routes!
@@ -53,6 +54,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         
         // force unwrapped
         self.photo = nil
+        self.thumbnail = nil
         self.photoService = nil
         self.favoritePhotoService = nil
         self.router = nil
@@ -61,7 +63,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         checkFavoriteStatus()
     }
     
-    init(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
+    init(photo: Photo, thumbnail: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
         self.title = photo.title
         self.description = photo.description
         self.tags = photo.tags
@@ -75,6 +77,7 @@ final class PhotoDetailsViewModel: ObservableObject {
         
         // dependencies
         self.photo = photo
+        self.thumbnail = thumbnail
         self.photoService = photoService
         self.favoritePhotoService = favoritePhotoService
         self.router = router
@@ -175,10 +178,10 @@ extension PhotoDetailsViewModel {
         
         if isFavorite {
             favoritePhotoService.store(photo, withSize: .original, completion: completion)
-            favoritePhotoService.store(photo, withSize: .thumbnail, completion: completion)
+            favoritePhotoService.store(thumbnail, withSize: .thumbnail, completion: completion)
         } else {
             favoritePhotoService.delete(photo, withSize: .original, completion: completion)
-            favoritePhotoService.delete(photo, withSize: .thumbnail, completion: completion)
+            favoritePhotoService.delete(thumbnail, withSize: .thumbnail, completion: completion)
         }
     }
 }

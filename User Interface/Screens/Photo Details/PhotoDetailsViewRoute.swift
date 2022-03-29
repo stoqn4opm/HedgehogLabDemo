@@ -30,6 +30,7 @@ extension PhotoDetailsViewRoute where Self: Router {
                                             url: originalPhoto.url)
                     
                     self?.openOriginalPhoto(photo: taggedPhoto,
+                                            thumbnail: photo,
                                             photoService: photoService,
                                             favoritePhotoService: favoritePhotoService,
                                             scheduler: scheduler,
@@ -42,12 +43,13 @@ extension PhotoDetailsViewRoute where Self: Router {
         }
     }
     
-    private func openOriginalPhoto(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
+    private func openOriginalPhoto(photo: Photo, thumbnail: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         
         let transition = ModalTransition()
         let router = MainRouter(rootTransition: transition)
         
         let viewModel = PhotoDetailsViewModel(photo: photo,
+                                              thumbnail: thumbnail,
                                               photoService: photoService,
                                               favoritePhotoService: favoritePhotoService,
                                               router: router,
