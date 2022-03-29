@@ -12,6 +12,8 @@ import Combine
 /// Interface that marks a photo service that can be modified
 /// Could have its entries deleted or new ones stored.
 public protocol PhotoServiceModifiable  {
+    var photoStoredPublisher: AnyPublisher<Photo, Error> { get }
+    var photoDeletedPublisher: AnyPublisher<Photo, Error> { get }
     func contains(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ())
     func store(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
     func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())

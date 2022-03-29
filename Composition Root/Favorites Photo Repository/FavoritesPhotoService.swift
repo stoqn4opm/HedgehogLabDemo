@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 import ServiceLayer
 
 // MARK: - Favorites PhotoService
@@ -18,11 +19,23 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
     let photoRepository: PhotoRepository & PhotoRepositoryModifiable
     let accessor: RawDataHandler
     
+    private var photoStoredSubject = PassthroughSubject<Photo, Error>()
+    private var photoDeletedSubject = PassthroughSubject<Photo, Error>()
+    
+    
     init(sourcePhotoService: PhotoService, photoRepository: PhotoRepository & PhotoRepositoryModifiable, accessor: RawDataHandler) {
         self.sourcePhotoService = sourcePhotoService
         self.photoRepository = photoRepository
         self.accessor = accessor
         super.init(photoRepository: photoRepository, accessor: accessor)
+    }
+    
+    var photoStoredPublisher: AnyPublisher<Photo, Error> {
+        photoStoredSubject.eraseToAnyPublisher()
+    }
+    
+    var photoDeletedPublisher: AnyPublisher<Photo, Error> {
+        photoDeletedSubject.eraseToAnyPublisher()
     }
     
     func contains(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ()) {
@@ -44,8 +57,15 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
                 self?.photoRepository.store(rawPhoto,
                                             withData: data,
                                             underKey: rawPhoto.downloadURL.lastPathComponent,
-                                            forSize: size,
-                                            completion: completion)
+                                            forSize: size) { error in
+                    
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                        self?.photoStoredSubject.send(photo)
+                    }
+                }
             case .failure(let error):
                 completion(error)
             }
@@ -53,18 +73,13 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
     }
     
     func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
-        photoRepository.deletePhoto(withId: photo.id, underKey: photo.url.lastPathComponent, inSize: size, completion: completion)
-    }
-}
-
-extension Photo.Size {
-    
-    fileprivate var urlSuffix: String {
-        switch self {
-        case .original:
-            return "original"
-        case .thumbnail:
-            return "thumbnail"
+        photoRepository.deletePhoto(withId: photo.id, underKey: photo.url.lastPathComponent, inSize: size) { [weak self] error in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+                self?.photoDeletedSubject.send(photo)
+            }
         }
     }
 }
