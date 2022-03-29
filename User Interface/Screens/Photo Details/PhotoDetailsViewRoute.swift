@@ -26,7 +26,8 @@ extension PhotoDetailsViewRoute where Self: Router {
                                             title: originalPhoto.title,
                                             description: originalPhoto.description,
                                             viewCount: originalPhoto.viewCount,
-                                            tags: photo.tags)
+                                            tags: photo.tags,
+                                            url: originalPhoto.url)
                     
                     self?.openOriginalPhoto(photo: taggedPhoto,
                                             photoService: photoService,

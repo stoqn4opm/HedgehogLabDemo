@@ -15,16 +15,16 @@ public struct Photo: Hashable {
     public var description: String?
     public var viewCount: Int
     public let tags: [String]
+    public let url: URL
     
-    public init(id: String, title: String, description: String?, viewCount: Int, tags: [String]) {
+    public init(id: String, title: String, description: String?, viewCount: Int, tags: [String], url: URL) {
         self.id = id
         self.title = title
         self.description = description
         self.viewCount = viewCount
         self.tags = tags
+        self.url = url
     }
-    
-    public var dataAccessorKey: String { id }
 }
 
 extension Photo {

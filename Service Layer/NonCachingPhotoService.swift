@@ -43,7 +43,7 @@ extension NonCachingPhotoService {
     }
     
     public func rawImageData(forPhoto photo: Photo, completion: @escaping (Result<Data, PhotoServiceError>) -> ()) {
-        accessor.read(forKey: photo.dataAccessorKey) { result in
+        accessor.read(forKey: photo.url.lastPathComponent) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
@@ -62,7 +62,7 @@ extension NonCachingPhotoService {
     private func handleMultiPhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhotos):
-            let photos = rawPhotos.map { Photo(id: $0.id, title: $0.title, description: $0.description, viewCount: $0.viewCount, tags: $0.tags) }
+            let photos = rawPhotos.map { Photo(id: $0.id, title: $0.title, description: $0.description, viewCount: $0.viewCount, tags: $0.tags, url: $0.downloadURL) }
             completion(.success(photos))
             
         case .failure(let error):
@@ -73,7 +73,7 @@ extension NonCachingPhotoService {
     private func handlePhotoFetchingResult(_ result: Result<RawPhoto, Swift.Error>, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhoto):
-            let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags)
+            let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags, url: rawPhoto.downloadURL)
             completion(.success(photo))
             
         case .failure(let error):

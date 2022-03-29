@@ -71,11 +71,11 @@ public class LossyCachePhotoStorage: PhotoStorage {
         downloader.download(url: rawPhoto.downloadURL) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.accessor.store(data: data, forKey: rawPhoto.id) { error in
+                self?.accessor.store(data: data, forKey: rawPhoto.downloadURL.lastPathComponent) { error in
                     if let error = error {
                         completion(.failure(error))
                     } else {
-                        let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags)
+                        let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags, url: rawPhoto.downloadURL)
                         completion(.success(photo))
                     }
                 }
@@ -87,7 +87,7 @@ public class LossyCachePhotoStorage: PhotoStorage {
     }
     
     public func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ()) {
-        accessor.read(forKey: photo.dataAccessorKey) { result in
+        accessor.read(forKey: photo.url.lastPathComponent) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
