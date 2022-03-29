@@ -117,7 +117,6 @@ extension PhotoDetailsViewModel {
                     self?.favoriteToggleOnInitialValue = false
                 } else {
                     self?.updateIsFavoriteState(to: isFavorite)
-                    print("is favorite: \(isFavorite)")
                 }
             }
             .store(in: &cancellables)
