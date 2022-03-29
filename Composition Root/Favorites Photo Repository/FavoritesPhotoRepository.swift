@@ -75,7 +75,7 @@ final class FavoritesPhotoRepository: PhotoRepository, PhotoRepositoryModifiable
                 
                 let allSearchResults = store.values
                     .filter {
-                        $0.title.lowercased().contains(searchQuery.lowercased()) ||
+                        $0.title?.lowercased().contains(searchQuery.lowercased()) == true ||
                         $0.description?.lowercased().contains(searchQuery.lowercased()) == true
                     }
                     .chunked(into: self?.pageSize ?? .max)

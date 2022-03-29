@@ -215,7 +215,7 @@ extension PhotoTabViewModel {
                 
             case .failure(let error):
                 print("[PhotoTabViewModel] Failed loading graphic representation of image with error: \(error)")
-                self?.errorMessageSubject.send(String(format: "Loading graphic for image %s representation failed".localized, photo.title))
+                self?.errorMessageSubject.send(String(format: "Loading graphic for image %s representation failed".localized, photo.title ?? ""))
             }
         }
     }

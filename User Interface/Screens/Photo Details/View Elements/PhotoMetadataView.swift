@@ -12,7 +12,7 @@ import SwiftUI
 
 struct PhotoMetadataView: View {
     
-    @Binding var title: String
+    @Binding var title: String?
     @Binding var description: String?
     @Binding var tags: [String]
     @Binding var viewCount: Int
@@ -24,7 +24,7 @@ struct PhotoMetadataView: View {
             PhotoTitleView(title: $title, viewCount: $viewCount, isFavorite: $isFavorite)
             Divider()
             if let description = description {
-                Text(description)
+                Text(AttributedString(description))
                     .padding(.bottom, 15)
             }
             if tags.isEmpty == false {
@@ -40,14 +40,15 @@ struct PhotoMetadataView: View {
 
 struct PhotoTitleView: View {
     
-    @Binding var title: String
+    @Binding var title: String?
     @Binding var viewCount: Int
     @Binding var isFavorite: Bool
     
+    @ViewBuilder
     var body: some View {
         VStack {
             HStack {
-                Text(title)
+                Text(title ?? "No Title...")
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 5)
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 5)
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 10)

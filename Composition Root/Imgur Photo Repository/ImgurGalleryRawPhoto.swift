@@ -43,7 +43,7 @@ final class ImgurGalleryRawPhoto: RawPhoto {
     }
     
     var id: String { galleryImage.id }
-    var title: String { galleryImage.title }
+    var title: String? { galleryImage.title }
     var description: String? { galleryImage.description }
     
     var tags: [String] { galleryImage.tags.map { $0.name } }

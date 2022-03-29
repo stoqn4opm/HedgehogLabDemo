@@ -31,7 +31,7 @@ public protocol PhotoService: AnyObject {
 /// to download the image.
 public protocol RawPhoto: Codable {
     var id: String { get }
-    var title: String { get }
+    var title: String? { get }
     var description: String? { get }
     var downloadURL: URL { get }
     var tags: [String] { get }

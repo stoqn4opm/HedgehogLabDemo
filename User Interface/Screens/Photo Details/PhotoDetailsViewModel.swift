@@ -17,7 +17,7 @@ import CombineSchedulers
 final class PhotoDetailsViewModel: ObservableObject {
     typealias Routes = Closable
     
-    @Published var title: String
+    @Published var title: String?
     @Published var description: String?
     @Published var tags: [String]
     @Published var viewCount: Int
