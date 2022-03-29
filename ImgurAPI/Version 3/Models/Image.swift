@@ -35,7 +35,9 @@ public struct Image: Codable {
     public let id: String
     
     /// The title of the image.
-    public let title: String
+    ///
+    /// Not documented as optional, but saw it being `nil` a couple of times.
+    public let title: String?
     
     /// Description of the image
     ///

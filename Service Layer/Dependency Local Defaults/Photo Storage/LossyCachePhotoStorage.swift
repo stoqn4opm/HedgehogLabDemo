@@ -19,9 +19,9 @@ import Combine
 public class LossyCachePhotoStorage: PhotoStorage {
     
     public let downloader: RawDataDownloader
-    public let accessor: RawDataAccessor
+    public let accessor: RawDataHandler
     
-    public init(downloader: RawDataDownloader, accessor: RawDataAccessor) {
+    public init(downloader: RawDataDownloader, accessor: RawDataHandler) {
         self.downloader = downloader
         self.accessor = accessor
     }
@@ -58,7 +58,7 @@ public class LossyCachePhotoStorage: PhotoStorage {
                 }
                 
                 if photos.isEmpty {
-                    completion(.failure(PhotoService.Error.photoStorageMultipleSavesFailed))
+                    completion(.failure(PhotoServiceError.photoStorageMultipleSavesFailed))
                 } else {
                     completion(.success(photos))
                 }
@@ -71,11 +71,11 @@ public class LossyCachePhotoStorage: PhotoStorage {
         downloader.download(url: rawPhoto.downloadURL) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.accessor.store(data: data, forKey: rawPhoto.id) { error in
+                self?.accessor.store(data: data, forKey: rawPhoto.downloadURL.lastPathComponent) { error in
                     if let error = error {
                         completion(.failure(error))
                     } else {
-                        let photo = Photo(rawPhoto: rawPhoto, dataAccessorKey: rawPhoto.id)
+                        let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags, url: rawPhoto.downloadURL)
                         completion(.success(photo))
                     }
                 }
@@ -87,7 +87,7 @@ public class LossyCachePhotoStorage: PhotoStorage {
     }
     
     public func readPhotoRawData(forPhoto photo: Photo, completion: @escaping (Result<Data, Error>) -> ()) {
-        accessor.read(forKey: photo.dataAccessorKey) { result in
+        accessor.read(forKey: photo.url.lastPathComponent) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

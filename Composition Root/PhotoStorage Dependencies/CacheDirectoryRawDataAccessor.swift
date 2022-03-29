@@ -20,9 +20,9 @@ extension CacheDirectoryRawDataAccessor {
     }
 }
 
-// MARK: - Cache Directory RawDataAccessor
+// MARK: - Cache Directory RawDataHandler
 
-/// RawDataAccessor that uses the directory within the caches directory
+/// RawDataHandler that uses the directory within the caches directory
 /// inside the user domain mask. The implementation tracks the disk space usage
 /// and after it reaches the limit it starts erroring out.
 ///
@@ -31,10 +31,10 @@ extension CacheDirectoryRawDataAccessor {
 /// Currently, it just adds new entries, it never deletes old ones, so if you use the app
 /// long enough it will start erroring out, as all the available space within the limit
 /// will be used.
-final class CacheDirectoryRawDataAccessor: RawDataAccessor {
+class CacheDirectoryRawDataAccessor: RawDataHandler {
     
     /// The subdirectory of the `NSCachesDirectory` directory that is used a a file system cache.
-    let workingDirectory: URL
+    let managedURL: URL
     let fileManager: FileManager
     let maxAllowedDiskUsageInBytes: Int64
     var currentlyUsedDiskSpaceInBytes: Int64 = 0
@@ -51,7 +51,7 @@ final class CacheDirectoryRawDataAccessor: RawDataAccessor {
         
         do {
             try fileManager.createDirectory(atPath: url.absoluteString, withIntermediateDirectories: true, attributes: nil)
-            workingDirectory = url
+            managedURL = url
         } catch {
             return nil
         }
@@ -67,7 +67,7 @@ final class CacheDirectoryRawDataAccessor: RawDataAccessor {
         
         currentlyUsedDiskSpaceInBytes += Int64(data.count)
         
-        let path = workingDirectory.appendingPathComponent(key).absoluteString
+        let path = managedURL.appendingPathComponent(key).absoluteString
         let success = fileManager.createFile(atPath: path, contents: data, attributes: nil)
         
         if success {
@@ -78,7 +78,7 @@ final class CacheDirectoryRawDataAccessor: RawDataAccessor {
     }
     
     func read(forKey key: String, withCompletion completion: @escaping (Result<Data, Swift.Error>) -> ()) {
-        let path = workingDirectory.appendingPathComponent(key).absoluteString
+        let path = managedURL.appendingPathComponent(key).absoluteString
         let data = fileManager.contents(atPath: path)
         
         if let data = data {

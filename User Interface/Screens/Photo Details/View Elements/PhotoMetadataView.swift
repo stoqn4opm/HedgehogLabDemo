@@ -12,19 +12,19 @@ import SwiftUI
 
 struct PhotoMetadataView: View {
     
-    @Binding var title: String
+    @Binding var title: String?
     @Binding var description: String?
     @Binding var tags: [String]
     @Binding var viewCount: Int
-    
+    @Binding var isFavorite: Bool
     
     @ViewBuilder
     var body: some View {
         VStack {
-            PhotoTitleView(title: $title, viewCount: $viewCount)
+            PhotoTitleView(title: $title, viewCount: $viewCount, isFavorite: $isFavorite)
             Divider()
             if let description = description {
-                Text(description)
+                Text(AttributedString(description))
                     .padding(.bottom, 15)
             }
             if tags.isEmpty == false {
@@ -40,13 +40,15 @@ struct PhotoMetadataView: View {
 
 struct PhotoTitleView: View {
     
-    @Binding var title: String
+    @Binding var title: String?
     @Binding var viewCount: Int
+    @Binding var isFavorite: Bool
     
+    @ViewBuilder
     var body: some View {
         VStack {
             HStack {
-                Text(title)
+                Text(title ?? "No Title...")
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 5)
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 5)
                     .shadow(color: .init(UIColor.systemGroupedBackground), radius: 10)
@@ -54,7 +56,6 @@ struct PhotoTitleView: View {
                     .font(.title)
                 Spacer()
             }
-            .padding(.bottom, 0.5)
             HStack {
                 Label {
                     Text("\(viewCount) views")
@@ -63,6 +64,15 @@ struct PhotoTitleView: View {
                     Image(systemName: "camera.fill")
                 }
                 Spacer()
+                Button {
+                    isFavorite.toggle()
+                } label: {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .resizable()
+                        .foregroundColor(.yellow)
+                        .frame(width: 35, height: 35)
+                    
+                }
             }
         }
     }
@@ -121,11 +131,11 @@ struct PhotoMetadataView_Previews: PreviewProvider {
             PhotoMetadataView(title: .constant("Photo Name"),
                               description: .constant("Use an Image instance when you want to add images to your SwiftUI app. You can create images from many sources"),
                               tags: .constant(["test1"]),
-                              viewCount: .constant(10))
+                              viewCount: .constant(10), isFavorite: .constant(true))
             PhotoMetadataView(title: .constant("Photo Name"),
                               description: .constant("Use an Image instance when you want to add images to your SwiftUI app. You can create images from many sources"),
                               tags: .constant(["test1"]),
-                              viewCount: .constant(10))
+                              viewCount: .constant(10), isFavorite: .constant(false))
             .preferredColorScheme(.dark)
         }
     }

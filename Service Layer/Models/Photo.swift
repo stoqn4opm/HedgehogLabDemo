@@ -9,36 +9,22 @@ import Foundation
 
 
 public struct Photo: Hashable {
-        
-    /// The key under which the raw `Data` of this Photo is saved.
-    public let dataAccessorKey: String
+    
+    public var id: String
+    public var title: String?
+    public var description: String?
+    public var viewCount: Int
     public let tags: [String]
-    private let rawPhoto: RawPhoto
+    public let url: URL
     
-    public init(rawPhoto: RawPhoto, dataAccessorKey: String) {
-        self.rawPhoto = rawPhoto
-        self.tags = rawPhoto.tags
-        self.dataAccessorKey = dataAccessorKey
-    }
-    
-    public init(photo: Photo, tags: [String]) {
-        self.rawPhoto = photo.rawPhoto
+    public init(id: String, title: String?, description: String?, viewCount: Int, tags: [String], url: URL) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.viewCount = viewCount
         self.tags = tags
-        self.dataAccessorKey = photo.dataAccessorKey
+        self.url = url
     }
-    
-    public static func == (lhs: Photo, rhs: Photo) -> Bool {
-        lhs.rawPhoto.id == rhs.rawPhoto.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(rawPhoto.id)
-    }
-    
-    public var id: String { rawPhoto.id }
-    public var title: String { rawPhoto.title }
-    public var description: String? { rawPhoto.description }
-    public var viewCount: Int { rawPhoto.viewCount }
 }
 
 extension Photo {

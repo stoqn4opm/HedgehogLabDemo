@@ -12,13 +12,15 @@ import ServiceLayer
 import UIKit
 @testable import HedgehogLabDemoUI
 
-final class SearchViewModelMock: SearchViewModelType {
+final class SearchViewModelMock: PhotoTabViewModelType {
+    
+    var screenTitle: String = "TestTitle"
     
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
         isLoadingSubject.eraseToAnyPublisher()
     }
     
-    var state: SearchViewModelState = .mostPopular
+    var state: PhotoTabViewModelState = .list
      
     private(set) var fetchedMostPopular = false
     private(set) var fetchedNext = false
@@ -26,17 +28,12 @@ final class SearchViewModelMock: SearchViewModelType {
     private(set) var searchQuery: String?
     private(set) var openPhotoDetails: Photo?
     
-    private(set) var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
-    private(set) var resetPhotosSubject = PassthroughSubject<Void, Never>()
+    private(set) var photosChangedSubject = PassthroughSubject<[Photo], Never>()
     private(set) var isLoadingSubject = PassthroughSubject<Bool, Never>()
     
     
-    var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
-        appendPhotosSubject.eraseToAnyPublisher()
-    }
-    
-    var resetPhotosPublisher: AnyPublisher<Void, Never> {
-        resetPhotosSubject.eraseToAnyPublisher()
+    var photosChangedPublisher: AnyPublisher<[Photo], Never> {
+        photosChangedSubject.eraseToAnyPublisher()
     }
     
     var errorMessagePublisher: AnyPublisher<String, Never> {
@@ -70,5 +67,9 @@ final class SearchViewModelMock: SearchViewModelType {
     
     func photo(at index: Int) -> Photo? {
         nil
+    }
+    
+    func initialFetch() {
+        
     }
 }

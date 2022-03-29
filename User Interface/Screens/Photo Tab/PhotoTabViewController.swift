@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  PhotoTabViewController.swift
 //  HedgehogLabDemo
 //
 //  Created by Stoyan Stoyanov on 23/03/22.
@@ -14,7 +14,7 @@ import Lottie
 
 // MARK: - Class Definition
 
-final class SearchViewController: UIViewController {
+final class PhotoTabViewController: UIViewController {
     
     @IBOutlet private(set) weak var collectionView: UICollectionView!
     @IBOutlet private weak var emptyStateContainer: UIView!
@@ -22,7 +22,7 @@ final class SearchViewController: UIViewController {
     @IBOutlet private weak var loadingAnimationView: AnimationView!
     @IBOutlet private weak var emptyAnimationView: AnimationView!
     
-    let viewModel: SearchViewModelType
+    let viewModel: PhotoTabViewModelType
     let distanceToEndBeforeFetchingMore: Int
     let scheduler: AnySchedulerOf<RunLoop>
     let searchController: UISearchController
@@ -34,7 +34,7 @@ final class SearchViewController: UIViewController {
     private var photoTapped: Bool
     
     init?(coder: NSCoder,
-          viewModel: SearchViewModelType,
+          viewModel: PhotoTabViewModelType,
           scheduler: AnySchedulerOf<RunLoop> = .main,
           distanceToEndBeforeFetchingMore: Int = 5,
           searchController: UISearchController) {
@@ -57,11 +57,11 @@ final class SearchViewController: UIViewController {
 
 // MARK: - View Lifecycle
 
-extension SearchViewController {
+extension PhotoTabViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Most Popular".localized
+        title = viewModel.screenTitle
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
         collectionView.scrollsToTop = false
@@ -73,7 +73,7 @@ extension SearchViewController {
         prepareLoadingAnimation()
         prepareEmptyStateAnimation()
         setupSubscriptions()
-        viewModel.fetchMostPopular()
+        viewModel.initialFetch()
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -85,7 +85,7 @@ extension SearchViewController {
 
 // MARK: - UI Preparation
 
-extension SearchViewController {
+extension PhotoTabViewController {
     
     private func prepareCollectionView() {
         dataSource = UICollectionViewDiffableDataSource<Int, Photo>(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -140,30 +140,16 @@ extension SearchViewController {
 
 // MARK: - Combine Subscriptions
 
-extension SearchViewController {
+extension PhotoTabViewController {
     
     private func setupSubscriptions() {
-        viewModel.appendPhotosPublisher
+        viewModel.photosChangedPublisher
             .receive(on: scheduler)
             .sink { _ in
             } receiveValue: { [weak self] photos in
-                guard let dataSource = self?.dataSource else { return }
-                var snapshot = dataSource.snapshot()
-                if snapshot.numberOfSections == 0 {
-                    snapshot.appendSections([0])
-                }
-                snapshot.appendItems(photos)
-                dataSource.apply(snapshot)
-                self?.refreshUIState()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.resetPhotosPublisher
-            .receive(on: scheduler)
-            .sink { _ in
-            } receiveValue: { [weak self] _ in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, Photo>()
                 snapshot.appendSections([0])
+                snapshot.appendItems(photos)
                 self?.dataSource?.apply(snapshot)
                 self?.refreshUIState()
             }
@@ -221,7 +207,7 @@ extension SearchViewController {
 
 // MARK: - User Actions
 
-extension SearchViewController {
+extension PhotoTabViewController {
     
     @objc private func pullToRefresh() {
         viewModel.refresh()
@@ -230,7 +216,7 @@ extension SearchViewController {
 
 // MARK: - UICollectionViewDelegate
 
-extension SearchViewController: UICollectionViewDelegate {
+extension PhotoTabViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let currentPhoto = dataSource?.itemIdentifier(for: indexPath) else { return }
@@ -255,7 +241,7 @@ extension SearchViewController: UICollectionViewDelegate {
 
 // MARK: - UISearchBarDelegate
 
-extension SearchViewController: UISearchBarDelegate {
+extension PhotoTabViewController: UISearchBarDelegate {
     
     // called when text changes (including clear)
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -278,7 +264,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 // MARK: - Helpers
 
-extension SearchViewController {
+extension PhotoTabViewController {
     
     func fetchMoreIfNeeded(reachedPhoto photo: Photo) {
         guard shouldFetchMore(reachedPhoto: photo) else { return }

@@ -11,19 +11,30 @@ import ServiceLayer
 import CombineSchedulers
 
 protocol PhotoDetailsViewRoute {
-    func openPhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
+    func openPhoto(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
 }
 
 extension PhotoDetailsViewRoute where Self: Router {
     
-    func openPhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
+    func openPhoto(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         
         photoService.fetchPhotoDetails(forId: photo.id, inSize: .original) { [weak self] result in
             scheduler.schedule {
                 switch result {
                 case .success(let originalPhoto):
-                    let taggedPhoto = Photo(photo: originalPhoto, tags: photo.tags)
-                    self?.openOriginalPhoto(photo: taggedPhoto, photoService: photoService, completion: completion)
+                    let taggedPhoto = Photo(id: originalPhoto.id,
+                                            title: originalPhoto.title,
+                                            description: originalPhoto.description,
+                                            viewCount: originalPhoto.viewCount,
+                                            tags: photo.tags,
+                                            url: originalPhoto.url)
+                    
+                    self?.openOriginalPhoto(photo: taggedPhoto,
+                                            thumbnail: photo,
+                                            photoService: photoService,
+                                            favoritePhotoService: favoritePhotoService,
+                                            scheduler: scheduler,
+                                            completion: completion)
                     
                 case .failure(let error):
                     completion(error)
@@ -32,12 +43,18 @@ extension PhotoDetailsViewRoute where Self: Router {
         }
     }
     
-    private func openOriginalPhoto(photo: Photo, photoService: PhotoService, completion: @escaping (Error?) -> ()) {
+    private func openOriginalPhoto(photo: Photo, thumbnail: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         
         let transition = ModalTransition()
         let router = MainRouter(rootTransition: transition)
         
-        let viewModel = PhotoDetailsViewModel(photo: photo, photoService: photoService, router: router)
+        let viewModel = PhotoDetailsViewModel(photo: photo,
+                                              thumbnail: thumbnail,
+                                              photoService: photoService,
+                                              favoritePhotoService: favoritePhotoService,
+                                              router: router,
+                                              scheduler: scheduler)
+        
         let view = PhotoDetailsView(viewModel: viewModel)
         let viewController = UIHostingController(rootView: view)
         
