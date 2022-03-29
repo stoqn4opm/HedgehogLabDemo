@@ -9,6 +9,13 @@ import Foundation
 import Combine
 
 
+/// Interface that marks a photo service that can be modified
+/// Could have its entries deleted or new ones stored.
+public protocol PhotoServiceModifiable  {
+    func store(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
+    func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
+}
+
 public protocol PhotoService {
     func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ())
@@ -26,6 +33,13 @@ public protocol RawPhoto: Codable {
     var downloadURL: URL { get }
     var tags: [String] { get }
     var viewCount: Int { get }
+}
+
+/// Interface that marks a photo repository that can be modified
+/// Could have its entries deleted or new ones stored.
+public protocol PhotoRepositoryModifiable {    
+    func store(_ photo: RawPhoto, withData data: Data, underKey dataAccessorKey: String, forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
+    func deletePhoto(withId id: String, underKey dataAccessorKey: String, inSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
 }
 
 /// Source that could provide `RawPhoto`s. That's the origin of where the photos are coming from.
