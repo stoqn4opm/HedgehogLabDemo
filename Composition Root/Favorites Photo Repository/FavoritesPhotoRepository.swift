@@ -48,7 +48,7 @@ final class FavoritesPhotoRepository: PhotoRepository, PhotoRepositoryModifiable
             }
         }
     }
- 
+    
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<RawPhoto, Error>) -> ()) {
         photoStorage(for: size) { [weak self] result in
             switch result {
@@ -86,6 +86,19 @@ final class FavoritesPhotoRepository: PhotoRepository, PhotoRepositoryModifiable
                 
             case .failure(let error):
                 completion(.failure(error))
+            }
+        }
+    }
+    
+    func containsPhoto(withId id: String, inSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ()) {
+        photoStorage(for: size) { result in
+            switch result {
+            case .success(let storage):
+                let found = storage.keys.contains(id)
+                completion(.success(found))
+                
+            case .failure(let error):
+                completion(.failure(.photoRepositoryError(error)))
             }
         }
     }
@@ -187,7 +200,7 @@ extension FavoritesPhotoRepository {
                     if let error = error as? CacheDirectoryRawDataAccessor.Error,
                        error == .dataNotFound {
                         completion(.success([:]))
-                    } else {                    
+                    } else {
                         completion(.failure(error))
                     }
                 }

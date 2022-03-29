@@ -22,7 +22,12 @@ extension PhotoDetailsViewRoute where Self: Router {
             scheduler.schedule {
                 switch result {
                 case .success(let originalPhoto):
-                    let taggedPhoto = Photo(photo: originalPhoto, tags: photo.tags)
+                    let taggedPhoto = Photo(id: originalPhoto.id,
+                                            title: originalPhoto.title,
+                                            description: originalPhoto.description,
+                                            viewCount: originalPhoto.viewCount,
+                                            tags: photo.tags)
+                    
                     self?.openOriginalPhoto(photo: taggedPhoto,
                                             photoService: photoService,
                                             favoritePhotoService: favoritePhotoService,

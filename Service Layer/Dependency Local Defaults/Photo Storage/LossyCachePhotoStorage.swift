@@ -75,7 +75,7 @@ public class LossyCachePhotoStorage: PhotoStorage {
                     if let error = error {
                         completion(.failure(error))
                     } else {
-                        let photo = Photo(rawPhoto: rawPhoto, dataAccessorKey: rawPhoto.id)
+                        let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags)
                         completion(.success(photo))
                     }
                 }

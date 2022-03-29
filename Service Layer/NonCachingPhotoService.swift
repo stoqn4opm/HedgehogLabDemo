@@ -62,7 +62,7 @@ extension NonCachingPhotoService {
     private func handleMultiPhotoFetchingResult(_ result: Result<[RawPhoto], Swift.Error>, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhotos):
-            let photos = rawPhotos.map { Photo(rawPhoto: $0, dataAccessorKey: $0.id) }
+            let photos = rawPhotos.map { Photo(id: $0.id, title: $0.title, description: $0.description, viewCount: $0.viewCount, tags: $0.tags) }
             completion(.success(photos))
             
         case .failure(let error):
@@ -73,7 +73,7 @@ extension NonCachingPhotoService {
     private func handlePhotoFetchingResult(_ result: Result<RawPhoto, Swift.Error>, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ()) {
         switch result {
         case .success(let rawPhoto):
-            let photo = Photo(rawPhoto: rawPhoto, dataAccessorKey: rawPhoto.id)
+            let photo = Photo(id: rawPhoto.id, title: rawPhoto.title, description: rawPhoto.description, viewCount: rawPhoto.viewCount, tags: rawPhoto.tags)
             completion(.success(photo))
             
         case .failure(let error):

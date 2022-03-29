@@ -12,6 +12,7 @@ import Combine
 /// Interface that marks a photo service that can be modified
 /// Could have its entries deleted or new ones stored.
 public protocol PhotoServiceModifiable  {
+    func contains(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ())
     func store(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
     func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
 }
@@ -37,7 +38,8 @@ public protocol RawPhoto: Codable {
 
 /// Interface that marks a photo repository that can be modified
 /// Could have its entries deleted or new ones stored.
-public protocol PhotoRepositoryModifiable {    
+public protocol PhotoRepositoryModifiable {
+    func containsPhoto(withId id: String, inSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ())
     func store(_ photo: RawPhoto, withData data: Data, underKey dataAccessorKey: String, forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
     func deletePhoto(withId id: String, underKey dataAccessorKey: String, inSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
 }
