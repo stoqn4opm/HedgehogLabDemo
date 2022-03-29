@@ -228,7 +228,11 @@ extension FavoritesPhotoRepository {
         do {
             let storeData = try JSONEncoder().encode(store as! [String : FavoriteRawPhoto])
             rawDataHandler.store(data: storeData, forKey: mainRecordKey(for: size)) { error in
-                
+                if let error = error {
+                    completion(.photoRepositoryError(error))
+                } else {
+                    completion(nil)
+                }
             }
         } catch {
             completion(.photoRepositoryError(error))
