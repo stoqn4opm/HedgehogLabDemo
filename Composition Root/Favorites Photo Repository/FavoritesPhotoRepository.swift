@@ -184,7 +184,12 @@ extension FavoritesPhotoRepository {
                     }
                     
                 case .failure(let error):
-                    completion(.failure(error))
+                    if let error = error as? CacheDirectoryRawDataAccessor.Error,
+                       error == .dataNotFound {
+                        completion(.success([:]))
+                    } else {                    
+                        completion(.failure(error))
+                    }
                 }
             }
         }
