@@ -22,12 +22,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         
         appStarter
+            .append(ThemingStartupAction(window: window))
             .append(MainStartupAction(
                 withImgurClientId: imgurClientId,
                 step1: LoadImgurPhotoService(),
-                step2: LoadUIFromPhotoService(in: windowScene),
+                step2: LoadUIFromPhotoService(in: windowScene, window: window),
                 step3: .init { window in
                     self.window = window
                 }

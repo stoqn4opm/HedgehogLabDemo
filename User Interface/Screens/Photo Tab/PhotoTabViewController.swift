@@ -124,14 +124,14 @@ extension PhotoTabViewController {
     }
     
     private func prepareLoadingAnimation() {
-        if let loadingAnimationPath = Bundle(for: Self.self).path(forResource: "loading", ofType: "json") {
+        if let loadingAnimationPath = Bundle(for: Self.self).path(forResource: "49109-leaf-icon", ofType: "json") {
             loadingAnimationView.animation = .filepath(loadingAnimationPath)
             loadingAnimationView.loopMode = .loop
         }
     }
     
     private func prepareEmptyStateAnimation() {
-        if let emptyAnimationPath = Bundle(for: Self.self).path(forResource: "10223-search-empty", ofType: "json") {
+        if let emptyAnimationPath = Bundle(for: Self.self).path(forResource: "84854-empty", ofType: "json") {
             emptyAnimationView.animation = .filepath(emptyAnimationPath)
             emptyAnimationView.loopMode = .autoReverse
         }
