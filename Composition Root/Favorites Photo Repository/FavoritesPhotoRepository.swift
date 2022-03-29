@@ -128,6 +128,7 @@ final class FavoritesPhotoRepository: PhotoRepository, PhotoRepositoryModifiable
                         } else {
                             
                             // if raw data removed, persist store in rawDataHandler
+                            self?.setInMemoryStore(store, for: size)
                             self?.persistStore(store, forSize: size, completion: completion)
                         }
                     }
@@ -225,6 +226,8 @@ extension FavoritesPhotoRepository {
     
     private func persistStore(_ store: [String: RawPhoto], forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
 #warning("don't reference directly FavoriteRawPhoto")
+        
+        setInMemoryStore(store, for: size)
         do {
             let storeData = try JSONEncoder().encode(store as! [String : FavoriteRawPhoto])
             rawDataHandler.store(data: storeData, forKey: mainRecordKey(for: size)) { error in

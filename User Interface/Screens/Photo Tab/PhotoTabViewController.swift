@@ -143,27 +143,13 @@ extension PhotoTabViewController {
 extension PhotoTabViewController {
     
     private func setupSubscriptions() {
-        viewModel.appendPhotosPublisher
+        viewModel.photosChangedPublisher
             .receive(on: scheduler)
             .sink { _ in
             } receiveValue: { [weak self] photos in
-                guard let dataSource = self?.dataSource else { return }
-                var snapshot = dataSource.snapshot()
-                if snapshot.numberOfSections == 0 {
-                    snapshot.appendSections([0])
-                }
-                snapshot.appendItems(photos)
-                dataSource.apply(snapshot)
-                self?.refreshUIState()
-            }
-            .store(in: &cancellables)
-        
-        viewModel.resetPhotosPublisher
-            .receive(on: scheduler)
-            .sink { _ in
-            } receiveValue: { [weak self] _ in
                 var snapshot = NSDiffableDataSourceSnapshot<Int, Photo>()
                 snapshot.appendSections([0])
+                snapshot.appendItems(photos)
                 self?.dataSource?.apply(snapshot)
                 self?.refreshUIState()
             }
