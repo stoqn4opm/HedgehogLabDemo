@@ -11,16 +11,21 @@ import ServiceLayer
 import CombineSchedulers
 
 protocol FavoritePhotoDetailsViewRoute {
-    func openFavoritePhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
+    func openFavoritePhoto(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
 }
 
 extension FavoritePhotoDetailsViewRoute where Self: Router {
     
-    func openFavoritePhoto(photo: Photo, photoService: PhotoService, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
+    func openFavoritePhoto(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         let transition = ModalTransition()
         let router = MainRouter(rootTransition: transition)
         
-        let viewModel = PhotoDetailsViewModel(photo: photo, photoService: photoService, router: router, scheduler: scheduler)
+        let viewModel = PhotoDetailsViewModel(photo: photo,
+                                              photoService: photoService,
+                                              favoritePhotoService: favoritePhotoService,
+                                              router: router,
+                                              scheduler: scheduler)
+        
         let view = PhotoDetailsView(viewModel: viewModel)
         let viewController = UIHostingController(rootView: view)
         

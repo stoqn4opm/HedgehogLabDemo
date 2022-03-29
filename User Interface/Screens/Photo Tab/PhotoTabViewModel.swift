@@ -74,6 +74,7 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
     
     let tab: Tabs
     let photoService: PhotoService
+    let favoritePhotoService: PhotoServiceModifiable
     
     @Published private(set) var state: PhotoTabViewModelState
     
@@ -89,9 +90,10 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
     
     private var cancellables: Set<AnyCancellable> = []
     
-    init(router: Routes, photoService: PhotoService, tab: Tabs) {
+    init(router: Routes, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, tab: Tabs) {
         self.router = router
         self.photoService = photoService
+        self.favoritePhotoService = favoritePhotoService
         self.tab = tab
         self.state = .list
         self.currentPage = 1
@@ -181,9 +183,17 @@ extension PhotoTabViewModel {
     func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ()) {
         switch tab {
         case .search:
-            router.openPhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
+            router.openPhoto(photo: photo,
+                             photoService: photoService,
+                             favoritePhotoService: favoritePhotoService,
+                             scheduler: scheduler,
+                             completion: completion)
         case .favorites:
-            router.openFavoritePhoto(photo: photo, photoService: photoService, scheduler: scheduler, completion: completion)
+            router.openFavoritePhoto(photo: photo,
+                                     photoService: photoService,
+                                     favoritePhotoService: favoritePhotoService,
+                                     scheduler: scheduler,
+                                     completion: completion)
         }
     }
 }

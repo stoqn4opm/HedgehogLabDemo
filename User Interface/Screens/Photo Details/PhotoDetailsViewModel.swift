@@ -23,9 +23,12 @@ final class PhotoDetailsViewModel: ObservableObject {
     @Published var viewCount: Int
     @Published var image: UIImage?
     @Published var isFavorite: Bool
+    @Published private(set) var errorMessage: String
+    @Published var presentErrorAlert: Bool
     
     let photo: Photo!
     let photoService: PhotoService!
+    let favoritePhotoService: PhotoServiceModifiable!
     let router: Routes!
     let scheduler: AnySchedulerOf<RunLoop>
     
@@ -41,22 +44,37 @@ final class PhotoDetailsViewModel: ObservableObject {
         self.viewCount = viewCount
         self.image = image
         self.isFavorite = isFavorite
-        photo = nil
-        photoService = nil
-        router = nil
-        scheduler = .main
+        
+        // default state
+        self.errorMessage = ""
+        self.presentErrorAlert = false
+        
+        // force unwrapped
+        self.photo = nil
+        self.photoService = nil
+        self.favoritePhotoService = nil
+        self.router = nil
+        self.scheduler = .main
+        
         setupSubscriptions()
     }
     
-    init(photo: Photo, photoService: PhotoService, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
-        title = photo.title
-        description = photo.description
-        tags = photo.tags
-        viewCount = photo.viewCount
-        isFavorite = false
+    init(photo: Photo, photoService: PhotoService, favoritePhotoService: PhotoServiceModifiable, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
+        self.title = photo.title
+        self.description = photo.description
+        self.tags = photo.tags
+        self.viewCount = photo.viewCount
+        self.image = nil
+        self.isFavorite = false
         
+        // default state
+        self.errorMessage = ""
+        self.presentErrorAlert = false
+        
+        // dependencies
         self.photo = photo
         self.photoService = photoService
+        self.favoritePhotoService = favoritePhotoService
         self.router = router
         self.scheduler = scheduler
         
@@ -72,7 +90,8 @@ extension PhotoDetailsViewModel {
         $isFavorite
             .removeDuplicates()
             .receive(on: scheduler)
-            .sink { isFavorite in
+            .sink { [weak self] isFavorite in
+                self?.updateIsFavoriteState(to: isFavorite)
                 print("is favorite: \(isFavorite)")
             }
             .store(in: &cancellables)
@@ -82,7 +101,34 @@ extension PhotoDetailsViewModel {
 // MARK: - Commands
 
 extension PhotoDetailsViewModel {
-    func generateGraphicRepresentation(withCompletion completion: @escaping (Bool) -> ()) {
+    
+    func generateGraphicRepresentation() {
+        generateGraphicRepresentation { [weak self] success in
+            guard success == false else { return }
+            self?.presentError("Image loading failed".localized)
+        }
+    }
+    
+    func presentError(_ message: String) {
+        errorMessage = message
+        presentErrorAlert = true
+    }
+    
+    func hideErrorAlert() {
+        errorMessage = ""
+        presentErrorAlert = false
+    }
+    
+    func dismiss() {
+        router.close()
+    }
+}
+
+// MARK: - Helpers
+
+extension PhotoDetailsViewModel {
+    
+    private func generateGraphicRepresentation(withCompletion completion: @escaping (Bool) -> ()) {
         guard let photoService = photoService else { completion(false); return }
         photoService.rawImageData(forPhoto: photo) { [weak self] result in
             switch result {
@@ -97,7 +143,19 @@ extension PhotoDetailsViewModel {
         }
     }
     
-    func dismiss() {
-        router.close()
+    private func updateIsFavoriteState(to isFavorite: Bool) {
+        let completion: (PhotoServiceError?) -> () = { [weak self] error in
+            guard let error = error else { return }
+            print("[PhotoDetailsViewModel] Failed updating is favorite status with error: \(error)")
+            self?.presentError("Updating is favorite status failed. Please try again later".localized)
+        }
+        
+        if isFavorite {
+            favoritePhotoService.store(photo, withSize: .original, completion: completion)
+            favoritePhotoService.store(photo, withSize: .thumbnail, completion: completion)
+        } else {
+            favoritePhotoService.delete(photo, withSize: .original, completion: completion)
+            favoritePhotoService.delete(photo, withSize: .thumbnail, completion: completion)
+        }
     }
 }
