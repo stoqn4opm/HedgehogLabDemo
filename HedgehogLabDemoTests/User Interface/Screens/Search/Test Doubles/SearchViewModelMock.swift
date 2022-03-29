@@ -33,7 +33,7 @@ final class SearchViewModelMock: PhotoTabViewModelType {
     private(set) var isLoadingSubject = PassthroughSubject<Bool, Never>()
     
     
-    var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
+    var photosChangedPublisher: AnyPublisher<[Photo], Never> {
         appendPhotosSubject.eraseToAnyPublisher()
     }
     

@@ -43,15 +43,12 @@ protocol PhotoTabViewModelType {
     /// Notifies the view model that the user want to see this photo.
     func openPhotoDetails(_ photo: Photo, scheduler: AnySchedulerOf<RunLoop>, completion: @escaping (Error?) -> ())
     
-    /// Publishes when a badge of more photos needs to be presented to the user.
-    var appendPhotosPublisher: AnyPublisher<[Photo], Never> { get }
+    /// Publishes when the photo list changes.
+    var photosChangedPublisher: AnyPublisher<[Photo], Never> { get }
     
     /// Sends `true` when the view model is going to perform
     /// a fetch operation and `false` when its done.
     var isLoadingPublisher: AnyPublisher<Bool, Never> { get }
-    
-    /// Publishes when list photo list needs to be cleared.
-    var resetPhotosPublisher: AnyPublisher<Void, Never> { get }
     
     /// Publishes when error message needs to be presented to the user.
     var errorMessagePublisher: AnyPublisher<String, Never> { get }
@@ -80,12 +77,10 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
     
     /// Keeps track on which page we are
     private var currentPage: Int
-    private var photos: [Photo]
     private var searchQuery: String
     
-    private var appendPhotosSubject = PassthroughSubject<[Photo], Never>()
+    @Published private var photos: [Photo]
     private var isLoadingSubject = PassthroughSubject<Bool, Never>()
-    private var resetPhotosSubject = PassthroughSubject<Void, Never>()
     private var errorMessageSubject = PassthroughSubject<String, Never>()
     
     private var cancellables: Set<AnyCancellable> = []
@@ -100,16 +95,11 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
         self.photos = []
         self.searchQuery = ""
         
-        resetPhotosPublisher
+        $state
+            .removeDuplicates()
+            .map { _ in () }
             .sink { [weak self] _ in
-                self?.currentPage = 1
-                self?.photos = []
-            }
-            .store(in: &cancellables)
-        
-        appendPhotosPublisher
-            .sink { [weak self] newPhotos in
-                self?.photos.append(contentsOf: newPhotos)
+                self?.reset()
             }
             .store(in: &cancellables)
     }
@@ -119,22 +109,13 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
 
 extension PhotoTabViewModel {
     
-    var appendPhotosPublisher: AnyPublisher<[Photo], Never> {
-        appendPhotosSubject
-            .eraseToAnyPublisher()
+    var photosChangedPublisher: AnyPublisher<[Photo], Never> {
+        $photos.eraseToAnyPublisher()
     }
     
     var isLoadingPublisher: AnyPublisher<Bool, Never> {
         isLoadingSubject
             .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-    
-    var resetPhotosPublisher: AnyPublisher<Void, Never> {
-        $state
-            .removeDuplicates()
-            .map { _ in () }
-            .merge(with: resetPhotosSubject)
             .eraseToAnyPublisher()
     }
     
@@ -160,7 +141,7 @@ extension PhotoTabViewModel {
         state = .search
         if self.searchQuery != searchQuery {
             // because we want to reset on different consecutive searches
-            resetPhotosSubject.send(())
+            reset()
         }
         
         self.searchQuery = searchQuery
@@ -176,7 +157,7 @@ extension PhotoTabViewModel {
     }
     
     func refresh() {
-        resetPhotosSubject.send(())
+        reset()
         fetch()
     }
     
@@ -226,6 +207,11 @@ extension PhotoTabViewModel {
 
 extension PhotoTabViewModel {
     
+    private func reset() {
+        currentPage = 1
+        photos = []
+    }
+    
     private func fetch() {
         switch state {
         case .list:
@@ -241,7 +227,7 @@ extension PhotoTabViewModel {
         
         switch result {
         case .success(let result):
-            appendPhotosSubject.send(result)
+            photos.append(contentsOf: result)
             
         case .failure(let error):
             print("[PhotoTabViewModel] Failed most popular photos with error: \(error)")
