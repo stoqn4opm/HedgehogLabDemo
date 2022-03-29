@@ -11,15 +11,15 @@ import Combine
 
 /// Interface that marks a photo service that can be modified
 /// Could have its entries deleted or new ones stored.
-public protocol PhotoServiceModifiable  {
-    var photoStoredPublisher: AnyPublisher<Photo, Error> { get }
-    var photoDeletedPublisher: AnyPublisher<Photo, Error> { get }
+public protocol PhotoServiceModifiable: AnyObject  {
+    var photoStoredPublisher: AnyPublisher<(photo: Photo, size: Photo.Size), Never> { get }
+    var photoDeletedPublisher: AnyPublisher<(photo: Photo, size: Photo.Size), Never> { get }
     func contains(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (Result<Bool, PhotoServiceError>) -> ())
     func store(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
     func delete(_ photo: Photo, withSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ())
 }
 
-public protocol PhotoService {
+public protocol PhotoService: AnyObject {
     func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<Photo, PhotoServiceError>) -> ())
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[Photo], PhotoServiceError>) -> ())

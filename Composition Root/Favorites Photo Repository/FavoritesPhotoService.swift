@@ -19,8 +19,8 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
     let photoRepository: PhotoRepository & PhotoRepositoryModifiable
     let accessor: RawDataHandler
     
-    private var photoStoredSubject = PassthroughSubject<Photo, Error>()
-    private var photoDeletedSubject = PassthroughSubject<Photo, Error>()
+    private var photoStoredSubject = PassthroughSubject<(photo: Photo, size: Photo.Size), Never>()
+    private var photoDeletedSubject = PassthroughSubject<(photo: Photo, size: Photo.Size), Never>()
     
     
     init(sourcePhotoService: PhotoService, photoRepository: PhotoRepository & PhotoRepositoryModifiable, accessor: RawDataHandler) {
@@ -30,11 +30,11 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
         super.init(photoRepository: photoRepository, accessor: accessor)
     }
     
-    var photoStoredPublisher: AnyPublisher<Photo, Error> {
+    var photoStoredPublisher: AnyPublisher<(photo: Photo, size: Photo.Size), Never> {
         photoStoredSubject.eraseToAnyPublisher()
     }
     
-    var photoDeletedPublisher: AnyPublisher<Photo, Error> {
+    var photoDeletedPublisher: AnyPublisher<(photo: Photo, size: Photo.Size), Never> {
         photoDeletedSubject.eraseToAnyPublisher()
     }
     
@@ -63,7 +63,7 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
                         completion(error)
                     } else {
                         completion(nil)
-                        self?.photoStoredSubject.send(photo)
+                        self?.photoStoredSubject.send((photo: photo, size: size))
                     }
                 }
             case .failure(let error):
@@ -78,7 +78,7 @@ final class FavoritesPhotoService: NonCachingPhotoService, PhotoServiceModifiabl
                 completion(error)
             } else {
                 completion(nil)
-                self?.photoDeletedSubject.send(photo)
+                self?.photoDeletedSubject.send((photo: photo, size: size))
             }
         }
     }

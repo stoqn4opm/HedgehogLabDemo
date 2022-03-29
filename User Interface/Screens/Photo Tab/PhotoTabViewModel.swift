@@ -95,11 +95,35 @@ final class PhotoTabViewModel: PhotoTabViewModelType {
         self.photos = []
         self.searchQuery = ""
         
+        setupSubscriptions()
+    }
+    
+    private func setupSubscriptions() {
         $state
             .removeDuplicates()
             .map { _ in () }
             .sink { [weak self] _ in
                 self?.reset()
+            }
+            .store(in: &cancellables)
+        
+        guard favoritePhotoService === photoService else { return }
+        
+        favoritePhotoService
+            .photoStoredPublisher
+            .sink { [weak self] tuple in
+                guard tuple.size == .thumbnail else { return }
+                guard self?.photos.contains(tuple.photo) == false else { return }
+                self?.photos.append(tuple.photo)
+            }
+            .store(in: &cancellables)
+        
+        favoritePhotoService
+            .photoDeletedPublisher
+            .sink { [weak self] tuple in
+                guard tuple.size == .thumbnail else { return }
+                guard let index = self?.photos.firstIndex(of: tuple.photo) else { return }
+                self?.photos.remove(at: index)
             }
             .store(in: &cancellables)
     }
@@ -227,7 +251,10 @@ extension PhotoTabViewModel {
         
         switch result {
         case .success(let result):
-            photos.append(contentsOf: result)
+            let newlyAdded = result
+                .filter { photos.contains($0) == false }
+            
+            photos.append(contentsOf: newlyAdded)
             
         case .failure(let error):
             print("[PhotoTabViewModel] Failed most popular photos with error: \(error)")
