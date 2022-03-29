@@ -10,9 +10,8 @@ import ServiceLayer
 
 // MARK: - Favorites Repository
 
-final class FavoritesPhotoRepository: PhotoRepository {
-        
-    let rawDataHandler: RawDataHandler
+final class FavoritesPhotoRepository: PhotoRepository, PhotoRepositoryModifiable {
+    let rawDataHandler: RawDataHandler & RawDataDestructor
     
     /// The key under which `inMemoryStore` is persisted inside `rawDataHandler`.
     let originalSizeMainRecordKey: String
@@ -22,7 +21,7 @@ final class FavoritesPhotoRepository: PhotoRepository {
     private var originalSizeInMemoryStore: [String: RawPhoto]
     private var thumbnailSizeInMemoryStore: [String: RawPhoto]
     
-    init(rawDataHandler: RawDataHandler,
+    init(rawDataHandler: RawDataHandler & RawDataDestructor,
          originalSizeMainRecordKey: String,
          thumbnailSizeMainRecordKey: String,
          pageSize: Int) {
@@ -37,7 +36,7 @@ final class FavoritesPhotoRepository: PhotoRepository {
     }
     
     func fetch(inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
-        store(for: size) { [weak self] result in
+        photoStorage(for: size) { [weak self] result in
             switch result {
             case .success(let store):
                 self?.setInMemoryStore(store, for: size)
@@ -51,7 +50,7 @@ final class FavoritesPhotoRepository: PhotoRepository {
     }
  
     func fetchPhotoDetails(forId id: String, inSize size: Photo.Size, withCompletion completion: @escaping (Result<RawPhoto, Error>) -> ()) {
-        store(for: size) { [weak self] result in
+        photoStorage(for: size) { [weak self] result in
             switch result {
             case .success(let store):
                 self?.setInMemoryStore(store, for: size)
@@ -69,7 +68,7 @@ final class FavoritesPhotoRepository: PhotoRepository {
     }
     
     func search(searchQuery: String, inSize size: Photo.Size, page: Int, withCompletion completion: @escaping (Result<[RawPhoto], Error>) -> ()) {
-        store(for: size) { [weak self] result in
+        photoStorage(for: size) { [weak self] result in
             switch result {
             case .success(let store):
                 self?.setInMemoryStore(store, for: size)
@@ -87,6 +86,45 @@ final class FavoritesPhotoRepository: PhotoRepository {
                 
             case .failure(let error):
                 completion(.failure(error))
+            }
+        }
+    }
+    
+    func store(_ photo: RawPhoto, withData data: Data, underKey dataAccessorKey: String, forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
+        rawDataHandler.store(data: data, forKey: dataAccessorKey) { [weak self] error in
+            if let error = error {
+                completion(.photoRepositoryError(error))
+            } else {
+                self?.addToMemoryStore(photo, forSize: size) { error in
+                    completion(error)
+                }
+            }
+        }
+    }
+    
+    func deletePhoto(withId id: String, underKey dataAccessorKey: String, inSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
+        photoStorage(for: size) { [weak self] store in // get the relevant store
+            switch store {
+            case .success(var store):
+                if store.removeValue(forKey: id) != nil { // delete photo model
+                    
+                    // if model deleted, remove raw data
+                    self?.rawDataHandler.delete(forKey: dataAccessorKey) { error in
+                        if let error = error {
+                            completion(.photoRepositoryError(error))
+                        } else {
+                            
+                            // if raw data removed, persist store in rawDataHandler
+                            self?.persistStore(store, forSize: size, completion: completion)
+                        }
+                    }
+                } else {
+                    // no image with this id found in the store
+                    completion(nil)
+                }
+                
+            case .failure(let error):
+                completion(.photoRepositoryError(error))
             }
         }
     }
@@ -129,7 +167,7 @@ extension FavoritesPhotoRepository {
         return all.indices.contains(pageIndex) ? all[pageIndex] : []
     }
     
-    private func store(for size: Photo.Size, completion: @escaping (Result<[String: RawPhoto], Error>) -> ()) {
+    private func photoStorage(for size: Photo.Size, completion: @escaping (Result<[String: RawPhoto], Error>) -> ()) {
         if inMemoryStore(for: size).isEmpty == false {
             completion(.success(inMemoryStore(for: size)))
         } else {
@@ -138,6 +176,7 @@ extension FavoritesPhotoRepository {
                 case .success(let data):
                     
                     do {
+#warning("don't reference directly FavoriteRawPhoto")
                         let store = try JSONDecoder().decode([String: FavoriteRawPhoto].self, from: data)
                         completion(.success(store))
                     } catch {
@@ -148,6 +187,33 @@ extension FavoritesPhotoRepository {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+    
+    private func addToMemoryStore(_ photo: RawPhoto, forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
+        photoStorage(for: size) { [weak self] result in
+            switch result {
+            case .success(var storage):
+                storage[photo.id] = photo
+                self?.persistStore(storage, forSize: size) { error in
+                    completion(error)
+                }
+                
+            case .failure(let error):
+                completion(.photoRepositoryError(error))
+            }
+        }
+    }
+    
+    private func persistStore(_ store: [String: RawPhoto], forSize size: Photo.Size, completion: @escaping (PhotoServiceError?) -> ()) {
+#warning("don't reference directly FavoriteRawPhoto")
+        do {
+            let storeData = try JSONEncoder().encode(store as! [String : FavoriteRawPhoto])
+            rawDataHandler.store(data: storeData, forKey: mainRecordKey(for: size)) { error in
+                
+            }
+        } catch {
+            completion(.photoRepositoryError(error))
         }
     }
 }

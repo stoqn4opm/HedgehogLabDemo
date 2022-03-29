@@ -8,11 +8,20 @@
 import Foundation
 import ServiceLayer
 
-public class FavoriteRawPhoto: RawPhoto {
-    public var id: String
-    public var title: String
-    public var description: String?
-    public var downloadURL: URL
-    public var tags: [String]
-    public var viewCount: Int
+class FavoriteRawPhoto: RawPhoto {
+    var id: String
+    var title: String
+    var description: String?
+    var downloadURL: URL
+    var tags: [String]
+    var viewCount: Int
+
+    init(id: String, title: String, description: String? = nil, downloadURL: URL, tags: [String], viewCount: Int) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.downloadURL = downloadURL
+        self.tags = tags
+        self.viewCount = viewCount
+    }
 }
