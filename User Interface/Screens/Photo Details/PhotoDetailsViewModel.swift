@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Combine
 import UIKit
 import ServiceLayer
+import CombineSchedulers
 
 
 // MARK: - PhotoDetailsViewModel
@@ -20,34 +22,60 @@ final class PhotoDetailsViewModel: ObservableObject {
     @Published var tags: [String]
     @Published var viewCount: Int
     @Published var image: UIImage?
-    
+    @Published var isFavorite: Bool
     
     let photo: Photo!
     let photoService: PhotoService!
     let router: Routes!
+    let scheduler: AnySchedulerOf<RunLoop>
+    
+    private var cancellables: Set<AnyCancellable> = []
     
     /// Used ONLY for SwiftUI previews, always pass photo and photo service and router to the model.
     ///
     /// Consider introducing a seam between PhotoDetailsView and its view model, so that this can go away.
-    init(title: String, description: String, tags: [String], viewCount: Int, image: UIImage) {
+    init(title: String, description: String, tags: [String], viewCount: Int, image: UIImage, isFavorite: Bool) {
         self.title = title
         self.description = description
         self.tags = tags
         self.viewCount = viewCount
         self.image = image
+        self.isFavorite = isFavorite
         photo = nil
         photoService = nil
         router = nil
+        scheduler = .main
+        setupSubscriptions()
     }
     
-    init(photo: Photo, photoService: PhotoService, router: Routes) {
+    init(photo: Photo, photoService: PhotoService, router: Routes, scheduler: AnySchedulerOf<RunLoop>) {
         title = photo.title
         description = photo.description
         tags = photo.tags
         viewCount = photo.viewCount
+        isFavorite = false
+        
         self.photo = photo
         self.photoService = photoService
         self.router = router
+        self.scheduler = scheduler
+        
+        setupSubscriptions()
+    }
+}
+
+// MARK: - Combine Subscriptions
+
+extension PhotoDetailsViewModel {
+    
+    func setupSubscriptions() {
+        $isFavorite
+            .removeDuplicates()
+            .receive(on: scheduler)
+            .sink { isFavorite in
+                print("is favorite: \(isFavorite)")
+            }
+            .store(in: &cancellables)
     }
 }
 

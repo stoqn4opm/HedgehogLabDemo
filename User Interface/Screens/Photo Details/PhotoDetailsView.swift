@@ -26,7 +26,7 @@ struct PhotoDetailsView: View {
                         PhotoMetadataView(title: $viewModel.title,
                                           description: $viewModel.description,
                                           tags: $viewModel.tags,
-                                          viewCount: $viewModel.viewCount)
+                                          viewCount: $viewModel.viewCount, isFavorite: $viewModel.isFavorite)
                         Spacer()
                     }
                     .padding(.bottom, 20)
@@ -70,8 +70,8 @@ struct PhotoDetailsView: View {
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PhotoDetailsView(viewModel: .init(title: "Photo Name", description: "Like many things in SwiftUI, there doesn't seem to be a to do it without tinkering with the underlying UIKit components. There's an easy solution for this one though, using the Introspect library:", tags: ["tag1", "tag2"], viewCount: 103, image: UIImage(systemName: "star")!))
-            PhotoDetailsView(viewModel: .init(title: "Photo Name", description: "Like many things in SwiftUI, there doesn't seem to be a to do it without tinkering with the underlying UIKit components. There's an easy solution for this one though, using the Introspect library:", tags: ["tag1", "tag2"], viewCount: 103, image: UIImage(systemName: "star")!))
+            PhotoDetailsView(viewModel: .init(title: "Photo Name", description: "Like many things in SwiftUI, there doesn't seem to be a to do it without tinkering with the underlying UIKit components. There's an easy solution for this one though, using the Introspect library:", tags: ["tag1", "tag2"], viewCount: 103, image: UIImage(systemName: "star")!, isFavorite: true))
+            PhotoDetailsView(viewModel: .init(title: "Photo Name", description: "Like many things in SwiftUI, there doesn't seem to be a to do it without tinkering with the underlying UIKit components. There's an easy solution for this one though, using the Introspect library:", tags: ["tag1", "tag2"], viewCount: 103, image: UIImage(systemName: "star")!, isFavorite: false))
                 .previewDevice("iPod touch (7th generation)")
                 .preferredColorScheme(.dark)
         }

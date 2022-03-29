@@ -20,7 +20,7 @@ extension FavoritePhotoDetailsViewRoute where Self: Router {
         let transition = ModalTransition()
         let router = MainRouter(rootTransition: transition)
         
-        let viewModel = PhotoDetailsViewModel(photo: photo, photoService: photoService, router: router)
+        let viewModel = PhotoDetailsViewModel(photo: photo, photoService: photoService, router: router, scheduler: scheduler)
         let view = PhotoDetailsView(viewModel: viewModel)
         let viewController = UIHostingController(rootView: view)
         
