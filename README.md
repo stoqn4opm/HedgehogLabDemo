@@ -3,6 +3,8 @@
 
 # iOS Developer Task
 
+![](https://img.shields.io/badge/version-2.0-brightgreen.svg)
+
 Welcome 👋 this document is intended to be used as a guide to the task provided - it’s important to note that there is no right or wrong answer here and to take as long as you need.
 
 Using Swift please build a small image sharing application. You should use an existing free image API such as imgur or equivalent. This exercise tests your ability to use a REST API, json data and iOS UI elements.
