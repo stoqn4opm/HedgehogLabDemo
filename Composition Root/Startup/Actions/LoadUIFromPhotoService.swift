@@ -14,7 +14,7 @@ import ServiceLayer
 
 final class LoadUIFromPhotoService: TransformerStartupAction<Result<(search: PhotoService, favorite: PhotoService & PhotoServiceModifiable), Error>, UIWindow> {
     
-    init(in windowScene: UIWindowScene) {
+    init(in windowScene: UIWindowScene, window: UIWindow) {
         super.init { result in
             
             var tabs: [UIViewController] = []
@@ -30,7 +30,6 @@ final class LoadUIFromPhotoService: TransformerStartupAction<Result<(search: Pho
                 // could be handled separately!
             }
             
-            let window = UIWindow(frame: windowScene.coordinateSpace.bounds)
             window.windowScene = windowScene
             window.rootViewController = MainTabBarController(viewControllers: tabs)
             window.makeKeyAndVisible()

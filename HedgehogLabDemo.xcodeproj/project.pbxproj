@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5E2A485227F0E38F00AE54C5 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5E2A485127F0E38F00AE54C5 /* Lottie */; };
-		5E2A485627F0E5CB00AE54C5 /* 10223-search-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */; };
-		5E2A485B27F0E86C00AE54C5 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E2A485A27F0E86C00AE54C5 /* loading.json */; };
 		5E2A485E27F0EEF900AE54C5 /* PhotoDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2A485D27F0EEF900AE54C5 /* PhotoDetailsView.swift */; };
 		5E2A486027F0F04F00AE54C5 /* PhotoDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2A485F27F0F04F00AE54C5 /* PhotoDetailsViewModel.swift */; };
 		5E2A486527F10A6F00AE54C5 /* PhotoMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2A486427F10A6F00AE54C5 /* PhotoMetadataView.swift */; };
@@ -47,6 +45,10 @@
 		5E43871727F25102006E1C58 /* FavoriteRawPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871627F25102006E1C58 /* FavoriteRawPhoto.swift */; };
 		5E43871F27F2F948006E1C58 /* FavoritesPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43871E27F2F948006E1C58 /* FavoritesPhotoService.swift */; };
 		5E43872127F339D5006E1C58 /* DestructiveCacheDirectoryRawDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43872027F339D5006E1C58 /* DestructiveCacheDirectoryRawDataAccessor.swift */; };
+		5E43872427F3CA1B006E1C58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6627EB5E2B003F9CB9 /* Assets.xcassets */; };
+		5E43872827F3CD43006E1C58 /* 49109-leaf-icon.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E43872727F3CD42006E1C58 /* 49109-leaf-icon.json */; };
+		5E43872A27F3CDA3006E1C58 /* 84854-empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E43872927F3CDA3006E1C58 /* 84854-empty.json */; };
+		5E43872C27F3D0EE006E1C58 /* ThemingStartupAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E43872B27F3D0EE006E1C58 /* ThemingStartupAction.swift */; };
 		5E53DCE827F10B4300D666DF /* PhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */; };
 		5E98C51027F12B6700946547 /* PhotoDetailsViewRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */; };
 		5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */; };
@@ -59,7 +61,6 @@
 		5EBDEF1227EDEC220083FDDD /* HedgehogLabDemoUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBDEEFE27EDEC220083FDDD /* HedgehogLabDemoUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EBDEF1B27EDECE20083FDDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6327EB5E2A003F9CB9 /* Main.storyboard */; };
 		5EBDEF1C27EDECE80083FDDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6827EB5E2B003F9CB9 /* LaunchScreen.storyboard */; };
-		5EBDEF1D27EDECEE0083FDDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EBC3F6627EB5E2B003F9CB9 /* Assets.xcassets */; };
 		5EBDEF1E27EDECF50083FDDD /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625027EBB70700FACD0B /* MainTabBarController.swift */; };
 		5EBDEF1F27EDECF90083FDDD /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED0625627EBBAB500FACD0B /* Tabs.swift */; };
 		5EBDEF2327EDED0E0083FDDD /* Routing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBC3F8F27EB60CA003F9CB9 /* Routing.swift */; };
@@ -156,8 +157,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "10223-search-empty.json"; sourceTree = "<group>"; };
-		5E2A485A27F0E86C00AE54C5 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		5E2A485D27F0EEF900AE54C5 /* PhotoDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsView.swift; sourceTree = "<group>"; };
 		5E2A485F27F0F04F00AE54C5 /* PhotoDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewModel.swift; sourceTree = "<group>"; };
 		5E2A486427F10A6F00AE54C5 /* PhotoMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMetadataView.swift; sourceTree = "<group>"; };
@@ -193,6 +192,9 @@
 		5E43871627F25102006E1C58 /* FavoriteRawPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRawPhoto.swift; sourceTree = "<group>"; };
 		5E43871E27F2F948006E1C58 /* FavoritesPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPhotoService.swift; sourceTree = "<group>"; };
 		5E43872027F339D5006E1C58 /* DestructiveCacheDirectoryRawDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestructiveCacheDirectoryRawDataAccessor.swift; sourceTree = "<group>"; };
+		5E43872727F3CD42006E1C58 /* 49109-leaf-icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "49109-leaf-icon.json"; sourceTree = "<group>"; };
+		5E43872927F3CDA3006E1C58 /* 84854-empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "84854-empty.json"; sourceTree = "<group>"; };
+		5E43872B27F3D0EE006E1C58 /* ThemingStartupAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemingStartupAction.swift; sourceTree = "<group>"; };
 		5E53DCE727F10B4300D666DF /* PhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoHeaderView.swift; sourceTree = "<group>"; };
 		5E98C50F27F12B6700946547 /* PhotoDetailsViewRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailsViewRoute.swift; sourceTree = "<group>"; };
 		5EBC3F5A27EB5E2A003F9CB9 /* HedgehogLabDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedgehogLabDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -288,8 +290,8 @@
 		5E2A485327F0E5BB00AE54C5 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				5E2A485427F0E5CB00AE54C5 /* 10223-search-empty.json */,
-				5E2A485A27F0E86C00AE54C5 /* loading.json */,
+				5E43872927F3CDA3006E1C58 /* 84854-empty.json */,
+				5E43872727F3CD42006E1C58 /* 49109-leaf-icon.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -331,6 +333,7 @@
 				5E34639627EEAC44000C40E4 /* LoadUIFromPhotoService.swift */,
 				5E34639927EEACC4000C40E4 /* LoadImgurPhotoService.swift */,
 				5E3463A227EEB891000C40E4 /* MainStartupAction.swift */,
+				5E43872B27F3D0EE006E1C58 /* ThemingStartupAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -503,6 +506,7 @@
 			children = (
 				5EBC3F5D27EB5E2A003F9CB9 /* AppDelegate.swift */,
 				5EBC3F5F27EB5E2A003F9CB9 /* SceneDelegate.swift */,
+				5EBC3F6627EB5E2B003F9CB9 /* Assets.xcassets */,
 				5E43871327F23D1E006E1C58 /* Helpers */,
 				5E34636F27EE6AAB000C40E4 /* Startup */,
 				5E43871027F232B2006E1C58 /* Favorites Photo Repository */,
@@ -586,7 +590,6 @@
 			children = (
 				5EBC3F6327EB5E2A003F9CB9 /* Main.storyboard */,
 				5EBC3F6827EB5E2B003F9CB9 /* LaunchScreen.storyboard */,
-				5EBC3F6627EB5E2B003F9CB9 /* Assets.xcassets */,
 				5ED0624F27EBB6C900FACD0B /* MainTabBar */,
 				5ED0624127EBAF2500FACD0B /* Screens */,
 				5EBC3F8E27EB609A003F9CB9 /* Routing */,
@@ -991,6 +994,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E43872427F3CA1B006E1C58 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,10 +1018,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBDEF1B27EDECE20083FDDD /* Main.storyboard in Resources */,
-				5EBDEF1D27EDECEE0083FDDD /* Assets.xcassets in Resources */,
-				5E2A485627F0E5CB00AE54C5 /* 10223-search-empty.json in Resources */,
-				5E2A485B27F0E86C00AE54C5 /* loading.json in Resources */,
+				5E43872827F3CD43006E1C58 /* 49109-leaf-icon.json in Resources */,
 				5EBDEF1C27EDECE80083FDDD /* LaunchScreen.storyboard in Resources */,
+				5E43872A27F3CDA3006E1C58 /* 84854-empty.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1039,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EBC3F5E27EB5E2A003F9CB9 /* AppDelegate.swift in Sources */,
+				5E43872C27F3D0EE006E1C58 /* ThemingStartupAction.swift in Sources */,
 				5E3463CC27EFB92D000C40E4 /* CacheDirectoryRawDataAccessor.swift in Sources */,
 				5E43871F27F2F948006E1C58 /* FavoritesPhotoService.swift in Sources */,
 				5E34637427EE6E80000C40E4 /* StartupActionExecutor.swift in Sources */,
@@ -1311,6 +1315,7 @@
 				DEVELOPMENT_TEAM = P6NHWRV56U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Composition Root/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Hedgehog Lab";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1340,6 +1345,7 @@
 				DEVELOPMENT_TEAM = P6NHWRV56U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Composition Root/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Hedgehog Lab";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
